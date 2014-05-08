@@ -1,10 +1,343 @@
+#!/bin/bash
+# Customized bash environment.
+#
+# Pat Collins <http://burned.com>
+#
+# With help from Ryan Tomayko <http://tomayko.com/about>
+
+# the basics
+: ${HOME=~}
+: ${LOGNAME=$(id -un)}
+: ${UNAME=$(uname)}
+
+# complete hostnames from this file
+: ${HOSTFILE=~/.ssh/known_hosts}
+
+# ----------------------------------------------------------------------
+#  SHELL OPTIONS
+# ----------------------------------------------------------------------
+
+# bring in system bashrc
+test -r /etc/bashrc &&
+      . /etc/bashrc
+
+# notify of bg job completion immediately
+set -o notify
+
+# shell opts. see bash(1) for details
+shopt -s cdspell                 >/dev/null 2>&1
+shopt -s extglob                 >/dev/null 2>&1
 # Enable history appending instead of overwriting.
-shopt -s histappend
+shopt -s histappend              >/dev/null 2>&1
+shopt -s hostcomplete            >/dev/null 2>&1
+shopt -s interactive_comments    >/dev/null 2>&1
+shopt -u mailwarn                >/dev/null 2>&1
+shopt -s no_empty_cmd_completion >/dev/null 2>&1
 
-UNAMESTR=`uname`
+unset MAILCHECK
 
-# Set prompt.
-export PS1="[\u@\h \W]\$ "
+# disable core dumps
+ulimit -S -c 0
+
+# default umask
+umask 0022
+
+# ----------------------------------------------------------------------
+# PATH
+# ----------------------------------------------------------------------
+
+# we want the various sbins on the path along with /usr/local/bin
+PATH="$PATH:/usr/local/sbin:/usr/sbin:/sbin"
+PATH="/usr/local/bin:$PATH"
+
+# put ~/bin on PATH if you have it
+test -d "$HOME/bin" &&
+PATH="$HOME/bin:$PATH"
+
+# ----------------------------------------------------------------------
+# ENVIRONMENT CONFIGURATION
+# ----------------------------------------------------------------------
+
+# detect interactive shell
+case "$-" in
+    *i*) INTERACTIVE=yes ;;
+    *)   unset INTERACTIVE ;;
+esac
+
+# detect login shell
+case "$0" in
+    -*) LOGIN=yes ;;
+    *)  unset LOGIN ;;
+esac
+
+# enable en_US locale w/ utf-8 encodings if not already configured
+: ${LANG:="en_US.UTF-8"}
+: ${LANGUAGE:="en"}
+: ${LC_CTYPE:="en_US.UTF-8"}
+: ${LC_ALL:="en_US.UTF-8"}
+export LANG LANGUAGE LC_CTYPE LC_ALL
+
+# always use PASSIVE mode ftp
+: ${FTP_PASSIVE:=1}
+export FTP_PASSIVE
+
+# ignore backups, CVS directories, python bytecode, vim swap files
+FIGNORE="~:CVS:#:.pyc:.swp:.swa:apache-solr-*"
+
+# history stuff
+HISTCONTROL=ignoreboth
+HISTFILESIZE=10000
+HISTSIZE=10000
+
+# ----------------------------------------------------------------------
+# PAGER / EDITOR
+# ----------------------------------------------------------------------
+
+# See what we have to work with ...
+HAVE_VIM=$(command -v vim)
+HAVE_GVIM=$(command -v gvim)
+
+# EDITOR
+test -n "$HAVE_VIM" &&
+EDITOR=vim ||
+EDITOR=vi
+export EDITOR
+
+# PAGER
+if test -n "$(command -v less)" ; then
+    PAGER="less -FirSwX"
+    MANPAGER="less -FiRswX"
+else
+    PAGER=more
+    MANPAGER="$PAGER"
+fi
+export PAGER MANPAGER
+
+# Ack
+ACK_PAGER="$PAGER"
+ACK_PAGER_COLOR="$PAGER"
+
+# ----------------------------------------------------------------------
+# PROMPT
+# ----------------------------------------------------------------------
+
+RED="\[\033[0;31m\]"
+BROWN="\[\033[0;33m\]"
+GREY="\[\033[0;97m\]"
+BLUE="\[\033[0;34m\]"
+PS_CLEAR="\[\033[0m\]"
+SCREEN_ESC="\[\033k\033\134\]"
+
+if [ "$LOGNAME" = "root" ]; then
+    COLOR1="${RED}"
+    COLOR2="${BROWN}"
+    P="#"
+elif hostname | grep -q 'github\.com'; then
+    GITHUB=yep
+    COLOR1="\[\e[0;94m\]"
+    COLOR2="\[\e[0;92m\]"
+    P="\$"
+else
+    COLOR1="${BLUE}"
+    COLOR2="${BROWN}"
+    P="\$"
+fi
+
+prompt_simple() {
+    unset PROMPT_COMMAND
+    PS1="[\u@\h:\w]\$ "
+    PS2="> "
+}
+
+prompt_compact() {
+    unset PROMPT_COMMAND
+    PS1="${COLOR1}${P}${PS_CLEAR} "
+    PS2="> "
+}
+
+prompt_color() {
+    PS1="${GREY}[${COLOR1}\u${GREY}@${COLOR2}\h${GREY}:${COLOR1}\W${GREY}]${COLOR2}$P${PS_CLEAR} "
+    PS2="\[[33;1m\] \[[0m[1m\]> "
+}
+
+# ----------------------------------------------------------------------
+# MACOS X / DARWIN SPECIFIC
+# ----------------------------------------------------------------------
+
+if [ "$UNAME" = Darwin ]; then
+    # setup java environment. puke.
+    export JAVA_HOME="/System/Library/Frameworks/JavaVM.framework/Home"
+
+    # hold jruby's hand
+    test -d /opt/jruby &&
+    export JRUBY_HOME="/opt/jruby"
+fi
+
+# ----------------------------------------------------------------------
+# BASH COMPLETION
+# ----------------------------------------------------------------------
+
+test -z "$BASH_COMPLETION" && {
+    bash=${BASH_VERSION%.*}; bmajor=${bash%.*}; bminor=${bash#*.}
+    test -n "$PS1" && test $bmajor -gt 1 && {
+        # search for a bash_completion file to source
+        for f in /usr/local/etc/bash_completion \
+                 /etc/bash_completion
+        do
+            if [ -f $f ]; then
+                . $f
+                break
+            fi
+        done
+    }
+    unset bash bmajor bminor
+}
+
+# override and disable tilde expansion
+_expand() {
+    return 0
+}
+
+# ----------------------------------------------------------------------
+# LS AND DIRCOLORS
+# ----------------------------------------------------------------------
+
+# we always pass these to ls(1)
+LS_COMMON="-hBG"
+
+# if the dircolors utility is available, set that up to
+dircolors="$(type -P gdircolors dircolors | head -1)"
+test -n "$dircolors" && {
+    COLORS=/etc/DIR_COLORS
+    test -e "/etc/DIR_COLORS.$TERM"   && COLORS="/etc/DIR_COLORS.$TERM"
+    test -e "$HOME/.dircolors"        && COLORS="$HOME/.dircolors"
+    test ! -e "$COLORS"               && COLORS=
+    eval `$dircolors --sh $COLORS`
+}
+unset dircolors
+
+# setup the main ls alias if we've established common args
+test -n "$LS_COMMON" &&
+alias ls="command ls $LS_COMMON"
+
+# these use the ls aliases above
+alias ll="ls -l"
+alias l.="ls -d .*"
+
+# --------------------------------------------------------------------
+# PATH MANIPULATION FUNCTIONS
+# --------------------------------------------------------------------
+
+# Usage: pls [<var>]
+# List path entries of PATH or environment variable <var>.
+pls () { eval echo \$${1:-PATH} |tr : '\n'; }
+
+# Usage: pshift [-n <num>] [<var>]
+# Shift <num> entries off the front of PATH or environment var <var>.
+# with the <var> option. Useful: pshift $(pwd)
+pshift () {
+    local n=1
+    [ "$1" = "-n" ] && { n=$(( $2 + 1 )); shift 2; }
+    eval "${1:-PATH}='$(pls |tail -n +$n |tr '\n' :)'"
+}
+
+# Usage: ppop [-n <num>] [<var>]
+# Pop <num> entries off the end of PATH or environment variable <var>.
+ppop () {
+    local n=1 i=0
+    [ "$1" = "-n" ] && { n=$2; shift 2; }
+    while [ $i -lt $n ]
+    do eval "${1:-PATH}='\${${1:-PATH}%:*}'"
+       i=$(( i + 1 ))
+    done
+}
+
+# Usage: prm <path> [<var>]
+# Remove <path> from PATH or environment variable <var>.
+prm () { eval "${2:-PATH}='$(pls $2 |grep -v "^$1\$" |tr '\n' :)'"; }
+
+# Usage: punshift <path> [<var>]
+# Shift <path> onto the beginning of PATH or environment variable <var>.
+punshift () { eval "${2:-PATH}='$1:$(eval echo \$${2:-PATH})'"; }
+
+# Usage: ppush <path> [<var>]
+ppush () { eval "${2:-PATH}='$(eval echo \$${2:-PATH})':$1"; }
+
+# Usage: puniq [<path>]
+# Remove duplicate entries from a PATH style value while retaining
+# the original order. Use PATH if no <path> is given.
+#
+# Example:
+#   $ puniq /usr/bin:/usr/local/bin:/usr/bin
+#   /usr/bin:/usr/local/bin
+puniq () {
+    echo "$1" |tr : '\n' |nl |sort -u -k 2,2 |sort -n |
+    cut -f 2- |tr '\n' : |sed -e 's/:$//' -e 's/^://'
+}
+
+# bring in rbdev functions
+. rbdev 2>/dev/null || true
+
+# bundle exec
+alias be='bundle exec'
+
+# source ~/.shenv now if it exists
+test -r ~/.shenv &&
+. ~/.shenv
+
+# condense PATH entries
+PATH=$(puniq $PATH)
+MANPATH=$(puniq $MANPATH)
+
+# Use the color prompt by default when interactive
+test -n "$PS1" &&
+prompt_color
+
+# -------------------------------------------------------------------
+# MOTD / FORTUNE
+# -------------------------------------------------------------------
+
+test -n "$INTERACTIVE" -a -n "$LOGIN" && {
+    uname -npsr
+    uptime
+}
+
+# beep
+alias beep='tput bel'
+
+# ----------------------------------------------------------------------
+# ALIASES / FUNCTIONS
+# ----------------------------------------------------------------------
+
+alias cd..="cd .."
+
+# tmux aliases
+alias tmux="TERM=screen-256color-bce tmux -2 -u"
+alias t="tmux"
+
+# disk usage with human sizes and minimal depth
+alias du1='du -h --max-depth=1'
+alias fn='find . -name'
+alias hi='history | tail -20'
+
+if command -v tmux >/dev/null ; then
+  alias tn='tmux new -s "$(basename `pwd`)" || tmux at -t "$(basename `pwd`)"'
+  alias ta='tmux attach'
+fi
+
+alias bekl='bundle exec kitchen list'
+alias bekc='bundle exec kitchen converge'
+alias beks='bundle exec kitchen setup'
+alias bekv='bundle exec kitchen verify'
+alias bekd='bundle exec kitchen destroy'
+alias bekt='bundle exec kitchen test'
+
+alias kl='kitchen list'
+alias kc='kitchen converge'
+alias ks='kitchen setup'
+alias kv='kitchen verify'
+alias kd='kitchen destroy'
+alias kt='kitchen test'
 
 # grep with fixed strings. useful for finding variables in files.
 tgrep () {
@@ -25,13 +358,6 @@ tgrepi () {
         grep --ignore-case --color --fixed-strings --with-filename --line-number --recursive "$str" .
 }
 
-export EDITOR=vim
-
-# java
-if [[ "$UNAMESTR" == 'Darwin' ]]; then
-  export JAVA_HOME="/System/Library/Frameworks/JavaVM.framework/Home"
-fi
-
 # ec2 cert and private key setup
 if [[ -d $HOME/.ec2 ]]; then
   export EC2_PRIVATE_KEY="$(/bin/ls $HOME/.ec2/pk-*.pem)"
@@ -47,22 +373,23 @@ fi
 # this is where we'd export the EC2_ACCESS_KEY and EC2_SECRET_KEY variables.
 [[ -s $HOME/.ec2rc ]] && source $HOME/.ec2rc
 
-# Make sure /usr/local/bin is near the front of the line.
-export PATH=$HOME/local/bin:$HOME/bin:/usr/local/share/npm/bin:/usr/local/bin:/usr/local/sbin:$PATH
-
-alias tmux="TERM=screen-256color-bce tmux -2 -u"
-alias t="tmux"
-
 [[ -s $HOME/bin/bash_completion_tmux.sh ]] && source $HOME/bin/bash_completion_tmux.sh
 
-export CLICOLOR=1
-export LSCOLORS=GxFxCxDxBxegedabagaced
+#export CLICOLOR=1
+#export LSCOLORS=GxFxCxDxBxegedabagaced
 
 ### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
+if [[ -d /usr/local/heroku/bin ]]; then
+  export PATH="/usr/local/heroku/bin:$PATH"
+fi
 
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 ulimit -n 2048
 
-export PATH="/Applications/Postgres.app/Contents/Versions/9.3/bin:$PATH"
+if [[ -d /Applications/Postgres.app/Contents/Versions/9.3/bin ]]; then
+  export PATH="/Applications/Postgres.app/Contents/Versions/9.3/bin:$PATH"
+fi
+
+# vim: ts=4 sts=4 shiftwidth=4 expandtab
+
