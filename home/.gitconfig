@@ -1,22 +1,22 @@
 [user]
   name = Pat Collins
-  email = collins@maya.com
-[color]
-  ui = auto
-  branch = auto
-  diff = auto
-  interactive = auto
-  status = auto
-[core]
-  autocrlf = input
-  editor = vim
-  excludesfile = ~/.gitignore_global
-[mergetool]
-  keepBackup = true
+  email = pat@burned.com
+
+[sendemail]
+  smtpserver = smtp.gmail.com
+  smtpserverport = 587
+  smtpencryption = tls
+  smtpuser = pat@burned.com
+
 [alias]
   aliases = !git config --get-regexp alias | sed -e 's/^alias\\.\\(.*\\)$/\\1/' -e 's/^\\([^ ]\\{1,\\}\\) \\(.*\\)$/\\1 = \\2/'
   cl = clone
+  ci = commit
   co = checkout
+  x = checkout HEAD
+  s = status -sb -uno --ignore-submodules=untracked
+  st = status
+  sa = status -sb --ignore-submodules=untracked
   wd = diff --word-diff
   incoming = !git fetch && git log ..origin/HEAD
   outgoing = !git fetch && git log origin/HEAD..
@@ -26,4 +26,60 @@
   trackup = branch --set-upstream
   serve = !git daemon --reuseaddr --verbose --base-path=. --export-all ./.git
   permission-reset = !git diff -p -R | grep -E \"^(diff|(old|new) mode)\" | git apply
+  ll = log --pretty=oneline --abbrev-commit --max-count=15
   lg = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h %C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)'
+
+[core]
+  filemode = true
+  logallrefupdates = true
+  whitespace = space-before-tab, trailing-space
+  autocrlf = input
+  editor = vim
+  excludesfile = ~/.gitignore_global
+
+[help]
+  browser = gitscm
+
+[branch]
+  autosetupmerge = true
+
+[diff]
+  renames = copies
+  mnemonicprefix = true
+
+[push]
+  default = current
+
+[color]
+  ui = auto
+  ;branch = auto
+  ;diff = auto
+  ;interactive = auto
+  ;status = auto
+
+[color "diff"]
+  meta = blue bold
+  frag = magenta bold
+  old = red bold
+  new = green bold
+
+[color "branch"]
+  current = yellow reverse
+  local = yellow bold
+  remote = green bold
+  plain = red bold
+
+[color "status"]
+  added = yellow
+  changed = green bold
+  untracked = blue bold
+
+[mergetool]
+  keepBackup = true
+
+[browser "gitscm"]
+  cmd = /bin/sh -c 'open http://git-scm.com/docs/$(basename $1 .html)' --
+
+[include]
+  path = .gitconfig_custom
+
