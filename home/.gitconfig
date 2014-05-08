@@ -1,0 +1,29 @@
+[user]
+  name = Pat Collins
+  email = collins@maya.com
+[color]
+  ui = auto
+  branch = auto
+  diff = auto
+  interactive = auto
+  status = auto
+[core]
+  autocrlf = input
+  editor = vim
+  excludesfile = ~/.gitignore_global
+[mergetool]
+  keepBackup = true
+[alias]
+  aliases = !git config --get-regexp alias | sed -e 's/^alias\\.\\(.*\\)$/\\1/' -e 's/^\\([^ ]\\{1,\\}\\) \\(.*\\)$/\\1 = \\2/'
+  cl = clone
+  co = checkout
+  wd = diff --word-diff
+  incoming = !git fetch && git log ..origin/HEAD
+  outgoing = !git fetch && git log origin/HEAD..
+  poh = push origin HEAD
+  pgm = push golden master
+  rv = remote -v
+  trackup = branch --set-upstream
+  serve = !git daemon --reuseaddr --verbose --base-path=. --export-all ./.git
+  permission-reset = !git diff -p -R | grep -E \"^(diff|(old|new) mode)\" | git apply
+  lg = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h %C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)'
