@@ -395,3 +395,8 @@ fi
 
 # vim: ts=4 sts=4 shiftwidth=4 expandtab
 
+# go conveniences
+mkdir -p $HOME/go
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
+
