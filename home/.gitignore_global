@@ -18,3 +18,7 @@ Thumbs.db
 # swap/undo files
 *.sw[a-z]
 *.un~
+
+doc/tags
+**/doc/tags
+
