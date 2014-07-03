@@ -280,6 +280,7 @@ puniq () {
 
 # bundle exec
 alias be='bundle exec'
+alias bi='bundle install'
 
 # source ~/.shenv now if it exists
 test -r ~/.shenv &&
@@ -325,6 +326,7 @@ if command -v tmux >/dev/null ; then
   alias ta='tmux attach'
 fi
 
+alias bek='bundle exec kitchen'
 alias bekl='bundle exec kitchen list'
 alias bekc='bundle exec kitchen converge'
 alias beks='bundle exec kitchen setup'
