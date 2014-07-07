@@ -400,3 +400,8 @@ mkdir -p $HOME/go
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
+if [[ -s $HOME/z/z.sh ]]; then
+  . $HOME/z/z.sh
+fi
+
+
