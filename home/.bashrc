@@ -47,8 +47,8 @@ umask 0022
 # ----------------------------------------------------------------------
 
 # we want the various sbins on the path along with /usr/local/bin
-PATH="$PATH:/usr/local/sbin:/usr/sbin:/sbin"
-PATH="/usr/local/bin:$PATH"
+PATH="$PATH:/usr/sbin:/sbin"
+PATH="/usr/local/bin:/usr/local/sbin:$PATH"
 
 # put ~/bin on PATH if you have it
 test -d "$HOME/bin" &&
@@ -381,13 +381,13 @@ fi
 #export LSCOLORS=GxFxCxDxBxegedabagaced
 
 ### Added by the Heroku Toolbelt
-if [[ -d /usr/local/heroku/bin ]]; then
-  export PATH="/usr/local/heroku/bin:$PATH"
-fi
+#if [[ -d /usr/local/heroku/bin ]]; then
+  #export PATH="/usr/local/heroku/bin:$PATH"
+#fi
 
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+#if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
-ulimit -n 2048
+#ulimit -n 2048
 
 if [[ -d /Applications/Postgres.app/Contents/Versions/9.3/bin ]]; then
   export PATH="/Applications/Postgres.app/Contents/Versions/9.3/bin:$PATH"
@@ -400,8 +400,27 @@ mkdir -p $HOME/go
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
-if [[ -s $HOME/z/z.sh ]]; then
-  . $HOME/z/z.sh
+# pyenv
+#if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+
+# virtualenv
+#eval "$(pyenv virtualenv-init -)"
+
+if [ "$UNAME" = Darwin ]; then
+  godocker () {
+    boot2docker init
+    boot2docker start
+    $(boot2docker shellinit)
+  }
 fi
 
 
+# The next line updates PATH for the Google Cloud SDK.
+[[ -s $HOME/google-cloud-sdk/path.bash.inc ]] && source "$HOME/google-cloud-sdk/path.bash.inc"
+
+# The next line enables bash completion for gcloud.
+[[ -s $HOME/google-cloud-sdk/completion.bash.inc ]] && source "$HOME/google-cloud-sdk/completion.bash.inc"
+
+# export JAVA_CMD=drip
+
+#alias airport='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/A/Resources/airport'
