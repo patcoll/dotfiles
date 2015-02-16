@@ -10,6 +10,7 @@
 
 [alias]
   aliases = !git config --get-regexp alias | sed -e 's/^alias\\.\\(.*\\)$/\\1/' -e 's/^\\([^ ]\\{1,\\}\\) \\(.*\\)$/\\1 = \\2/'
+  br = branch
   cl = clone
   ci = commit
   co = checkout
