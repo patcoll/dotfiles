@@ -424,3 +424,6 @@ fi
 # export JAVA_CMD=drip
 
 #alias airport='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/A/Resources/airport'
+
+export PATH="$HOME/.cabal/bin:$PATH"
+
