@@ -406,12 +406,19 @@ export PATH=$PATH:$GOPATH/bin
 # virtualenv
 #eval "$(pyenv virtualenv-init -)"
 
-if [ "$UNAME" = Darwin ]; then
+if [[ "$UNAME" = Darwin ]]; then
   godocker () {
     boot2docker init
     boot2docker start
     $(boot2docker shellinit)
   }
+
+  DETECTBOOT2DOCKER=$(VBoxManage list runningvms | grep boot2docker)
+  DETECTBOOT2DOCKER=$?
+  if [[ $DETECTBOOT2DOCKER = 0 ]]; then
+    echo boot2docker running
+    $(boot2docker shellinit)
+  fi
 fi
 
 
