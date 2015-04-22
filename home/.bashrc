@@ -434,3 +434,4 @@ fi
 
 export PATH="$HOME/.cabal/bin:$PATH"
 
+export HOMEBREW_GITHUB_API_TOKEN=6f384c466e31b8f3f56ed23d13411e6c7a07276e
