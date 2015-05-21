@@ -9,6 +9,10 @@
 .svn
 CVS
 
+# redundant, but here so we can use this gitignore file for rsyncing
+.git
+.bash_history
+
 # windows noise
 Thumbs.db
 
@@ -23,3 +27,5 @@ doc/tags
 **/doc/tags
 
 .netrwhist
+.vagrant/
+.viminfo
