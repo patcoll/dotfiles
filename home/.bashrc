@@ -425,6 +425,28 @@ if [[ "$UNAME" = Darwin ]]; then
   fi
 fi
 
+if [[ "$UNAME" = Darwin ]]; then
+  gobrew () {
+    brew install dos2unix
+    brew install editorconfig
+    brew install git
+    brew install gnu-tar
+    brew install heroku-toolbelt
+    brew install ncdu
+    brew install reattach-to-user-namespace
+    brew install tmux
+    brew install vim
+
+    brew install caskroom/cask/brew-cask
+    brew cask install postgres
+    brew cask install rowanj-gitx
+  }
+
+  GOBREWRAN=.gobrewran
+  if [[ ! -f $HOME/$GOBREWRAN ]]; then
+    which brew && gobrew && touch $HOME/$GOBREWRAN
+  fi
+fi
 
 # The next line updates PATH for the Google Cloud SDK.
 [[ -s $HOME/google-cloud-sdk/path.bash.inc ]] && source "$HOME/google-cloud-sdk/path.bash.inc"
