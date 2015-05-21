@@ -413,6 +413,10 @@ if [[ "$UNAME" = Darwin ]]; then
     $(boot2docker shellinit)
   }
 
+  docker-ip() {
+    boot2docker ip 2> /dev/null
+  }
+
   DETECTBOOT2DOCKER=$(VBoxManage list runningvms | grep boot2docker)
   DETECTBOOT2DOCKER=$?
   if [[ $DETECTBOOT2DOCKER = 0 ]]; then
