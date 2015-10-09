@@ -463,4 +463,7 @@ export PATH="$HOME/.cabal/bin:$PATH"
 export HOMEBREW_GITHUB_API_TOKEN=6f384c466e31b8f3f56ed23d13411e6c7a07276e
 
 # docker-osx-dev
-export DOCKER_HOST=tcp://localhost:2375
+#export DOCKER_HOST=tcp://localhost:2375
+
+# added by travis gem
+[ -f /Users/collins/.travis/travis.sh ] && source /Users/collins/.travis/travis.sh

@@ -31,6 +31,7 @@
   lg = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h %C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)'
 
 [core]
+  ignorecase = false
   filemode = true
   logallrefupdates = true
   whitespace = space-before-tab, trailing-space
@@ -75,8 +76,11 @@
   changed = green bold
   untracked = blue bold
 
+[merge]
+  tool = opendiff
+
 [mergetool]
-  keepBackup = true
+  keepBackup = false
 
 [browser "gitscm"]
   cmd = /bin/sh -c 'open http://git-scm.com/docs/$(basename $1 .html)' --
@@ -84,3 +88,7 @@
 [include]
   path = .gitconfig_custom
 
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
