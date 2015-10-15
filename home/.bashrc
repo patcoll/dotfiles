@@ -385,7 +385,7 @@ fi
   #export PATH="/usr/local/heroku/bin:$PATH"
 #fi
 
-#if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 #ulimit -n 2048
 
@@ -460,10 +460,10 @@ fi
 
 export PATH="$HOME/.cabal/bin:$PATH"
 
-export HOMEBREW_GITHUB_API_TOKEN=6f384c466e31b8f3f56ed23d13411e6c7a07276e
-
 # docker-osx-dev
 #export DOCKER_HOST=tcp://localhost:2375
+
+source $HOME/.git-completion.bash
 
 # added by travis gem
 [ -f /Users/collins/.travis/travis.sh ] && source /Users/collins/.travis/travis.sh
