@@ -407,25 +407,6 @@ export PATH=$PATH:$GOPATH/bin
 #eval "$(pyenv virtualenv-init -)"
 
 if [[ "$UNAME" = Darwin ]]; then
-  godocker () {
-    boot2docker init
-    boot2docker start
-    $(boot2docker shellinit)
-  }
-
-  docker-ip() {
-    boot2docker ip 2> /dev/null
-  }
-
-  DETECTBOOT2DOCKER=$(VBoxManage list runningvms | grep boot2docker)
-  DETECTBOOT2DOCKER=$?
-  if [[ $DETECTBOOT2DOCKER = 0 ]]; then
-    echo boot2docker running
-    $(boot2docker shellinit)
-  fi
-fi
-
-if [[ "$UNAME" = Darwin ]]; then
   gobrew () {
     brew install dos2unix
     brew install editorconfig
