@@ -423,7 +423,7 @@ if [[ "$UNAME" = Darwin ]]; then
   fi
 fi
 
-if [[ "$(uname -a)" = *"Ubuntu"* ]]; then
+if [[ "$(uname -a)" == *"Ubuntu"* ]]; then
   goapt () {
     sudo aptitude update -y
     sudo aptitude install -y ack-grep
