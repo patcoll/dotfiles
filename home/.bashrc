@@ -472,5 +472,5 @@ if [ $NODE_DEFAULT_VERSION != "" ]; then
 fi
 
 # source /usr/local/opt/autoenv/activate.sh
-[[ $(which direnv) != "" ]] && eval "$(direnv hook bash)"
-[[ $(which npm) != "" ]] && eval "$(npm completion)"
+[[ "$(which direnv)" != "" ]] && eval "$(direnv hook bash)"
+[[ "$(which npm)" != "" ]] && eval "$(npm completion)"
