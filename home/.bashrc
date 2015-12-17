@@ -418,8 +418,8 @@ if [[ "$UNAME" = Darwin ]]; then
   }
 
   GOBREWRAN=.gobrewran
-  if [[ ! -f $HOME/$GOBREWRAN ]]; then
-    which brew && gobrew && touch $HOME/$GOBREWRAN
+  if [[ ! -f "$HOME/$GOBREWRAN" ]]; then
+    which brew && gobrew && touch "$HOME/$GOBREWRAN"
   fi
 fi
 
@@ -432,8 +432,8 @@ if [[ "$(uname -a)" == *"Ubuntu"* ]]; then
   }
 
   GOAPTRAN=.goaptran
-  if [[ ! -f $HOME/$GOAPTRAN ]]; then
-    goapt && touch $HOME/$GOAPTRAN
+  if [[ ! -f "$HOME/$GOAPTRAN" ]]; then
+    goapt && touch "$HOME/$GOAPTRAN"
   fi
 fi
 
