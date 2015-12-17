@@ -463,9 +463,13 @@ if [ "$UNAME" = Darwin ]; then
   source $(brew --prefix nvm)/nvm.sh
 fi
 
-NODE_DEFAULT_VERSION=$(<"$NVM_DIR/alias/default")
+if [[ -d "$NVM_DIR" ]]; then
+  NODE_DEFAULT_VERSION=$(<"$NVM_DIR/alias/default")
+else
+  NODE_DEFAULT_VERSION=""
+fi
 
-if [ "$NODE_DEFAULT_VERSION" != "" ]; then
+if [[ "$NODE_DEFAULT_VERSION" != "" ]]; then
   export PATH="$NVM_DIR/versions/node/$NODE_DEFAULT_VERSION/bin":$PATH
 fi
 
