@@ -341,23 +341,16 @@ alias kv='kitchen verify'
 alias kd='kitchen destroy'
 alias kt='kitchen test'
 
+# alias dc='docker-compose'
+# alias dm='docker-machine'
+
 # grep with fixed strings. useful for finding variables in files.
 tgrep () {
-  str="$*"
-  #for arg in $*; do str="$str $(printf '%q' $arg)"; done
-  str="${str#"${str%%[![:space:]]*}"}"
-  str="${str%"${str##*[![:space:]]}"}"
-  echo "grep --color --fixed-strings --with-filename --line-number --recursive \"$str\" ."
-        grep --color --fixed-strings --with-filename --line-number --recursive "$str" .
+  ack $@
 }
 
 tgrepi () {
-  str="$*"
-  #for arg in $*; do str="$str $(printf '%q' $arg)"; done
-  str="${str#"${str%%[![:space:]]*}"}"
-  str="${str%"${str##*[![:space:]]}"}"
-  echo "grep --ignore-case --color --fixed-strings --with-filename --line-number --recursive \"$str\" ."
-        grep --ignore-case --color --fixed-strings --with-filename --line-number --recursive "$str" .
+  ack -i $@
 }
 
 # ec2 cert and private key setup
@@ -417,6 +410,7 @@ if [[ "$UNAME" = Darwin ]]; then
     brew install reattach-to-user-namespace
     brew install tmux
     brew install vim
+    brew install ack # at least 2.0
 
     brew install caskroom/cask/brew-cask
     brew cask install postgres
@@ -426,6 +420,20 @@ if [[ "$UNAME" = Darwin ]]; then
   GOBREWRAN=.gobrewran
   if [[ ! -f $HOME/$GOBREWRAN ]]; then
     which brew && gobrew && touch $HOME/$GOBREWRAN
+  fi
+fi
+
+if [[ "$(uname -a)" = *"Ubuntu"* ]]; then
+  goapt () {
+    sudo aptitude update -y
+    sudo aptitude install -y ack-grep
+    sudo dpkg-divert --local --divert /usr/bin/ack --rename --add /usr/bin/ack-grep
+    sudo aptitude install -y vim
+  }
+
+  GOAPTRAN=.goaptran
+  if [[ ! -f $HOME/$GOAPTRAN ]]; then
+    goapt && touch $HOME/$GOAPTRAN
   fi
 fi
 
@@ -448,3 +456,21 @@ source $HOME/.git-completion.bash
 
 # added by travis gem
 [ -f /Users/collins/.travis/travis.sh ] && source /Users/collins/.travis/travis.sh
+
+export NVM_DIR=~/.nvm
+
+if [ "$UNAME" = Darwin ]; then
+  source $(brew --prefix nvm)/nvm.sh
+fi
+
+if [[ -f $NVM_DIR/alias/default ]]; then
+  NODE_DEFAULT_VERSION=$(<"$NVM_DIR/alias/default")
+fi
+
+if [ $NODE_DEFAULT_VERSION != "" ]; then
+  export PATH="$NVM_DIR/versions/node/$NODE_DEFAULT_VERSION/bin":$PATH
+fi
+
+# source /usr/local/opt/autoenv/activate.sh
+[[ $(which direnv) != "" ]] && eval "$(direnv hook bash)"
+[[ $(which npm) != "" ]] && eval "$(npm completion)"
