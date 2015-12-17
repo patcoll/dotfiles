@@ -455,7 +455,7 @@ export PATH="$HOME/.cabal/bin:$PATH"
 source $HOME/.git-completion.bash
 
 # added by travis gem
-[ -f /Users/collins/.travis/travis.sh ] && source /Users/collins/.travis/travis.sh
+[ -f "$HOME/.travis/travis.sh" ] && source "$HOME/.travis/travis.sh"
 
 export NVM_DIR=~/.nvm
 
@@ -463,11 +463,9 @@ if [ "$UNAME" = Darwin ]; then
   source $(brew --prefix nvm)/nvm.sh
 fi
 
-if [[ -f $NVM_DIR/alias/default ]]; then
-  NODE_DEFAULT_VERSION=$(<"$NVM_DIR/alias/default")
-fi
+NODE_DEFAULT_VERSION=$(<"$NVM_DIR/alias/default")
 
-if [ $NODE_DEFAULT_VERSION != "" ]; then
+if [ "$NODE_DEFAULT_VERSION" != "" ]; then
   export PATH="$NVM_DIR/versions/node/$NODE_DEFAULT_VERSION/bin":$PATH
 fi
 
