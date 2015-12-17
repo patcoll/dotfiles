@@ -457,7 +457,7 @@ source $HOME/.git-completion.bash
 # added by travis gem
 [ -f "$HOME/.travis/travis.sh" ] && source "$HOME/.travis/travis.sh"
 
-export NVM_DIR=~/.nvm
+export NVM_DIR="$HOME/.nvm"
 
 if [ "$UNAME" = Darwin ]; then
   source $(brew --prefix nvm)/nvm.sh
