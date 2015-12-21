@@ -424,6 +424,8 @@ if [[ "$UNAME" = Darwin ]]; then
 fi
 
 if [[ "$(uname -a)" == *"Ubuntu"* ]]; then
+  sudo -n ls >/dev/null 2>&1
+  has_sudo=$?
   goapt () {
     sudo aptitude update -y
     sudo aptitude install -y ack-grep
@@ -432,7 +434,7 @@ if [[ "$(uname -a)" == *"Ubuntu"* ]]; then
   }
 
   GOAPTRAN=.goaptran
-  if [[ ! -f "$HOME/$GOAPTRAN" ]]; then
+  if [[ "$has_sudo" == 0 ]] && [[ ! -f "$HOME/$GOAPTRAN" ]]; then
     goapt && touch "$HOME/$GOAPTRAN"
   fi
 fi
