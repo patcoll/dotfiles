@@ -103,10 +103,14 @@ EDITOR=vim ||
 EDITOR=vi
 export EDITOR
 
+# LESS
+LESS="-FirSwX"
+export LESS
+
 # PAGER
 if test -n "$(command -v less)" ; then
-    PAGER="less -FirSwX"
-    MANPAGER="less -FiRswX"
+    PAGER="less $LESS"
+    MANPAGER="less $LESS"
 else
     PAGER=more
     MANPAGER="$PAGER"
@@ -116,6 +120,11 @@ export PAGER MANPAGER
 # Ack
 ACK_PAGER="$PAGER"
 ACK_PAGER_COLOR="$PAGER"
+
+# Ag: The Silver Searcher
+alias ag="ag --pager=\"$PAGER\""
+# Only for when we're really sold on ag ;)
+# alias ack="ag --pager=\"$PAGER\""
 
 # ----------------------------------------------------------------------
 # PROMPT
@@ -389,7 +398,7 @@ fi
 # vim: ts=4 sts=4 shiftwidth=4 expandtab
 
 # go conveniences
-mkdir -p $HOME/go
+mkdir -p $HOME/go/src/github.com/patcoll
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
@@ -411,6 +420,7 @@ if [[ "$UNAME" = Darwin ]]; then
     brew install tmux
     brew install vim
     brew install ack # at least 2.0
+    brew install ag
 
     brew install caskroom/cask/brew-cask
     brew cask install postgres
@@ -429,6 +439,7 @@ if [[ "$(uname -a)" == *"Ubuntu"* ]]; then
   goapt () {
     sudo aptitude update -y
     sudo aptitude install -y ack-grep
+    sudo aptitude install -y silversearcher-ag
     sudo dpkg-divert --local --divert /usr/bin/ack --rename --add /usr/bin/ack-grep
     sudo aptitude install -y vim
   }
