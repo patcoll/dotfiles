@@ -11,9 +11,12 @@
 [alias]
   aliases = !git config --get-regexp alias | sed -e 's/^alias\\.\\(.*\\)$/\\1/' -e 's/^\\([^ ]\\{1,\\}\\) \\(.*\\)$/\\1 = \\2/'
   br = branch
+  cb = rev-parse --abbrev-ref HEAD
   cl = clone
   ci = commit
   co = checkout
+  co-pr = !sh -c 'git fetch origin pull/$1/head:pr/$1 && git checkout pr/$1' -
+  fa = "!f(){ for remote in `git remote -v | grep -v heroku | awk '{print $1}' | uniq`; do set -x; git fetch $remote; { set +x; } 2>/dev/null; done };f"
   x = checkout HEAD
   s = status -sb -uno --ignore-submodules=untracked
   st = status
@@ -21,14 +24,20 @@
   wd = diff --word-diff
   incoming = !git fetch && git log ..origin/HEAD
   outgoing = !git fetch && git log origin/HEAD..
+  pf = push --force-with-lease
   poh = push origin HEAD
   pgm = push golden master
   rv = remote -v
+  ra = "!f(){ set -x; git rebase origin/master master; git rebase origin/develop develop; { set +x; } 2>/dev/null; };f"
+  rb = "!f(){ set -x; git rebase \"origin/$1\" \"$1\"; { set +x; } 2>/dev/null; };f"
   trackup = branch --set-upstream
   serve = !git daemon --reuseaddr --verbose --base-path=. --export-all ./.git
   permission-reset = !git diff -p -R | grep -E \"^(diff|(old|new) mode)\" | git apply
   ll = log --pretty=oneline --abbrev-commit --max-count=15
   lg = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h %C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)'
+
+[apply]
+  whitespace = fix
 
 [core]
   ignorecase = false
