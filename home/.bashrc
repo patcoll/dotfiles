@@ -491,3 +491,5 @@ fi
 [[ "$(which npm)" != "" ]] && eval "$(npm completion)"
 
 [[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
+
+[ -f "$HOME/.bashrc.local" ] && source "$HOME/.bashrc.local"
