@@ -391,8 +391,8 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 #ulimit -n 2048
 
-if [[ -d /Applications/Postgres.app/Contents/Versions/9.3/bin ]]; then
-  export PATH="/Applications/Postgres.app/Contents/Versions/9.3/bin:$PATH"
+if [[ -d /Applications/Postgres.app/Contents/Versions/latest/bin ]]; then
+  export PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
 fi
 
 # vim: ts=4 sts=4 shiftwidth=4 expandtab
@@ -493,3 +493,5 @@ fi
 [[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
 
 [ -f "$HOME/.bashrc.local" ] && source "$HOME/.bashrc.local"
+
+export PATH="$HOME/.yarn/bin:$PATH"
