@@ -24,6 +24,7 @@
   wd = diff --word-diff
   incoming = !git fetch && git log ..origin/HEAD
   outgoing = !git fetch && git log origin/HEAD..
+  p = push
   pf = push --force-with-lease
   poh = push origin HEAD
   pgm = push golden master
