@@ -30,7 +30,7 @@
   pgm = push golden master
   pr = "!f(){ set -x; git fetch -p origin; git branch -r --merged | grep origin | grep -v '>' | grep -v master | grep -v develop | xargs -L1 | awk '{split($0,a,\"/\"); print a[2]}' | xargs -L10 -P3 git push origin --delete; { set +x; } 2>/dev/null; };f"
   rv = remote -v
-  ra = "!f(){ set -x; git rebase origin/master master; git rebase origin/develop develop; { set +x; } 2>/dev/null; };f"
+  ra = "!f(){ set -x; git rebase origin/master master; { set +x; } 2>/dev/null; if [[ $(git ls-remote --heads origin develop | wc -l) -ne 0 ]]; then { set -x; } 2>/dev/null; git rebase origin/develop develop; fi; { set +x; } 2>/dev/null; };f"
   rb = "!f(){ set -x; git rebase \"origin/$1\" \"$1\"; { set +x; } 2>/dev/null; };f"
   trackup = branch --set-upstream
   serve = !git daemon --reuseaddr --verbose --base-path=. --export-all ./.git

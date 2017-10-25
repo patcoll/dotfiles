@@ -354,13 +354,13 @@ alias kt='kitchen test'
 # alias dm='docker-machine'
 
 # grep with fixed strings. useful for finding variables in files.
-tgrep () {
-  ack $@
-}
-
-tgrepi () {
-  ack -i $@
-}
+# tgrep () {
+#   ack $@
+# }
+#
+# tgrepi () {
+#   ack -i $@
+# }
 
 # ec2 cert and private key setup
 if [[ -d $HOME/.ec2 ]]; then
@@ -493,5 +493,9 @@ fi
 [[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
 
 [ -f "$HOME/.bashrc.local" ] && source "$HOME/.bashrc.local"
+
+alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
+alias chrome-canary="/Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Google\ Chrome\ Canary"
+alias chromium="/Applications/Chromium.app/Contents/MacOS/Chromium"
 
 export PATH="$HOME/.yarn/bin:$PATH"
