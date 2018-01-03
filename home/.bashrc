@@ -410,6 +410,7 @@ export PATH=$PATH:$GOPATH/bin
 
 if [[ "$UNAME" = Darwin ]]; then
   gobrew () {
+    brew install direnv
     brew install dos2unix
     brew install editorconfig
     brew install git
@@ -421,6 +422,10 @@ if [[ "$UNAME" = Darwin ]]; then
     brew install vim
     brew install ack # at least 2.0
     brew install ag
+
+    brew install nvm
+    brew install rbenv
+    brew install rbenv-gemset
 
     brew install caskroom/cask/brew-cask
     brew cask install postgres
