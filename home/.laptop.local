@@ -1,0 +1,18 @@
+#!/bin/sh
+
+brew bundle --file=- <<EOF
+# Unix
+brew "ack"
+brew "direnv"
+brew "dos2unix"
+brew "editorconfig"
+brew "gnu-tar"
+brew "ncdu"
+
+# Programming language prerequisites and package managers
+brew "nvm"
+brew "rbenv"
+brew "rbenv-gemset"
+
+cask "rowanj-gitx"
+EOF

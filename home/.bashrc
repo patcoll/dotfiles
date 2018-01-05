@@ -408,35 +408,31 @@ export PATH=$PATH:$GOPATH/bin
 # virtualenv
 #eval "$(pyenv virtualenv-init -)"
 
-if [[ "$UNAME" = Darwin ]]; then
-  gobrew () {
-    brew install direnv
-    brew install dos2unix
-    brew install editorconfig
-    brew install git
-    brew install gnu-tar
-    brew install heroku-toolbelt
-    brew install ncdu
-    brew install reattach-to-user-namespace
-    brew install tmux
-    brew install vim
-    brew install ack # at least 2.0
-    brew install ag
-
-    brew install nvm
-    brew install rbenv
-    brew install rbenv-gemset
-
-    brew install caskroom/cask/brew-cask
-    brew cask install postgres
-    brew cask install rowanj-gitx
-  }
-
-  GOBREWRAN=.gobrewran
-  if [[ ! -f "$HOME/$GOBREWRAN" ]]; then
-    which brew && gobrew && touch "$HOME/$GOBREWRAN"
-  fi
-fi
+# if [[ "$UNAME" = Darwin ]]; then
+#   GOBREWRAN=.gobrewran
+#
+#   gobrew () {
+#     if [[ ! -f "$HOME/$GOBREWRAN" ]]; then
+#       # Set gobrewran so this only happens once.
+#       touch "$HOME/$GOBREWRAN"
+#
+#       brew install gnu-tar
+#
+#       brew install nvm
+#       brew install rbenv
+#       brew install rbenv-gemset
+#
+#       brew tap caskroom/cask
+#       # brew cask install postgres
+#       brew cask install rowanj-gitx
+#     fi
+#   }
+#
+#   # Install Homebrew if not found.
+#   which brew >/dev/null 2>&1 || /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+#   # Install specified packages if it's never been done before.
+#   which brew >/dev/null 2>&1 && gobrew
+# fi
 
 if [[ "$(uname -a)" == *"Ubuntu"* ]]; then
   sudo -n ls >/dev/null 2>&1
