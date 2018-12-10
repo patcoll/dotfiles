@@ -291,6 +291,10 @@ puniq () {
 alias be='bundle exec'
 alias bi='bundle install'
 
+# git
+alias gp='git push'
+alias gco='git checkout'
+
 # source ~/.shenv now if it exists
 test -r ~/.shenv &&
 . ~/.shenv
@@ -387,7 +391,7 @@ fi
   #export PATH="/usr/local/heroku/bin:$PATH"
 #fi
 
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+# if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 #ulimit -n 2048
 
@@ -472,10 +476,8 @@ export PATH="$HOME/.cabal/bin:$PATH"
 [ -f "$HOME/.travis/travis.sh" ] && source "$HOME/.travis/travis.sh"
 
 export NVM_DIR="$HOME/.nvm"
-
-if [ "$UNAME" = Darwin ]; then
-  source $(brew --prefix nvm)/nvm.sh
-fi
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 if [[ -d "$NVM_DIR" ]]; then
   NODE_DEFAULT_VERSION=$(<"$NVM_DIR/alias/default")
@@ -500,3 +502,11 @@ alias chrome-canary="/Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Goo
 alias chromium="/Applications/Chromium.app/Contents/MacOS/Chromium"
 
 export PATH="$HOME/.yarn/bin:$PATH"
+export PATH="/usr/local/opt/php@7.1/bin:$PATH"
+
+export PATH="/usr/local/opt/curl/bin:$PATH"
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
