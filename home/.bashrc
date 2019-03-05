@@ -122,7 +122,7 @@ ACK_PAGER="$PAGER"
 ACK_PAGER_COLOR="$PAGER"
 
 # Ag: The Silver Searcher
-alias ag="ag --pager=\"$PAGER\""
+alias ag="ag --path-to-ignore ~/.ignore --pager=\"$PAGER\""
 # Only for when we're really sold on ag ;)
 # alias ack="ag --pager=\"$PAGER\""
 
@@ -510,3 +510,8 @@ export PATH="/usr/local/opt/curl/bin:$PATH"
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
+
+
+. $HOME/.asdf/asdf.sh
+
+. $HOME/.asdf/completions/asdf.bash

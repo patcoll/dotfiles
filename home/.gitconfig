@@ -57,8 +57,12 @@
   autosetupmerge = true
 
 [diff]
+  # tool = vimdiff
   renames = copies
   mnemonicprefix = true
+
+# [difftool]
+#   prompt = false
 
 [push]
   default = current
