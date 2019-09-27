@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+parts=${1:-4}
+tmux split-window -v -c '#{pane_current_path}' -p 29
+if [[ $parts = 3 ]]; then
+  tmux split-window -h -c '#{pane_current_path}' -p 66
+  tmux split-window -h -c '#{pane_current_path}' -p 50
+elif [[ $parts = 4 ]]; then
+  tmux split-window -h -c '#{pane_current_path}' -p 50
+  tmux split-window -h -c '#{pane_current_path}' -p 50
+  tmux select-pane -t 1
+  tmux split-window -h -c '#{pane_current_path}' -p 50
+fi
+tmux select-pane -t 0
+tmux send-keys "vim ." C-m
+tmux select-pane -t 1
+tmux send-keys "git cb" C-m
+tmux select-pane -t 0
