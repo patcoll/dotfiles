@@ -504,7 +504,10 @@ alias chromium="/Applications/Chromium.app/Contents/MacOS/Chromium"
 export PATH="$HOME/.yarn/bin:$PATH"
 export PATH="/usr/local/opt/php@7.1/bin:$PATH"
 
+# Use curl from homebrew first.
 export PATH="/usr/local/opt/curl/bin:$PATH"
+
+# Use curl with updated openssl from homebrew first.
 export PATH="/usr/local/opt/curl-openssl/bin:$PATH"
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
