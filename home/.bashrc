@@ -510,6 +510,9 @@ export PATH="/usr/local/opt/curl/bin:$PATH"
 # Use curl with updated openssl from homebrew first.
 export PATH="/usr/local/opt/curl-openssl/bin:$PATH"
 
+# For ChooseNim
+export PATH=/Users/patcoll/.nimble/bin:$PATH
+
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
