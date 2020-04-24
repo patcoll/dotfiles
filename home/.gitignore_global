@@ -29,3 +29,6 @@ doc/tags
 .netrwhist
 .vagrant/
 .viminfo
+.undodir
+.lvimrc
+jsconfig.json
