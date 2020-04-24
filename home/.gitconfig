@@ -9,6 +9,7 @@
   smtpuser = pat@burned.com
 
 [alias]
+  aa = add -A
   aliases = !git config --get-regexp alias | sed -e 's/^alias\\.\\(.*\\)$/\\1/' -e 's/^\\([^ ]\\{1,\\}\\) \\(.*\\)$/\\1 = \\2/'
   br = branch
   cb = rev-parse --abbrev-ref HEAD
@@ -28,10 +29,10 @@
   pf = push --force-with-lease
   poh = push origin HEAD
   pgm = push golden master
-  pr = "!f(){ set -x; git fetch -p origin; git branch -r --merged | grep origin | grep -v '>' | grep -v master | grep -v develop | xargs -L1 | awk '{split($0,a,\"/\"); print a[2]}' | xargs -L10 -P3 git push origin --delete; { set +x; } 2>/dev/null; };f"
   rv = remote -v
   ra = "!f(){ set -x; CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD); { set +x; } 2>/dev/null; for branch in master develop; do if [[ $(git ls-remote --heads origin $branch | wc -l) -ne 0 ]]; then { set -x; } 2>/dev/null; git checkout $branch && git rebase origin/$branch $branch; fi; { set +x; } 2>/dev/null; done; set -x; git checkout $CURRENT_BRANCH; { set +x; } 2>/dev/null; };f"
   rb = "!f(){ set -x; git rebase \"origin/$1\" \"$1\"; { set +x; } 2>/dev/null; };f"
+  rbc = "!f(){ set -x; CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD); git rebase \"origin/$CURRENT_BRANCH\" \"$CURRENT_BRANCH\"; { set +x; } 2>/dev/null; };f"
   trackup = branch --set-upstream
   serve = !git daemon --reuseaddr --verbose --base-path=. --export-all ./.git
   permission-reset = !git diff -p -R | grep -E \"^(diff|(old|new) mode)\" | git apply
@@ -92,7 +93,8 @@
   untracked = blue bold
 
 [merge]
-  tool = opendiff
+  # tool = opendiff
+  tool = smerge
 
 [mergetool]
   keepBackup = false
@@ -104,9 +106,10 @@
   path = .gitconfig_custom
 
 [filter "lfs"]
-	clean = git-lfs clean %f
-	smudge = git-lfs smudge %f
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
 	required = true
+	process = git-lfs filter-process
 [merge "npm-merge-driver"]
 	name = automatically merge npm lockfiles
 	driver = npx npm-merge-driver merge %A %O %B %P
