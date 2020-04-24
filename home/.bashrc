@@ -122,9 +122,10 @@ ACK_PAGER="$PAGER"
 ACK_PAGER_COLOR="$PAGER"
 
 # Ag: The Silver Searcher
-alias ag="ag --path-to-ignore ~/.ignore --pager=\"$PAGER\""
+alias ag="ag --hidden --path-to-ignore ~/.ignore --pager=\"$PAGER\""
 # Only for when we're really sold on ag ;)
 # alias ack="ag --pager=\"$PAGER\""
+alias agg="ag -Qs"
 
 # ----------------------------------------------------------------------
 # PROMPT
@@ -292,6 +293,7 @@ alias be='bundle exec'
 alias bi='bundle install'
 
 # git
+alias gaa='git add -A'
 alias gp='git push'
 alias gco='git checkout'
 
@@ -412,41 +414,85 @@ export PATH=$PATH:$GOPATH/bin
 # virtualenv
 #eval "$(pyenv virtualenv-init -)"
 
-# if [[ "$UNAME" = Darwin ]]; then
-#   GOBREWRAN=.gobrewran
-#
-#   gobrew () {
-#     if [[ ! -f "$HOME/$GOBREWRAN" ]]; then
-#       # Set gobrewran so this only happens once.
-#       touch "$HOME/$GOBREWRAN"
-#
-#       brew install gnu-tar
-#
-#       brew install nvm
-#       brew install rbenv
-#       brew install rbenv-gemset
-#
-#       brew tap caskroom/cask
-#       # brew cask install postgres
-#       brew cask install rowanj-gitx
-#     fi
-#   }
-#
-#   # Install Homebrew if not found.
-#   which brew >/dev/null 2>&1 || /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-#   # Install specified packages if it's never been done before.
-#   which brew >/dev/null 2>&1 && gobrew
-# fi
+if [[ "$UNAME" = Darwin ]]; then
+  GOBREWRAN=.gobrewran
+
+  gobrew () {
+    if [[ ! -f "$HOME/$GOBREWRAN" ]]; then
+      # Set gobrewran so this only happens once.
+      touch "$HOME/$GOBREWRAN"
+
+      brew install gnu-tar
+      brew install curl-openssl
+      brew install wget
+
+      brew install asdf
+
+      brew install ack
+      brew install the_silver_searcher
+      brew install ripgrep
+      brew install bat
+      brew install fd
+      brew install jq
+
+      brew install git
+      brew install tmux
+      brew install vim
+
+      brew install watchman
+      brew install redis
+
+      # brew cask install textmate
+      #
+      # brew cask install postgres
+      # brew cask install postico
+      # brew cask install sequel-pro
+      # brew cask install tad
+      #
+      # brew cask install rowanj-gitx
+      # brew cask install spectacle
+      # brew cask install sublime-merge
+      #
+      # brew cask install 1password
+      # brew cask install docker
+      # brew cask install dropbox
+      # brew cask install firefox
+      # brew cask install google-chrome
+      # brew cask install iterm2
+      # brew cask install notion
+      # brew cask install spotify
+      #
+      # brew cask install slack
+      # brew cask install discord
+      # brew cask install telegram
+      #
+      # brew cask install fluid
+      # brew cask install istat-menus
+      # brew cask install jqbx
+      # brew cask install licecap
+      # brew cask install ngrok
+      # brew cask install rocket
+      # brew cask install sublime-merge
+      # brew cask install vlc
+      # brew cask install workflowy
+      # brew cask install zeplin
+    fi
+  }
+
+  # Install Homebrew if not found.
+  which brew >/dev/null 2>&1 || /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  # Install specified packages if it's never been done before.
+  which brew >/dev/null 2>&1 && gobrew
+fi
 
 if [[ "$(uname -a)" == *"Ubuntu"* ]]; then
   sudo -n ls >/dev/null 2>&1
   has_sudo=$?
   goapt () {
-    sudo aptitude update -y
-    sudo aptitude install -y ack-grep
-    sudo aptitude install -y silversearcher-ag
-    sudo dpkg-divert --local --divert /usr/bin/ack --rename --add /usr/bin/ack-grep
-    sudo aptitude install -y vim
+    sudo apt-get update -y
+    sudo apt-get install -y ack-grep
+    sudo apt-get install -y silversearcher-ag
+    sudo apt-get install -y vim
   }
 
   GOAPTRAN=.goaptran
@@ -518,7 +564,17 @@ export PATH=/Users/patcoll/.nimble/bin:$PATH
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
 
+if [[ -f "$HOME/.asdf/asdf.sh" ]]; then
+  . $HOME/.asdf/asdf.sh
+  . $HOME/.asdf/completions/asdf.bash
+fi
 
-. $HOME/.asdf/asdf.sh
+if [ "$UNAME" = Darwin ]; then
+  if ! defaults read net.kovidgoyal.kitty NSUserKeyEquivalents >/dev/null 2>&1 | grep -q "Hide kitty"; then
+    defaults write net.kovidgoyal.kitty NSUserKeyEquivalents -dict-add "Hide kitty" '@~^$-'
+  fi
 
-. $HOME/.asdf/completions/asdf.bash
+  if ! defaults read net.kovidgoyal.kitty NSUserKeyEquivalents >/dev/null 2>&1 | grep -q "Hide Others"; then
+    defaults write net.kovidgoyal.kitty NSUserKeyEquivalents -dict-add "Hide Others" '@~^$='
+  fi
+fi
