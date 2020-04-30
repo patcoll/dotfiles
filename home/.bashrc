@@ -48,14 +48,14 @@ umask 0022
 
 # detect interactive shell
 case "$-" in
-    *i*) INTERACTIVE=yes ;;
-    *)   unset INTERACTIVE ;;
+  *i*) INTERACTIVE=yes ;;
+  *)   unset INTERACTIVE ;;
 esac
 
 # detect login shell
 case "$0" in
-    -*) LOGIN=yes ;;
-    *)  unset LOGIN ;;
+  -*) LOGIN=yes ;;
+  *)  unset LOGIN ;;
 esac
 
 # enable en_US locale w/ utf-8 encodings if not already configured
