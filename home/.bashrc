@@ -47,12 +47,12 @@ umask 0022
 # ----------------------------------------------------------------------
 
 # we want the various sbins on the path along with /usr/local/bin
-PATH="$PATH:/usr/sbin:/sbin"
-PATH="/usr/local/bin:/usr/local/sbin:$PATH"
+# PATH="$PATH:/usr/sbin:/sbin"
+# PATH="/usr/local/bin:/usr/local/sbin:$PATH"
 
 # put ~/bin on PATH if you have it
-test -d "$HOME/bin" &&
-PATH="$HOME/bin:$PATH"
+# test -d "$HOME/bin" &&
+# PATH="$HOME/bin:$PATH"
 
 # ----------------------------------------------------------------------
 # ENVIRONMENT CONFIGURATION
@@ -96,11 +96,18 @@ HISTSIZE=10000
 # See what we have to work with ...
 HAVE_VIM=$(command -v vim)
 HAVE_GVIM=$(command -v gvim)
+HAVE_NVIM=$(command -v nvim)
 
-# EDITOR
-test -n "$HAVE_VIM" &&
-EDITOR=vim ||
 EDITOR=vi
+
+if [[ -n "$HAVE_VIM" ]]; then
+  EDITOR=vim
+fi
+
+if [[ -n "$HAVE_NVIM" ]]; then
+  EDITOR=nvim
+fi
+
 export EDITOR
 
 # LESS
@@ -109,23 +116,21 @@ export LESS
 
 # PAGER
 if test -n "$(command -v less)" ; then
-    PAGER="less $LESS"
-    MANPAGER="less $LESS"
+  PAGER="less $LESS"
+  MANPAGER="less $LESS"
 else
-    PAGER=more
-    MANPAGER="$PAGER"
+  PAGER=more
+  MANPAGER="$PAGER"
 fi
 export PAGER MANPAGER
 
-# Ack
-ACK_PAGER="$PAGER"
-ACK_PAGER_COLOR="$PAGER"
-
 # Ag: The Silver Searcher
 alias ag="ag --hidden --path-to-ignore ~/.ignore --pager=\"$PAGER\""
-# Only for when we're really sold on ag ;)
-# alias ack="ag --pager=\"$PAGER\""
 alias agg="ag -Qs"
+
+# Ripgrep
+alias rg="rg -p"
+alias rgg="rg -F"
 
 # ----------------------------------------------------------------------
 # PROMPT
@@ -142,11 +147,6 @@ if [ "$LOGNAME" = "root" ]; then
     COLOR1="${RED}"
     COLOR2="${BROWN}"
     P="#"
-elif hostname | grep -q 'github\.com'; then
-    GITHUB=yep
-    COLOR1="\[\e[0;94m\]"
-    COLOR2="\[\e[0;92m\]"
-    P="\$"
 else
     COLOR1="${BLUE}"
     COLOR2="${BROWN}"
@@ -171,41 +171,28 @@ prompt_color() {
 }
 
 # ----------------------------------------------------------------------
-# MACOS X / DARWIN SPECIFIC
-# ----------------------------------------------------------------------
-
-if [ "$UNAME" = Darwin ]; then
-    # setup java environment. puke.
-    export JAVA_HOME="/System/Library/Frameworks/JavaVM.framework/Home"
-
-    # hold jruby's hand
-    test -d /opt/jruby &&
-    export JRUBY_HOME="/opt/jruby"
-fi
-
-# ----------------------------------------------------------------------
 # BASH COMPLETION
 # ----------------------------------------------------------------------
 
 test -z "$BASH_COMPLETION" && {
-    bash=${BASH_VERSION%.*}; bmajor=${bash%.*}; bminor=${bash#*.}
-    test -n "$PS1" && test $bmajor -gt 1 && {
-        # search for a bash_completion file to source
-        for f in /usr/local/etc/bash_completion \
-                 /etc/bash_completion
-        do
-            if [ -f $f ]; then
-                . $f
-                break
-            fi
-        done
+  bash=${BASH_VERSION%.*}; bmajor=${bash%.*}; bminor=${bash#*.}
+  test -n "$PS1" && test $bmajor -gt 1 && {
+    # search for a bash_completion file to source
+    for f in /usr/local/etc/bash_completion \
+             /etc/bash_completion
+      do
+        if [ -f $f ]; then
+          . $f
+          break
+        fi
+      done
     }
-    unset bash bmajor bminor
+  unset bash bmajor bminor
 }
 
 # override and disable tilde expansion
 _expand() {
-    return 0
+  return 0
 }
 
 # ----------------------------------------------------------------------
@@ -218,11 +205,11 @@ LS_COMMON="-hB"
 # if the dircolors utility is available, set that up to
 dircolors="$(type -P gdircolors dircolors | head -1)"
 test -n "$dircolors" && {
-    COLORS=/etc/DIR_COLORS
-    test -e "/etc/DIR_COLORS.$TERM"   && COLORS="/etc/DIR_COLORS.$TERM"
-    test -e "$HOME/.dircolors"        && COLORS="$HOME/.dircolors"
-    test ! -e "$COLORS"               && COLORS=
-    eval `$dircolors --sh $COLORS`
+  COLORS=/etc/DIR_COLORS
+  test -e "/etc/DIR_COLORS.$TERM"   && COLORS="/etc/DIR_COLORS.$TERM"
+  test -e "$HOME/.dircolors"        && COLORS="$HOME/.dircolors"
+  test ! -e "$COLORS"               && COLORS=
+  eval `$dircolors --sh $COLORS`
 }
 unset dircolors
 
@@ -246,20 +233,20 @@ pls () { eval echo \$${1:-PATH} |tr : '\n'; }
 # Shift <num> entries off the front of PATH or environment var <var>.
 # with the <var> option. Useful: pshift $(pwd)
 pshift () {
-    local n=1
-    [ "$1" = "-n" ] && { n=$(( $2 + 1 )); shift 2; }
-    eval "${1:-PATH}='$(pls |tail -n +$n |tr '\n' :)'"
+  local n=1
+  [ "$1" = "-n" ] && { n=$(( $2 + 1 )); shift 2; }
+  eval "${1:-PATH}='$(pls |tail -n +$n |tr '\n' :)'"
 }
 
 # Usage: ppop [-n <num>] [<var>]
 # Pop <num> entries off the end of PATH or environment variable <var>.
 ppop () {
-    local n=1 i=0
-    [ "$1" = "-n" ] && { n=$2; shift 2; }
-    while [ $i -lt $n ]
-    do eval "${1:-PATH}='\${${1:-PATH}%:*}'"
-       i=$(( i + 1 ))
-    done
+  local n=1 i=0
+  [ "$1" = "-n" ] && { n=$2; shift 2; }
+  while [ $i -lt $n ]
+  do eval "${1:-PATH}='\${${1:-PATH}%:*}'"
+    i=$(( i + 1 ))
+  done
 }
 
 # Usage: prm <path> [<var>]
@@ -281,29 +268,33 @@ ppush () { eval "${2:-PATH}='$(eval echo \$${2:-PATH})':$1"; }
 #   $ puniq /usr/bin:/usr/local/bin:/usr/bin
 #   /usr/bin:/usr/local/bin
 puniq () {
-    echo "$1" |tr : '\n' |nl |sort -u -k 2,2 |sort -n |
+  echo "$1" |tr : '\n' |nl |sort -u -k 2,2 |sort -n |
     cut -f 2- |tr '\n' : |sed -e 's/:$//' -e 's/^://'
 }
 
 # bring in rbdev functions
-. rbdev 2>/dev/null || true
-
-# bundle exec
-alias be='bundle exec'
-alias bi='bundle install'
-
-# git
-alias gaa='git add -A'
-alias gp='git push'
-alias gco='git checkout'
+# . rbdev 2>/dev/null || true
 
 # source ~/.shenv now if it exists
-test -r ~/.shenv &&
-. ~/.shenv
+# test -r ~/.shenv &&
+# . ~/.shenv
+
+# ----------------------------------------------------------------------
+# PATH
+# ----------------------------------------------------------------------
+
+# we want the various sbins on the path along with /usr/local/bin
+ppush "/usr/sbin"
+ppush "/sbin"
+
+punshift "/usr/local/sbin"
+punshift "/usr/local/bin"
+
+punshift "$HOME/bin"
 
 # condense PATH entries
-PATH=$(puniq $PATH)
-MANPATH=$(puniq $MANPATH)
+export PATH=$(puniq $PATH)
+export MANPATH=$(puniq $MANPATH)
 
 # Use the color prompt by default when interactive
 test -n "$PS1" &&
@@ -314,212 +305,152 @@ prompt_color
 # -------------------------------------------------------------------
 
 test -n "$INTERACTIVE" -a -n "$LOGIN" && {
-    uname -npsr
-    uptime
+  uname -npsr
+  uptime
 }
-
-# beep
-alias beep='tput bel'
 
 # ----------------------------------------------------------------------
 # ALIASES / FUNCTIONS
 # ----------------------------------------------------------------------
 
-alias cd..="cd .."
+# bundle exec
+alias be='bundle exec'
+alias bi='bundle install'
+
+# git
+alias gaa='git add -A'
+alias gp='git push'
+alias gco='git checkout'
 
 # tmux aliases
-alias tmux="TERM=screen-256color-bce tmux -2 -u"
-alias t="tmux"
+# alias tmux="TERM=screen-256color-bce tmux -2 -u"
+# alias t="tmux"
+# alias tn='tmux new -s "$(basename `pwd`)" || tmux at -t "$(basename `pwd`)"'
+# alias ta='tmux attach'
 
-# disk usage with human sizes and minimal depth
-alias du1='du -h --max-depth=1'
-alias fn='find . -name'
-alias hi='history | tail -20'
-
-if command -v tmux >/dev/null ; then
-  alias tn='tmux new -s "$(basename `pwd`)" || tmux at -t "$(basename `pwd`)"'
-  alias ta='tmux attach'
-fi
-
-alias bek='bundle exec kitchen'
-alias bekl='bundle exec kitchen list'
-alias bekc='bundle exec kitchen converge'
-alias beks='bundle exec kitchen setup'
-alias bekv='bundle exec kitchen verify'
-alias bekd='bundle exec kitchen destroy'
-alias bekt='bundle exec kitchen test'
-
-alias kl='kitchen list'
-alias kc='kitchen converge'
-alias ks='kitchen setup'
-alias kv='kitchen verify'
-alias kd='kitchen destroy'
-alias kt='kitchen test'
-
-# alias dc='docker-compose'
-# alias dm='docker-machine'
-
-# grep with fixed strings. useful for finding variables in files.
-# tgrep () {
-#   ack $@
-# }
-#
-# tgrepi () {
-#   ack -i $@
-# }
-
-# ec2 cert and private key setup
-if [[ -d $HOME/.ec2 ]]; then
-  export EC2_PRIVATE_KEY="$(/bin/ls $HOME/.ec2/pk-*.pem)"
-  export EC2_CERT="$(/bin/ls $HOME/.ec2/cert-*.pem)"
-fi
-
-# ec2-api-tools setup
-if [[ -d /usr/local/Cellar/ec2-api-tools ]]; then
-  export EC2_HOME="$(/bin/ls -d /usr/local/Cellar/ec2-api-tools/*/jars)"
-fi
-
-# load ec2 configuration.
-# this is where we'd export the EC2_ACCESS_KEY and EC2_SECRET_KEY variables.
-[[ -s $HOME/.ec2rc ]] && source $HOME/.ec2rc
-
-[[ -s $HOME/bin/bash_completion_tmux.sh ]] && source $HOME/bin/bash_completion_tmux.sh
-
-#export CLICOLOR=1
-#export LSCOLORS=GxFxCxDxBxegedabagaced
-
-### Added by the Heroku Toolbelt
-#if [[ -d /usr/local/heroku/bin ]]; then
-  #export PATH="/usr/local/heroku/bin:$PATH"
-#fi
-
-# if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
-
-#ulimit -n 2048
-
-if [[ -d /Applications/Postgres.app/Contents/Versions/latest/bin ]]; then
-  export PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
-fi
-
-# vim: ts=4 sts=4 shiftwidth=4 expandtab
+# vim aliases
+alias vim="nvim"
 
 # go conveniences
-mkdir -p $HOME/go/src/github.com/patcoll
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOPATH/bin
+# mkdir -p $HOME/go/src/github.com/patcoll
+# export GOPATH=$HOME/go
+# export PATH=$PATH:$GOPATH/bin
 
-# pyenv
-#if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+# if [[ "$UNAME" = Darwin ]]; then
+#   GOBREWRAN=.gobrewran
+#
+#   gobrew () {
+#     if [[ ! -f "$HOME/$GOBREWRAN" ]]; then
+#       # Set gobrewran so this only happens once.
+#       touch "$HOME/$GOBREWRAN"
+#
+#       # brew install gnu-tar
+#       # brew install curl-openssl
+#       # brew install wget
+#       #
+#       # brew install asdf
+#       #
+#       # brew install ack
+#       # brew install the_silver_searcher
+#       # brew install ripgrep
+#       # brew install bat
+#       # brew install fd
+#       # brew install jq
+#       #
+#       # brew install git
+#       # brew install tmux
+#       # brew install vim
+#       # brew install nvim
+#       #
+#       # brew install watchman
+#       # brew install redis
+#
+#       # brew cask install textmate
+#       #
+#       # brew cask install postgres
+#       # brew cask install postico
+#       # brew cask install sequel-pro
+#       # brew cask install tad
+#       #
+#       # brew cask install rowanj-gitx
+#       # brew cask install spectacle
+#       # brew cask install sublime-merge
+#       #
+#       # brew cask install 1password
+#       # brew cask install docker
+#       # brew cask install dropbox
+#       # brew cask install firefox
+#       # brew cask install google-chrome
+#       # brew cask install iterm2
+#       # brew cask install notion
+#       # brew cask install spotify
+#       #
+#       # brew cask install slack
+#       # brew cask install discord
+#       # brew cask install telegram
+#       #
+#       # brew cask install fluid
+#       # brew cask install istat-menus
+#       # brew cask install jqbx
+#       # brew cask install licecap
+#       # brew cask install ngrok
+#       # brew cask install rocket
+#       # brew cask install sublime-merge
+#       # brew cask install vlc
+#       # brew cask install workflowy
+#       # brew cask install zeplin
+#     fi
+#   }
+#
+#   # Install Homebrew if not found.
+#   which brew >/dev/null 2>&1 || /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+#   # Install specified packages if it's never been done before.
+#   which brew >/dev/null 2>&1 && gobrew
+# fi
 
-# virtualenv
-#eval "$(pyenv virtualenv-init -)"
-
-if [[ "$UNAME" = Darwin ]]; then
-  GOBREWRAN=.gobrewran
-
-  gobrew () {
-    if [[ ! -f "$HOME/$GOBREWRAN" ]]; then
-      # Set gobrewran so this only happens once.
-      touch "$HOME/$GOBREWRAN"
-
-      brew install gnu-tar
-      brew install curl-openssl
-      brew install wget
-
-      brew install asdf
-
-      brew install ack
-      brew install the_silver_searcher
-      brew install ripgrep
-      brew install bat
-      brew install fd
-      brew install jq
-
-      brew install git
-      brew install tmux
-      brew install vim
-
-      brew install watchman
-      brew install redis
-
-      # brew cask install textmate
-      #
-      # brew cask install postgres
-      # brew cask install postico
-      # brew cask install sequel-pro
-      # brew cask install tad
-      #
-      # brew cask install rowanj-gitx
-      # brew cask install spectacle
-      # brew cask install sublime-merge
-      #
-      # brew cask install 1password
-      # brew cask install docker
-      # brew cask install dropbox
-      # brew cask install firefox
-      # brew cask install google-chrome
-      # brew cask install iterm2
-      # brew cask install notion
-      # brew cask install spotify
-      #
-      # brew cask install slack
-      # brew cask install discord
-      # brew cask install telegram
-      #
-      # brew cask install fluid
-      # brew cask install istat-menus
-      # brew cask install jqbx
-      # brew cask install licecap
-      # brew cask install ngrok
-      # brew cask install rocket
-      # brew cask install sublime-merge
-      # brew cask install vlc
-      # brew cask install workflowy
-      # brew cask install zeplin
-    fi
-  }
-
-  # Install Homebrew if not found.
-  which brew >/dev/null 2>&1 || /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-  # Install specified packages if it's never been done before.
-  which brew >/dev/null 2>&1 && gobrew
-fi
-
-if [[ "$(uname -a)" == *"Ubuntu"* ]]; then
-  sudo -n ls >/dev/null 2>&1
-  has_sudo=$?
-  goapt () {
-    sudo apt-get update -y
-    sudo apt-get install -y ack-grep
-    sudo apt-get install -y silversearcher-ag
-    sudo apt-get install -y vim
-  }
-
-  GOAPTRAN=.goaptran
-  if [[ "$has_sudo" == 0 ]] && [[ ! -f "$HOME/$GOAPTRAN" ]]; then
-    goapt && touch "$HOME/$GOAPTRAN"
-  fi
-fi
+# if [[ "$(uname -a)" == *"Ubuntu"* ]]; then
+#   sudo -n ls >/dev/null 2>&1
+#   has_sudo=$?
+#
+#   GOAPTRAN=.goaptran
+#
+#   goapt () {
+#     if [[ ! -f "$HOME/$GOAPTRAN" ]]; then
+#       touch "$HOME/$GOAPTRAN"
+#
+#       sudo apt-get update -y
+#       sudo apt-get install -y silversearcher-ag
+#       sudo apt-get install -y vim
+#       sudo apt-get install -y nvim
+#     fi
+#   }
+#
+#   if [[ "$has_sudo" == 0 ]]; then
+#     goapt
+#   fi
+# fi
 
 # The next line updates PATH for the Google Cloud SDK.
-[[ -s $HOME/google-cloud-sdk/path.bash.inc ]] && source "$HOME/google-cloud-sdk/path.bash.inc"
+# [[ -s $HOME/google-cloud-sdk/path.bash.inc ]] && source "$HOME/google-cloud-sdk/path.bash.inc"
 
 # The next line enables bash completion for gcloud.
-[[ -s $HOME/google-cloud-sdk/completion.bash.inc ]] && source "$HOME/google-cloud-sdk/completion.bash.inc"
+# [[ -s $HOME/google-cloud-sdk/completion.bash.inc ]] && source "$HOME/google-cloud-sdk/completion.bash.inc"
 
 # export JAVA_CMD=drip
 
 #alias airport='/System/Library/PrivateFrameworks/Apple80211.framework/Versions/A/Resources/airport'
 
-export PATH="$HOME/.cabal/bin:$PATH"
+# export PATH="$HOME/.cabal/bin:$PATH"
+
+punshift "$HOME/.cabal/bin"
 
 # docker-osx-dev
 #export DOCKER_HOST=tcp://localhost:2375
 
-[ -f "$HOME/.git-completion.bash" ] && source $HOME/.git-completion.bash
+# [ -f "$HOME/.git-completion.bash" ] && source $HOME/.git-completion.bash
 
 # added by travis gem
-[ -f "$HOME/.travis/travis.sh" ] && source "$HOME/.travis/travis.sh"
+# [ -f "$HOME/.travis/travis.sh" ] && source "$HOME/.travis/travis.sh"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -539,37 +470,44 @@ fi
 [[ "$(which direnv)" != "" ]] && eval "$(direnv hook bash)"
 [[ "$(which npm)" != "" ]] && eval "$(npm completion)"
 
-[[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
+# [[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
 
-[ -f "$HOME/.bashrc.local" ] && source "$HOME/.bashrc.local"
-
-alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
-alias chrome-canary="/Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Google\ Chrome\ Canary"
-alias chromium="/Applications/Chromium.app/Contents/MacOS/Chromium"
-
-export PATH="$HOME/.yarn/bin:$PATH"
-export PATH="/usr/local/opt/php@7.1/bin:$PATH"
+# Add yarn bin folder
+punshift "$HOME/.yarn/bin"
 
 # Use curl from homebrew first.
-export PATH="/usr/local/opt/curl/bin:$PATH"
+punshift "/usr/local/opt/curl/bin"
 
 # Use curl with updated openssl from homebrew first.
-export PATH="/usr/local/opt/curl-openssl/bin:$PATH"
+punshift "/usr/local/opt/curl-openssl/bin"
 
 # For ChooseNim
-export PATH=/Users/patcoll/.nimble/bin:$PATH
+punshift "$HOME/.nimble/bin"
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
-
+# Load asdf
 if [[ -f "$HOME/.asdf/asdf.sh" ]]; then
-  . $HOME/.asdf/asdf.sh
-  . $HOME/.asdf/completions/asdf.bash
+  . "$HOME/.asdf/asdf.sh"
 fi
 
+# Load asdf bash completion
+if [[ -f "$HOME/.asdf/completions/asdf.bash" ]]; then
+  . "$HOME/.asdf/completions/asdf.bash"
+fi
+
+# tmux bash completion
+[[ -s $HOME/bin/bash_completion_tmux.sh ]] && source $HOME/bin/bash_completion_tmux.sh
+
+# ----------------------------------------------------------------------
+# MACOS X / DARWIN SPECIFIC
+# ----------------------------------------------------------------------
+
 if [ "$UNAME" = Darwin ]; then
+  POSTGRES_BIN="/Applications/Postgres.app/Contents/Versions/latest/bin"
+  if [[ -d "$POSTGRES_BIN" ]]; then
+    export PATH="$POSTGRES_BIN:$PATH"
+  fi
+
+  # Customize hide commands for kitty.app so we can use Cmd-H and Option-Cmd-H key commands.
   if ! defaults read net.kovidgoyal.kitty NSUserKeyEquivalents >/dev/null 2>&1 | grep -q "Hide kitty"; then
     defaults write net.kovidgoyal.kitty NSUserKeyEquivalents -dict-add "Hide kitty" '@~^$-'
   fi
@@ -578,3 +516,5 @@ if [ "$UNAME" = Darwin ]; then
     defaults write net.kovidgoyal.kitty NSUserKeyEquivalents -dict-add "Hide Others" '@~^$='
   fi
 fi
+
+[ -f "$HOME/.bashrc.local" ] && source "$HOME/.bashrc.local"

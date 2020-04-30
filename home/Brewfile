@@ -1,0 +1,60 @@
+tap "homebrew/cask"
+cask_args appdir: "/Applications"
+
+brew "gnu-tar"
+brew "curl-openssl"
+brew "wget"
+
+brew "asdf"
+
+# brew "ack"
+brew "the_silver_searcher"
+brew "ripgrep"
+brew "bat"
+brew "fd"
+brew "jq"
+
+brew "git"
+brew "tmux"
+brew "vim"
+brew "nvim"
+
+brew "watchman"
+brew "redis"
+
+cask "textmate"
+
+cask "postgres"
+cask "postico"
+cask "sequel-pro"
+cask "tad"
+
+cask "rowanj-gitx"
+cask "spectacle"
+cask "sublime-merge"
+
+cask "1password"
+cask "docker"
+cask "dropbox"
+cask "firefox"
+cask "google-chrome"
+# cask "iterm2"
+cask "kitty"
+cask "notion"
+cask "spotify"
+
+cask "slack"
+cask "discord"
+cask "telegram"
+
+cask "fluid"
+cask "istat-menus"
+cask "jqbx"
+cask "licecap"
+cask "ngrok"
+cask "rocket"
+cask "sublime-merge"
+cask "vlc"
+# cask "workflowy"
+cask "zeplin"
+cask "zoomus"
