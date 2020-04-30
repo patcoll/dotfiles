@@ -113,12 +113,12 @@ fi
 export PAGER MANPAGER
 
 # Ag: The Silver Searcher
-alias ag="ag --hidden --path-to-ignore ~/.ignore --pager=\"$PAGER\""
+alias ag="ag --hidden --path-to-ignore ~/.ignore"
 alias agg="ag -Qs"
 
 # Ripgrep
-alias rg="rg -p"
-alias rgg="rg -F"
+alias rg="rg -p --ignore-file ~/.ignore"
+alias rgg="rg -Fs"
 
 # ----------------------------------------------------------------------
 # PROMPT
