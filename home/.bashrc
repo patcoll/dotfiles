@@ -43,18 +43,6 @@ ulimit -S -c 0
 umask 0022
 
 # ----------------------------------------------------------------------
-# PATH
-# ----------------------------------------------------------------------
-
-# we want the various sbins on the path along with /usr/local/bin
-# PATH="$PATH:/usr/sbin:/sbin"
-# PATH="/usr/local/bin:/usr/local/sbin:$PATH"
-
-# put ~/bin on PATH if you have it
-# test -d "$HOME/bin" &&
-# PATH="$HOME/bin:$PATH"
-
-# ----------------------------------------------------------------------
 # ENVIRONMENT CONFIGURATION
 # ----------------------------------------------------------------------
 
