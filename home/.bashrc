@@ -267,6 +267,26 @@ puniq () {
 # test -r ~/.shenv &&
 # . ~/.shenv
 
+#
+# Homebrew on Linux
+#
+HOMEBREW_LINUX=no
+
+if [[ -d ~/.linuxbrew ]]; then
+  HOMEBREW_LINUX=yes
+  eval $(~/.linuxbrew/bin/brew shellenv)
+fi
+
+if [[ -d /home/linuxbrew/.linuxbrew ]]; then
+  HOMEBREW_LINUX=yes
+  eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+fi
+
+if [[ "$HOMEBREW_LINUX" = "yes" ]]; then
+  eval $($(brew --prefix)/bin/brew shellenv)
+fi
+
+
 # ----------------------------------------------------------------------
 # PATH
 # ----------------------------------------------------------------------
@@ -504,5 +524,10 @@ if [ "$UNAME" = Darwin ]; then
     defaults write net.kovidgoyal.kitty NSUserKeyEquivalents -dict-add "Hide Others" '@~^$='
   fi
 fi
+
+if [[ -d "$HOME/.nix-profile" ]]; then
+  . "$HOME/.nix-profile/etc/profile.d/nix.sh"
+fi
+
 
 [ -f "$HOME/.bashrc.local" ] && source "$HOME/.bashrc.local"
