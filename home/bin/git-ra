@@ -1,0 +1,15 @@
+#!/bin/bash
+{ set -x; } 2>/dev/null
+CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+{ set +x; } 2>/dev/null
+for branch in master develop; do
+  if [[ $(git ls-remote --heads origin $branch | wc -l) -ne 0 ]]; then
+    { set -x; } 2>/dev/null
+    git checkout $branch && git rebase origin/$branch $branch
+  fi
+  { set +x; } 2>/dev/null
+done
+
+{ set -x; } 2>/dev/null
+git checkout $CURRENT_BRANCH
+{ set +x; } 2>/dev/null

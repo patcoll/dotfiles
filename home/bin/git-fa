@@ -1,0 +1,6 @@
+#!/bin/bash
+for remote in `git remote -v | grep -v heroku | awk '{print $1}' | uniq`; do
+  { set -x; } 2>/dev/null
+  git fetch --tags --prune $remote
+  { set +x; } 2>/dev/null
+done

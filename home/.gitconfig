@@ -17,7 +17,6 @@
   ci = commit
   co = checkout
   co-pr = !sh -c 'git fetch origin pull/$1/head:pr/$1 && git checkout pr/$1' -
-  fa = "!f(){ for remote in `git remote -v | grep -v heroku | awk '{print $1}' | uniq`; do set -x; git fetch --tags --prune $remote; { set +x; } 2>/dev/null; done };f"
   x = checkout HEAD
   s = status -sb -uno --ignore-submodules=untracked
   st = status
@@ -30,7 +29,6 @@
   poh = push origin HEAD
   pgm = push golden master
   rv = remote -v
-  ra = "!f(){ set -x; CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD); { set +x; } 2>/dev/null; for branch in master develop; do if [[ $(git ls-remote --heads origin $branch | wc -l) -ne 0 ]]; then { set -x; } 2>/dev/null; git checkout $branch && git rebase origin/$branch $branch; fi; { set +x; } 2>/dev/null; done; set -x; git checkout $CURRENT_BRANCH; { set +x; } 2>/dev/null; };f"
   rb = "!f(){ set -x; git rebase \"origin/$1\" \"$1\"; { set +x; } 2>/dev/null; };f"
   rbc = "!f(){ set -x; CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD); git rebase \"origin/$CURRENT_BRANCH\" \"$CURRENT_BRANCH\"; { set +x; } 2>/dev/null; };f"
   trackup = branch --set-upstream
