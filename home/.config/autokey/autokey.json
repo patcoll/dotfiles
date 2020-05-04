@@ -12,7 +12,7 @@
         "showTrayIcon": true, 
         "sortByUsageCount": true, 
         "scriptGlobals": {
-            "hotkey": "<ctrl>+<tab>"
+            "hotkey": "<alt>+<right>"
         }, 
         "undoUsingBackspace": true, 
         "notificationIcon": "autokey-status", 

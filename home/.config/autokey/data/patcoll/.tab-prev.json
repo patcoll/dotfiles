@@ -1,8 +1,8 @@
 {
-    "usageCount": 16, 
+    "usageCount": 0, 
     "omitTrigger": false, 
     "prompt": false, 
-    "description": "alt-tab", 
+    "description": "tab-prev", 
     "abbreviation": {
         "wordChars": "[\\w]", 
         "abbreviations": [], 
@@ -12,12 +12,14 @@
         "triggerInside": false
     }, 
     "hotkey": {
-        "hotKey": "<tab>", 
+        "hotKey": "[", 
         "modifiers": [
             "<ctrl>"
         ]
     }, 
-    "modes": [], 
+    "modes": [
+        3
+    ], 
     "showInTrayMenu": false, 
     "filter": {
         "regex": null, 
