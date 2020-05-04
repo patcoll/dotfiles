@@ -1,2 +1,16 @@
+/autokey/autokey.json~
+/autokey/autokey.log
+/autokey/autokey.pid
 /configstore
 /direnv/allow
+/chromium
+/enchant
+/epiphany
+/evolution
+/libaccounts-glib
+/marlin
+/menus
+/plank
+/pulse
+/Slack
+/spotify

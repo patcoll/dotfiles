@@ -1,0 +1,28 @@
+{
+    "usageCount": 60, 
+    "omitTrigger": false, 
+    "prompt": false, 
+    "description": "paste", 
+    "abbreviation": {
+        "wordChars": "[\\w]", 
+        "abbreviations": [], 
+        "immediate": false, 
+        "ignoreCase": false, 
+        "backspace": true, 
+        "triggerInside": false
+    }, 
+    "hotkey": {
+        "hotKey": "v", 
+        "modifiers": [
+            "<alt>"
+        ]
+    }, 
+    "modes": [], 
+    "showInTrayMenu": false, 
+    "filter": {
+        "regex": null, 
+        "isRecursive": false
+    }, 
+    "type": "script", 
+    "store": {}
+}
