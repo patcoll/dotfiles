@@ -12,7 +12,7 @@
         "showTrayIcon": true, 
         "sortByUsageCount": true, 
         "scriptGlobals": {
-            "hotkey": "<alt>+<right>"
+            "hotkey": "<alt>+<shift>+<left>"
         }, 
         "undoUsingBackspace": true, 
         "notificationIcon": "autokey-status", 
@@ -32,7 +32,7 @@
             100
         ], 
         "workAroundApps": ".*VirtualBox.*|krdc.Krdc", 
-        "hPanePosition": 356, 
+        "hPanePosition": 406, 
         "isFirstRun": true
     }, 
     "userCodeDir": null, 

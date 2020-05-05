@@ -1,8 +1,8 @@
 {
-    "usageCount": 39, 
+    "usageCount": 11, 
     "omitTrigger": false, 
     "prompt": false, 
-    "description": "save", 
+    "description": "tab-prev-2", 
     "abbreviation": {
         "wordChars": "[\\w]", 
         "abbreviations": [], 
@@ -12,9 +12,10 @@
         "triggerInside": false
     }, 
     "hotkey": {
-        "hotKey": "s", 
+        "hotKey": "<left>", 
         "modifiers": [
-            "<super>"
+            "<alt>", 
+            "<ctrl>"
         ]
     }, 
     "modes": [], 

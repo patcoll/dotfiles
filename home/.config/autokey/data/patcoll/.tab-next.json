@@ -1,5 +1,5 @@
 {
-    "usageCount": 0, 
+    "usageCount": 18, 
     "omitTrigger": false, 
     "prompt": false, 
     "description": "tab-next", 
@@ -14,6 +14,7 @@
     "hotkey": {
         "hotKey": "]", 
         "modifiers": [
+            "<alt>", 
             "<ctrl>"
         ]
     }, 

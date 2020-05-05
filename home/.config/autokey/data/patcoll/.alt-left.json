@@ -1,8 +1,8 @@
 {
-    "usageCount": 39, 
+    "usageCount": 46, 
     "omitTrigger": false, 
     "prompt": false, 
-    "description": "save", 
+    "description": "alt-left", 
     "abbreviation": {
         "wordChars": "[\\w]", 
         "abbreviations": [], 
@@ -12,12 +12,14 @@
         "triggerInside": false
     }, 
     "hotkey": {
-        "hotKey": "s", 
+        "hotKey": "<left>", 
         "modifiers": [
-            "<super>"
+            "<alt>"
         ]
     }, 
-    "modes": [], 
+    "modes": [
+        3
+    ], 
     "showInTrayMenu": false, 
     "filter": {
         "regex": null, 

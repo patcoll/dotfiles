@@ -14,8 +14,8 @@
     "hotkey": {
         "hotKey": "<right>", 
         "modifiers": [
-            "<ctrl>", 
-            "<shift>"
+            "<shift>", 
+            "<super>"
         ]
     }, 
     "modes": [

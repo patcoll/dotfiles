@@ -1,8 +1,8 @@
 {
-    "usageCount": 13, 
+    "usageCount": 35, 
     "omitTrigger": false, 
     "prompt": false, 
-    "description": "move-word-right", 
+    "description": "alt-right", 
     "abbreviation": {
         "wordChars": "[\\w]", 
         "abbreviations": [], 

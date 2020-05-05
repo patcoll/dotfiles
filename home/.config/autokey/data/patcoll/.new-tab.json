@@ -1,5 +1,5 @@
 {
-    "usageCount": 20, 
+    "usageCount": 23, 
     "omitTrigger": false, 
     "prompt": false, 
     "description": "new-tab", 
@@ -14,7 +14,7 @@
     "hotkey": {
         "hotKey": "t", 
         "modifiers": [
-            "<alt>"
+            "<super>"
         ]
     }, 
     "modes": [], 

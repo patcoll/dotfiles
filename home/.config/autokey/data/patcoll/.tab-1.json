@@ -1,8 +1,8 @@
 {
-    "usageCount": 29, 
+    "usageCount": 10, 
     "omitTrigger": false, 
     "prompt": false, 
-    "description": "move-word-left", 
+    "description": "tab-1", 
     "abbreviation": {
         "wordChars": "[\\w]", 
         "abbreviations": [], 
@@ -12,14 +12,12 @@
         "triggerInside": false
     }, 
     "hotkey": {
-        "hotKey": "<left>", 
+        "hotKey": "1", 
         "modifiers": [
-            "<alt>"
+            "<super>"
         ]
     }, 
-    "modes": [
-        3
-    ], 
+    "modes": [], 
     "showInTrayMenu": false, 
     "filter": {
         "regex": null, 

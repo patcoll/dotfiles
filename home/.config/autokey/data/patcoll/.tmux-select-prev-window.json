@@ -1,8 +1,8 @@
 {
-    "usageCount": 39, 
+    "usageCount": 0, 
     "omitTrigger": false, 
     "prompt": false, 
-    "description": "save", 
+    "description": "tmux-select-prev-window", 
     "abbreviation": {
         "wordChars": "[\\w]", 
         "abbreviations": [], 
@@ -12,9 +12,9 @@
         "triggerInside": false
     }, 
     "hotkey": {
-        "hotKey": "s", 
+        "hotKey": "c", 
         "modifiers": [
-            "<super>"
+            "<alt>"
         ]
     }, 
     "modes": [], 
