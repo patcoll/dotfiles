@@ -331,10 +331,10 @@ alias gp='git push'
 alias gco='git checkout'
 
 # tmux aliases
-# alias tmux="TERM=screen-256color-bce tmux -2 -u"
-# alias t="tmux"
+alias tmux="TERM=screen-256color-bce tmux -2 -u"
+alias t="tmux"
 # alias tn='tmux new -s "$(basename `pwd`)" || tmux at -t "$(basename `pwd`)"'
-# alias ta='tmux attach'
+alias ta='tmux attach'
 
 # vim aliases
 alias vim="nvim"
