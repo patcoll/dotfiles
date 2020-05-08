@@ -1,0 +1,8 @@
+--- /usr/share/X11/xkb/types/complete	2020-05-07 12:32:50.032627338 -0400
++++ /home/pat/.xkb/types/complete	2020-05-07 12:37:42.398890814 -0400
+@@ -6,4 +6,17 @@
+     include "level5"
+     include "extra"
+     include "numpad"
++    include "local"
+ };

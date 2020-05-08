@@ -1,0 +1,4 @@
+hidden partial modifier_keys
+xkb_symbols "myf13" {
+    key <CAPS> { [ F13 ] };
+};
