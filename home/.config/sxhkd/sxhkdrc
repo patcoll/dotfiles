@@ -1,0 +1,8 @@
+# Cut, copy and paste
+#super + x
+#  xte "keydown Control_L" "key x" "keyup Control_L"
+#super + c
+#  xte "keydown Control_L" "key c" "keyup Control_L"
+#super + v
+#  xte "keydown Control_L" "key v" "keyup Control_L"
+
