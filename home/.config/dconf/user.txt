@@ -9,9 +9,9 @@ last-folder='/home/pat/Videos'
 viewed=['welcome', 'location', 'night-light', 'housekeeping', 'appcenter', 'finish']
 
 [io/elementary/switchboard/saved-state]
-window-position=(1451, 168)
+window-position=(1031, 502)
 window-maximized=false
-window-size=(1108, 862)
+window-size=(1108, 873)
 
 [io/elementary/photos/preferences/window]
 direct-maximize=false
@@ -41,11 +41,11 @@ window-position=(1240, 303)
 default-viewmode='icon'
 window-size=(1000, 680)
 window-state='normal'
-active-tab-position=0
-tab-info-list=[(uint32 0, 'file:///home/pat/Downloads', '')]
+active-tab-position=1
+tab-info-list=[(uint32 0, 'file:///home/pat/Downloads', ''), (0, 'file:///home/pat/Downloads/JetBrainsMono-1.0.3/ttf', '')]
 
 [io/elementary/files/file-chooser]
-last-folder-uri='file:///home/pat/Pictures'
+last-folder-uri='file:///home/pat'
 
 [io/elementary/files/icon-view]
 zoom-level='large'
@@ -61,14 +61,14 @@ background='rgba(46, 46, 46, 0.95)'
 [io/elementary/terminal/saved-state]
 zoom=1.0
 tabs=['/home/pat']
-window-position=(219, 77)
+window-position=(92, 74)
 focused-tab=0
 window-state='Normal'
 window-size=(2289, 1247)
 
 [io/elementary/appcenter/settings]
-last-refresh-time=int64 1588609163
-window-position=(583, 107)
+last-refresh-time=int64 1588884095
+window-position=(683, 137)
 non-curated-warning=false
 cached-drivers=['backport-iwlwifi-dkms']
 window-maximized=false
@@ -76,7 +76,7 @@ window-size=(1100, 892)
 
 [io/elementary/code/settings]
 focused-document-view2='file:///home/pat/.local/share/io.elementary.code/unsaved/Text%20file%20from%202020-05-04%2009:39:50:949837'
-opened-files-view1=['file:///home/pat/.local/share/io.elementary.code/unsaved/Text%20file%20from%202020-05-04%2011:10:06:635563', 'file:///home/pat/.local/share/io.elementary.code/unsaved/Text%20file%20from%202020-05-04%2011:48:54:949509', 'file:///home/pat/.local/share/io.elementary.code/unsaved/Text%20file%20from%202020-05-04%2012:42:08:518592']
+opened-files-view1=['file:///home/pat/.local/share/io.elementary.code/unsaved/Text%20file%20from%202020-05-04%2011:10:06:635563', 'file:///home/pat/.local/share/io.elementary.code/unsaved/Text%20file%20from%202020-05-04%2011:48:54:949509', 'file:///home/pat/.local/share/io.elementary.code/unsaved/Text%20file%20from%202020-05-04%2012:42:08:518592', 'file:///home/pat/.local/share/io.elementary.code/unsaved/Text%20file%20from%202020-05-06%2016:29:45:90648', 'file:///home/pat/.local/share/io.elementary.code/unsaved/Text%20file%20from%202020-05-06%2016:29:45:650276', 'file:///home/pat/.local/share/io.elementary.code/unsaved/Text%20file%20from%202020-05-06%2016:45:44:865954', 'file:///home/pat/.local/share/io.elementary.code/unsaved/Text%20file%20from%202020-05-06%2016:45:45:1897', 'file:///home/pat/.local/share/io.elementary.code/unsaved/Text%20file%20from%202020-05-06%2016:45:45:210124', 'file:///home/pat/.local/share/io.elementary.code/unsaved/Text%20file%20from%202020-05-06%2017:16:27:610905', 'file:///home/pat/.local/share/io.elementary.code/unsaved/Text%20file%20from%202020-05-06%2017:16:27:907144']
 opened-files-view2=@as []
 plugins-enabled=['brackets-completion', 'detect-indent', 'editorconfig', 'outline']
 focused-document-view1='file:///home/pat/.local/share/io.elementary.code/unsaved/Text%20file%20from%202020-05-04%2011:10:06:635563'
@@ -85,17 +85,17 @@ focused-document-view1='file:///home/pat/.local/share/io.elementary.code/unsaved
 opened-folders=@as []
 
 [io/elementary/code/saved-state]
-window-x=55
+window-x=1102
 window-height=727
 window-width=1035
 hp1-size=174
-window-y=558
+window-y=503
 
 [net/launchpad/plank/docks/dock1]
 icon-size=64
 show-dock-item=false
 position='bottom'
-dock-items=['io.elementary.files.dockitem', 'chromium-browser.dockitem', 'spotify.dockitem', 'io.elementary.terminal.dockitem', 'io.elementary.appcenter.dockitem', 'gnome-system-monitor.dockitem', 'io.elementary.switchboard.dockitem', 'org.gnome.tweaks.dockitem', 'ca.desrt.dconf-editor.dockitem', 'autokey-gtk.dockitem', 'io.elementary.code.dockitem', 'chrome-kjbdgfilnfhdoflbpgamdcdgpehopbep-Profile_1.dockitem', 'slack.dockitem', 'io.elementary.photos.dockitem', 'chrome-lhmfhdnfcochlihjdblnbkpihdockkjo-Default.dockitem', 'io.elementary.videos.dockitem']
+dock-items=['io.elementary.files.dockitem', 'chromium-browser.dockitem', 'spotify.dockitem', 'kitty.dockitem', 'io.elementary.appcenter.dockitem', 'gnome-system-monitor.dockitem', 'io.elementary.switchboard.dockitem', 'org.gnome.tweaks.dockitem', 'ca.desrt.dconf-editor.dockitem', 'autokey-gtk.dockitem', 'io.elementary.code.dockitem', 'chrome-kjbdgfilnfhdoflbpgamdcdgpehopbep-Profile_1.dockitem', 'slack.dockitem', 'io.elementary.photos.dockitem', 'chrome-lhmfhdnfcochlihjdblnbkpihdockkjo-Default.dockitem', 'io.elementary.videos.dockitem']
 unhide-delay=0
 items-alignment='center'
 theme='Gtk+'
@@ -117,10 +117,20 @@ current-workspace-only=false
 night-light-enabled=false
 
 [org/gnome/settings-daemon/plugins/media-keys]
-custom-keybindings=@as []
+custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']
+
+screenreader=''
+
+screensaver='<Primary><Shift><Alt><Super>l'
+
+terminal=''
+
+volume-mute='AudioMute'
 
 [org/gnome/settings-daemon/plugins/xsettings]
 hinting='slight'
+
+overrides={'Gtk/EnablePrimaryPaste': <0>, 'Gtk/DecorationLayout': <'close:menu,maximize'>, 'Gtk/ShellShowsAppMenu': <0>, 'Gtk/DialogsUseHeader': <0>}
 
 [org/gnome/nautilus/desktop]
 network-icon-visible=false
@@ -146,7 +156,7 @@ button-layout='close:maximize'
 titlebar-font='Open Sans 10'
 
 [org/gnome/desktop/wm/keybindings]
-switch-to-workspace-left=['']
+switch-to-workspace-left=['<Primary><Shift>braceleft']
 move-to-workspace-left=['']
 move-to-monitor-right=['']
 unmaximize=['']
@@ -161,9 +171,9 @@ switch-to-workspace-8=['']
 switch-to-workspace-9=['']
 maximize=['']
 show-desktop=['']
-panel-main-menu=['<Primary><Super>space']
+panel-main-menu=['<Super>space']
 switch-to-workspace-1=['']
-switch-to-workspace-right=['']
+switch-to-workspace-right=['<Primary><Shift>braceright']
 move-to-workspace-1=['']
 move-to-workspace-2=['']
 move-to-workspace-3=['']
@@ -175,13 +185,13 @@ move-to-workspace-8=['']
 move-to-workspace-9=['']
 move-to-monitor-down=['']
 lower=['']
-switch-windows-backward=['<Primary><Shift>Tab']
-minimize=['<Primary><Super>h']
+switch-windows-backward=['<Shift><Alt>Tab']
+minimize=['<Primary><Super>Down']
 move-to-workspace-right=['']
 toggle-maximized=['<Primary><Super>Up']
 move-to-monitor-up=['']
 close=['<Alt>F4']
-switch-windows=['<Primary>Tab']
+switch-windows=['<Alt>Tab']
 
 [org/gnome/desktop/privacy]
 remove-old-trash-files=true
@@ -199,7 +209,7 @@ show-desktop-icons=false
 [org/gnome/desktop/input-sources]
 show-all-sources=true
 sources=[('xkb', 'us')]
-xkb-options=['ctrl:nocaps', 'terminate:ctrl_alt_bksp', 'shift:both_capslock_cancel', 'altwin:ctrl_alt_win']
+xkb-options=['shift:both_capslock_cancel', 'terminate:ctrl_alt_bksp', 'ctrl:nocaps', 'altwin:swap_alt_win']
 
 [org/gnome/desktop/sound]
 event-sounds=true
@@ -229,11 +239,13 @@ ignore-ca-cert=false
 toggle-tiled-right=['']
 toggle-tiled-left=['']
 
+switch-monitor=['']
+
 [org/gnome/gnome-system-monitor]
 show-dependencies=false
 current-tab='processes'
 maximized=false
-window-state=(1029, 500, 36, 832)
+window-state=(1030, 500, 92, 745)
 show-whose-processes='user'
 
 [org/gnome/gnome-system-monitor/disktreenew]
@@ -244,13 +256,13 @@ col-6-width=0
 
 [org/gnome/gnome-system-monitor/proctree]
 columns-order=[0, 1, 2, 3, 4, 6, 8, 12, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26]
-sort-order=0
-sort-col=15
+sort-order=1
+sort-col=12
 
 [org/gtk/settings/file-chooser]
 sort-column='name'
 sidebar-width=148
-window-position=(785, 242)
+window-position=(785, 334)
 show-size-column=true
 show-hidden=false
 window-size=(990, 742)
@@ -271,6 +283,14 @@ pip=['']
 switch-to-workspace-last=['']
 switch-to-workspace-first=['']
 
+expose-windows=['<Alt><Super>w']
+
+expose-all-windows=['']
+
+zoom-in=['']
+
+zoom-out=['']
+
 [org/pantheon/desktop/gala/behavior]
 hotcorner-topleft='none'
 hotcorner-topright='none'
@@ -278,6 +298,10 @@ hotcorner-bottomright='none'
 dock-names=['docky', 'Docky', 'plank']
 hotcorner-bottomleft='none'
 edge-tiling=false
+
+hotcorner-custom-command='xdg-screensaver lock'
+
+overlay-action=''
 
 [org/pantheon/desktop/gala/notifications/applications/io.elementary.appcenter]
 remember=true
@@ -298,13 +322,38 @@ normal-unfocused=['6', '-1', '0', '4', '80']
 [apps/light-locker]
 late-locking=false
 lock-after-screensaver=uint32 5
-lock-on-suspend=true
+lock-on-suspend=false
 idle-hint=false
 lock-on-lid=false
 
 [ca/desrt/dconf-editor]
 saved-view='/io/elementary/terminal/settings/alt-changes-tab'
-bookmarks=['/io/elementary/terminal/settings/']
+bookmarks=['/io/elementary/terminal/settings/', '/org/gnome/desktop/input-sources/']
 window-height=1041
 window-width=1268
 window-is-maximized=false
+
+show-warning=false
+
+[org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0]
+
+
+
+
+command='echo'
+
+name='echo'
+
+binding='<Primary>w'
+
+[org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1]
+
+[org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2]
+
+[org/gnome/evince/default]
+window-ratio=(1.3333333333333333, 1.2666666666666666)
+
+[org/gnome/settings-daemon/plugins/power]
+power-button-action='interactive'
+sleep-inactive-ac-type='nothing'
+sleep-inactive-ac-timeout=0
