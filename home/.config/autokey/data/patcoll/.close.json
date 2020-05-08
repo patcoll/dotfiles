@@ -1,5 +1,5 @@
 {
-    "usageCount": 34, 
+    "usageCount": 61, 
     "omitTrigger": false, 
     "prompt": false, 
     "description": "close", 
@@ -14,7 +14,7 @@
     "hotkey": {
         "hotKey": "w", 
         "modifiers": [
-            "<alt>"
+            "<super>"
         ]
     }, 
     "modes": [], 

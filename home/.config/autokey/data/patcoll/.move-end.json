@@ -1,5 +1,5 @@
 {
-    "usageCount": 3, 
+    "usageCount": 28, 
     "omitTrigger": false, 
     "prompt": false, 
     "description": "move-end", 
@@ -17,9 +17,7 @@
             "<super>"
         ]
     }, 
-    "modes": [
-        3
-    ], 
+    "modes": [], 
     "showInTrayMenu": false, 
     "filter": {
         "regex": null, 

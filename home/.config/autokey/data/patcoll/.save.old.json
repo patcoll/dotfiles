@@ -1,8 +1,8 @@
 {
-    "usageCount": 40, 
+    "usageCount": 39, 
     "omitTrigger": false, 
     "prompt": false, 
-    "description": "move-home", 
+    "description": "save.old", 
     "abbreviation": {
         "wordChars": "[\\w]", 
         "abbreviations": [], 
@@ -12,7 +12,7 @@
         "triggerInside": false
     }, 
     "hotkey": {
-        "hotKey": "<left>", 
+        "hotKey": "s", 
         "modifiers": [
             "<super>"
         ]

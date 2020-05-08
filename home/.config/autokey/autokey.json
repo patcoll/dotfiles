@@ -12,7 +12,7 @@
         "showTrayIcon": true, 
         "sortByUsageCount": true, 
         "scriptGlobals": {
-            "hotkey": "<alt>+<shift>+<left>"
+            "hotkey": "<f20>"
         }, 
         "undoUsingBackspace": true, 
         "notificationIcon": "autokey-status", 
