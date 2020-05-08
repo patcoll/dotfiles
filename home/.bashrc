@@ -455,7 +455,7 @@ punshift "$HOME/.cabal/bin"
 # docker-osx-dev
 #export DOCKER_HOST=tcp://localhost:2375
 
-# [ -f "$HOME/.git-completion.bash" ] && source $HOME/.git-completion.bash
+[ -f "$HOME/.git-completion.bash" ] && source $HOME/.git-completion.bash
 
 # added by travis gem
 # [ -f "$HOME/.travis/travis.sh" ] && source "$HOME/.travis/travis.sh"
