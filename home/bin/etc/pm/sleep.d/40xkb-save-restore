@@ -1,0 +1,64 @@
+#!/bin/sh
+
+# /etc/pm/sleep.d/40xkb-save-restore
+# written by Vincent Lefevre <vincent@vinc17.net>
+#
+# See pm-action(8) man page for the documentation.
+# See /var/log/pm-suspend.log* for the logs.
+#
+# "xhost +si:localuser:root" must be run by the user, for instance
+# at login time, so that xkbcomp can have access to the display.
+# But the settings are not always restored:
+#   https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=756268
+#
+# Script originally suggested here:
+#   https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=633849#92
+
+set -e
+
+dir=/run/pm-xkb
+mkdir -p $dir
+displays=$dir/displays
+
+unset list
+
+ok()
+{
+  if [ -n "$list" ]; then
+    echo "$1 XKB settings for displays:$list"
+  fi
+}
+
+xkbsave()
+{
+  : > $displays
+  cd /tmp/.X11-unix
+  for file in X*
+  do
+    d=${file#X}
+    if xkbcomp :$d $dir/$d; then
+      echo $d >> $displays
+      list="$list $d"
+    fi
+  done
+  ok saved
+}
+
+xkbrestore()
+{
+  while read d
+  do
+    xkbcomp -w 0 $dir/$d :$d
+    list="$list $d"
+  done < $displays
+  ok restored
+}
+
+case $1 in
+  suspend|hibernate) xkbsave ;;
+  resume|thaw) xkbrestore ;;
+  *) echo "unsupported argument" >&2
+     exit 1 ;;
+esac
+
+# $Id: 40xkb-save-restore 73204 2014-09-19 09:57:21Z vinc17/xvii $
