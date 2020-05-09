@@ -12,7 +12,7 @@
         "showTrayIcon": true, 
         "sortByUsageCount": true, 
         "scriptGlobals": {
-            "hotkey": "<f20>"
+            "hotkey": "<shift>+<ctrl>+<alt>+v"
         }, 
         "undoUsingBackspace": true, 
         "notificationIcon": "autokey-status", 
@@ -22,7 +22,7 @@
         "interfaceType": "XRecord", 
         "windowDefaultSize": [
             1404, 
-            975
+            986
         ], 
         "showToolbar": true, 
         "serviceRunning": true, 

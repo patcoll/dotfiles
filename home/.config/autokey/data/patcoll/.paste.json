@@ -1,5 +1,5 @@
 {
-    "usageCount": 122, 
+    "usageCount": 182, 
     "omitTrigger": false, 
     "prompt": false, 
     "description": "paste", 
@@ -14,7 +14,7 @@
     "hotkey": {
         "hotKey": "v", 
         "modifiers": [
-            "<ctrl>"
+            "<super>"
         ]
     }, 
     "modes": [], 
