@@ -9,7 +9,7 @@ last-folder='/home/pat/Videos'
 viewed=['welcome', 'location', 'night-light', 'housekeeping', 'appcenter', 'finish']
 
 [io/elementary/switchboard/saved-state]
-window-position=(1031, 502)
+window-position=(431, 443)
 window-maximized=false
 window-size=(1108, 873)
 
@@ -17,6 +17,12 @@ window-size=(1108, 873)
 direct-maximize=false
 direct-height=680
 direct-width=1000
+
+library-maximize=false
+
+library-width=1000
+
+library-height=680
 
 [io/elementary/calendar/saved-state]
 month-page='2020-05'
@@ -37,12 +43,12 @@ last-title-info=['io.elementary.music.desktop', '', '']
 
 [io/elementary/files/preferences]
 sidebar-width=191
-window-position=(1240, 303)
+window-position=(113, 397)
 default-viewmode='icon'
 window-size=(1000, 680)
 window-state='normal'
-active-tab-position=1
-tab-info-list=[(uint32 0, 'file:///home/pat/Downloads', ''), (0, 'file:///home/pat/Downloads/JetBrainsMono-1.0.3/ttf', '')]
+active-tab-position=0
+tab-info-list=[(uint32 0, 'file:///home/pat/Downloads', '')]
 
 [io/elementary/files/file-chooser]
 last-folder-uri='file:///home/pat'
@@ -61,22 +67,22 @@ background='rgba(46, 46, 46, 0.95)'
 [io/elementary/terminal/saved-state]
 zoom=1.0
 tabs=['/home/pat']
-window-position=(92, 74)
+window-position=(94, 103)
 focused-tab=0
-window-state='Normal'
+window-state='Maximized'
 window-size=(2289, 1247)
 
 [io/elementary/appcenter/settings]
-last-refresh-time=int64 1588884095
-window-position=(683, 137)
+last-refresh-time=int64 1589037767
+window-position=(751, 182)
 non-curated-warning=false
 cached-drivers=['backport-iwlwifi-dkms']
 window-maximized=false
-window-size=(1100, 892)
+window-size=(1100, 911)
 
 [io/elementary/code/settings]
 focused-document-view2='file:///home/pat/.local/share/io.elementary.code/unsaved/Text%20file%20from%202020-05-04%2009:39:50:949837'
-opened-files-view1=['file:///home/pat/.local/share/io.elementary.code/unsaved/Text%20file%20from%202020-05-04%2011:10:06:635563', 'file:///home/pat/.local/share/io.elementary.code/unsaved/Text%20file%20from%202020-05-04%2011:48:54:949509', 'file:///home/pat/.local/share/io.elementary.code/unsaved/Text%20file%20from%202020-05-04%2012:42:08:518592', 'file:///home/pat/.local/share/io.elementary.code/unsaved/Text%20file%20from%202020-05-06%2016:29:45:90648', 'file:///home/pat/.local/share/io.elementary.code/unsaved/Text%20file%20from%202020-05-06%2016:29:45:650276', 'file:///home/pat/.local/share/io.elementary.code/unsaved/Text%20file%20from%202020-05-06%2016:45:44:865954', 'file:///home/pat/.local/share/io.elementary.code/unsaved/Text%20file%20from%202020-05-06%2016:45:45:1897', 'file:///home/pat/.local/share/io.elementary.code/unsaved/Text%20file%20from%202020-05-06%2016:45:45:210124', 'file:///home/pat/.local/share/io.elementary.code/unsaved/Text%20file%20from%202020-05-06%2017:16:27:610905', 'file:///home/pat/.local/share/io.elementary.code/unsaved/Text%20file%20from%202020-05-06%2017:16:27:907144']
+opened-files-view1=['file:///home/pat/.local/share/io.elementary.code/unsaved/Text%20file%20from%202020-05-04%2011:10:06:635563', 'file:///home/pat/.local/share/io.elementary.code/unsaved/Text%20file%20from%202020-05-04%2011:48:54:949509', 'file:///home/pat/.local/share/io.elementary.code/unsaved/Text%20file%20from%202020-05-04%2012:42:08:518592', 'file:///home/pat/.local/share/io.elementary.code/unsaved/Text%20file%20from%202020-05-06%2016:29:45:90648', 'file:///home/pat/.local/share/io.elementary.code/unsaved/Text%20file%20from%202020-05-06%2016:29:45:650276', 'file:///home/pat/.local/share/io.elementary.code/unsaved/Text%20file%20from%202020-05-06%2016:45:44:865954', 'file:///home/pat/.local/share/io.elementary.code/unsaved/Text%20file%20from%202020-05-06%2016:45:45:1897', 'file:///home/pat/.local/share/io.elementary.code/unsaved/Text%20file%20from%202020-05-06%2016:45:45:210124', 'file:///home/pat/.local/share/io.elementary.code/unsaved/Text%20file%20from%202020-05-06%2017:16:27:610905']
 opened-files-view2=@as []
 plugins-enabled=['brackets-completion', 'detect-indent', 'editorconfig', 'outline']
 focused-document-view1='file:///home/pat/.local/share/io.elementary.code/unsaved/Text%20file%20from%202020-05-04%2011:10:06:635563'
@@ -85,11 +91,11 @@ focused-document-view1='file:///home/pat/.local/share/io.elementary.code/unsaved
 opened-folders=@as []
 
 [io/elementary/code/saved-state]
-window-x=1102
-window-height=727
-window-width=1035
+window-x=1066
+window-height=917
+window-width=1338
 hp1-size=174
-window-y=503
+window-y=293
 
 [net/launchpad/plank/docks/dock1]
 icon-size=64
@@ -121,7 +127,7 @@ custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybin
 
 screenreader=''
 
-screensaver='<Primary><Shift><Alt><Super>l'
+screensaver='<Super>l'
 
 terminal=''
 
@@ -185,13 +191,19 @@ move-to-workspace-8=['']
 move-to-workspace-9=['']
 move-to-monitor-down=['']
 lower=['']
-switch-windows-backward=['<Shift><Alt>Tab']
-minimize=['<Primary><Super>Down']
+switch-windows-backward=['<Shift><Super>Tab']
+minimize=['<Super>h']
 move-to-workspace-right=['']
 toggle-maximized=['<Primary><Super>Up']
 move-to-monitor-up=['']
 close=['<Alt>F4']
-switch-windows=['<Alt>Tab']
+switch-windows=['<Super>Tab']
+
+toggle-fullscreen=['']
+
+toggle-on-all-workspaces=['']
+
+toggle-above=['']
 
 [org/gnome/desktop/privacy]
 remove-old-trash-files=true
@@ -209,7 +221,7 @@ show-desktop-icons=false
 [org/gnome/desktop/input-sources]
 show-all-sources=true
 sources=[('xkb', 'us')]
-xkb-options=['shift:both_capslock_cancel', 'terminate:ctrl_alt_bksp', 'ctrl:nocaps', 'altwin:swap_alt_win']
+xkb-options=['terminate:ctrl_alt_bksp', 'ctrl:nocaps', 'altwin:swap_alt_win', 'local']
 
 [org/gnome/desktop/sound]
 event-sounds=true
@@ -283,7 +295,7 @@ pip=['']
 switch-to-workspace-last=['']
 switch-to-workspace-first=['']
 
-expose-windows=['<Alt><Super>w']
+expose-windows=['<Primary><Alt>w']
 
 expose-all-windows=['']
 
@@ -327,7 +339,7 @@ idle-hint=false
 lock-on-lid=false
 
 [ca/desrt/dconf-editor]
-saved-view='/io/elementary/terminal/settings/alt-changes-tab'
+saved-view='/org/gnome/desktop/input-sources/xkb-options'
 bookmarks=['/io/elementary/terminal/settings/', '/org/gnome/desktop/input-sources/']
 window-height=1041
 window-width=1268
@@ -340,13 +352,19 @@ show-warning=false
 
 
 
-command='echo'
 
-name='echo'
 
-binding='<Primary>w'
+
+command='notify-send -i face-wink silly face'
+
+name='notify-send -i face-wink silly face'
+
+binding=''
 
 [org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1]
+
+
+
 
 [org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2]
 
@@ -357,3 +375,18 @@ window-ratio=(1.3333333333333333, 1.2666666666666666)
 power-button-action='interactive'
 sleep-inactive-ac-type='nothing'
 sleep-inactive-ac-timeout=0
+
+[io/elementary/photos/preferences/ui]
+display-metadata-sidebar=true
+display-photo-tags=true
+library-photos-sort-ascending=false
+library-photos-sort-by=2
+photo-thumbnail-scale=256
+events-sort-ascending=false
+display-sidebar=true
+
+[io/elementary/dpms]
+standby-time=0
+
+[org/pantheon/desktop/gala/notifications/applications/gala-other]
+sounds=false

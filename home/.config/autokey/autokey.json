@@ -12,7 +12,7 @@
         "showTrayIcon": true, 
         "sortByUsageCount": true, 
         "scriptGlobals": {
-            "hotkey": "<shift>+<ctrl>+<alt>+v"
+            "hotkey": "<super>+["
         }, 
         "undoUsingBackspace": true, 
         "notificationIcon": "autokey-status", 

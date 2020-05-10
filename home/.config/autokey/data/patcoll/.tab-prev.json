@@ -1,5 +1,5 @@
 {
-    "usageCount": 21, 
+    "usageCount": 30, 
     "omitTrigger": false, 
     "prompt": false, 
     "description": "tab-prev", 
@@ -14,11 +14,12 @@
     "hotkey": {
         "hotKey": "[", 
         "modifiers": [
-            "<alt>", 
-            "<ctrl>"
+            "<super>"
         ]
     }, 
-    "modes": [], 
+    "modes": [
+        3
+    ], 
     "showInTrayMenu": false, 
     "filter": {
         "regex": null, 

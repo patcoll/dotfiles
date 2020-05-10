@@ -1,0 +1,5 @@
+default xkb_compatibility "local" {
+    interpret Overlay1_Enable {
+        action = SetControls(controls=overlay1);
+    };
+};
