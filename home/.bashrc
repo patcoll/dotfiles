@@ -120,6 +120,8 @@ alias agg="ag -Qs"
 alias rg="rg -p --ignore-file ~/.ignore"
 alias rgg="rg -Fs"
 
+alias xclip="xclip -sel clip"
+
 # ----------------------------------------------------------------------
 # PROMPT
 # ----------------------------------------------------------------------
@@ -531,3 +533,6 @@ fi
 
 
 [ -f "$HOME/.bashrc.local" ] && source "$HOME/.bashrc.local"
+
+# added by travis gem
+[ ! -s /home/pat/.travis/travis.sh ] || source /home/pat/.travis/travis.sh
