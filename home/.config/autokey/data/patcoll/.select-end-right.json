@@ -1,5 +1,5 @@
 {
-    "usageCount": 4, 
+    "usageCount": 14, 
     "omitTrigger": false, 
     "prompt": false, 
     "description": "select-end-right", 
@@ -14,8 +14,8 @@
     "hotkey": {
         "hotKey": "<right>", 
         "modifiers": [
-            "<shift>", 
-            "<super>"
+            "<ctrl>", 
+            "<shift>"
         ]
     }, 
     "modes": [

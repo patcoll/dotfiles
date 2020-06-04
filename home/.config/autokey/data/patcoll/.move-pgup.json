@@ -1,8 +1,8 @@
 {
-    "usageCount": 12, 
+    "usageCount": 0, 
     "omitTrigger": false, 
     "prompt": false, 
-    "description": "select-home-left", 
+    "description": "move-pgup", 
     "abbreviation": {
         "wordChars": "[\\w]", 
         "abbreviations": [], 
@@ -12,10 +12,9 @@
         "triggerInside": false
     }, 
     "hotkey": {
-        "hotKey": "<left>", 
+        "hotKey": "<up>", 
         "modifiers": [
-            "<ctrl>", 
-            "<shift>"
+            "<ctrl>"
         ]
     }, 
     "modes": [

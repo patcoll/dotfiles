@@ -1,5 +1,5 @@
 {
-    "usageCount": 40, 
+    "usageCount": 91, 
     "omitTrigger": false, 
     "prompt": false, 
     "description": "move-home", 
@@ -17,9 +17,7 @@
             "<super>"
         ]
     }, 
-    "modes": [
-        3
-    ], 
+    "modes": [], 
     "showInTrayMenu": false, 
     "filter": {
         "regex": null, 

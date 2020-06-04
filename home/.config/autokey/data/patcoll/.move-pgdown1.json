@@ -1,8 +1,8 @@
 {
-    "usageCount": 12, 
+    "usageCount": 0, 
     "omitTrigger": false, 
     "prompt": false, 
-    "description": "select-home-left", 
+    "description": "move-pgdown", 
     "abbreviation": {
         "wordChars": "[\\w]", 
         "abbreviations": [], 
@@ -12,10 +12,9 @@
         "triggerInside": false
     }, 
     "hotkey": {
-        "hotKey": "<left>", 
+        "hotKey": "<down>", 
         "modifiers": [
-            "<ctrl>", 
-            "<shift>"
+            "<ctrl>"
         ]
     }, 
     "modes": [

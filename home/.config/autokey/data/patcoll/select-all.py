@@ -1,9 +1,9 @@
 import re
 
-store.set_global_value('hotkey', '<alt>+a')
+store.set_global_value('hotkey', '<ctrl>+a')
 
-if re.match('.*(Emacs|Guake|Gnome-terminal|Gvim|Eclipse|io.elementary.terminal)', window.get_active_class()):
-    engine.set_return_value('<ctrl>+<shift>+a')
+if re.match('.*(nvPY)', window.get_active_class()):
+    engine.set_return_value('<ctrl>+?')
 else:
     engine.set_return_value('<ctrl>+a')
 

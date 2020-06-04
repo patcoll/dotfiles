@@ -1,8 +1,8 @@
 {
-    "usageCount": 12, 
+    "usageCount": 14, 
     "omitTrigger": false, 
     "prompt": false, 
-    "description": "select-home-left", 
+    "description": "browse-next", 
     "abbreviation": {
         "wordChars": "[\\w]", 
         "abbreviations": [], 
@@ -12,10 +12,9 @@
         "triggerInside": false
     }, 
     "hotkey": {
-        "hotKey": "<left>", 
+        "hotKey": "]", 
         "modifiers": [
-            "<ctrl>", 
-            "<shift>"
+            "<ctrl>"
         ]
     }, 
     "modes": [

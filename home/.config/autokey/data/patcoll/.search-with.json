@@ -1,8 +1,8 @@
 {
-    "usageCount": 12, 
+    "usageCount": 6, 
     "omitTrigger": false, 
     "prompt": false, 
-    "description": "select-home-left", 
+    "description": "search-with", 
     "abbreviation": {
         "wordChars": "[\\w]", 
         "abbreviations": [], 
@@ -12,15 +12,12 @@
         "triggerInside": false
     }, 
     "hotkey": {
-        "hotKey": "<left>", 
+        "hotKey": "e", 
         "modifiers": [
-            "<ctrl>", 
-            "<shift>"
+            "<ctrl>"
         ]
     }, 
-    "modes": [
-        3
-    ], 
+    "modes": [], 
     "showInTrayMenu": false, 
     "filter": {
         "regex": null, 

@@ -1,8 +1,8 @@
 {
-    "usageCount": 12, 
+    "usageCount": 0, 
     "omitTrigger": false, 
     "prompt": false, 
-    "description": "select-home-left", 
+    "description": "alt", 
     "abbreviation": {
         "wordChars": "[\\w]", 
         "abbreviations": [], 
@@ -14,13 +14,10 @@
     "hotkey": {
         "hotKey": "<left>", 
         "modifiers": [
-            "<ctrl>", 
-            "<shift>"
+            "<alt>"
         ]
     }, 
-    "modes": [
-        3
-    ], 
+    "modes": [], 
     "showInTrayMenu": false, 
     "filter": {
         "regex": null, 

@@ -12,7 +12,7 @@
         "showTrayIcon": true, 
         "sortByUsageCount": true, 
         "scriptGlobals": {
-            "hotkey": "<super>+["
+            "hotkey": "<ctrl>+a"
         }, 
         "undoUsingBackspace": true, 
         "notificationIcon": "autokey-status", 
