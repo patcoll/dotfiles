@@ -18,6 +18,13 @@ partial default xkb_types "local" {
         level_name[Level4] = "Shift+Super";
     };
 
+    //
+    // BELOW BE DRAGONS.
+    //
+    // I'm keeping this stuff around so I can look at old things that may or
+    // may not have worked for future reference.
+    //
+
     //include "complete"
 
     // For the function keys (<FK01>, <FK02>, ..., <FK12>)

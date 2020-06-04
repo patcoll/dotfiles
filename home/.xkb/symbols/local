@@ -1,5 +1,69 @@
 partial default alphanumeric_keys modifier_keys
 xkb_symbols "local" {
+    include "terminate(ctrl_alt_bksp)"
+
+    // NOTE: Using `altwin(ctrl_alt_win)` out-of-the-box, I think combined with
+    // `ctrl(nocaps)`, produces the behavior where the Ctrl key at the
+    // bottom-left hand corner of my keyboard is somehow mapped to both Ctrl
+    // and Super. For this reason, I decided to pick/choose only certain parts
+    // of those two configs so I could get that key to map only to Super.
+    //
+    // include "altwin(ctrl_alt_win)"
+
+    //
+    // Customized version of `altwin(ctrl_alt_win)`:
+    key <LALT> { [ Control_L, Control_L  ] };
+    // key <RALT> { type[Group1] = "TWO_LEVEL",
+    //              symbols[Group1] = [ Control_R, Control_R ] };
+    key <LWIN> { [ Alt_L, Meta_L ] };
+    key <RWIN> { [ Alt_R, Meta_R ] };
+    key <LCTL> { [ Super_L ] };
+    key <RCTL> { [ Super_R ] };
+    modifier_map Control { <LALT> };
+    modifier_map Mod1 { <LWIN>, <RWIN> };
+    modifier_map Mod4 { <LCTL>, <RCTL> };
+
+    //
+    // CAPS LOCK REPLACEMENT OPTIONS. See note above regarding
+    // `altwin(ctrl_alt_win)`. The enabled options below are modified to let
+    // the bottom-left Ctrl key only be mapped to Super.
+    //
+    // include "ctrl(nocaps)"
+
+    replace key <CAPS> { [ Control_R, Control_R ] };
+    replace modifier_map Control { <CAPS>, <LALT> };
+
+    // 1
+    // include "capslock(ctrl_modifier)"
+    // replace key <CAPS> { [ Control_L, Control_L ] };
+
+    // 2
+    // include "ctrl(nocaps)"
+    // modifier_map  Control { <CAPS> };
+
+    // 3 custom
+    //replace key <CAPS> { [ Control_R, Control_R ] };
+    //replace modifier_map Control { <CAPS>, <LALT> };
+
+    //
+    // In a world where the actual Caps Lock key no longer locks the keyboard
+    // for capital letters, this option allows the user to press both Shift
+    // keys at once to enable Caps Lock behavior, then press any Shift key to
+    // disable Caps Lock behavior.
+    include "shift(both_capslock_cancel)"
+
+    //
+    // Map the right Alt key to AltGr. This key has historically been mapped to
+    // enable special characters.  For my purposes, I'll probably map it to an
+    // emoji picker.
+    include "level3(ralt_switch)"
+
+    //
+    // BELOW BE DRAGONS.
+    //
+    // I'm keeping this stuff around so I can look at old things that may or
+    // may not have worked for future reference.
+    //
 
     // NOTE: Trying to get Caps Lock key to have unique Control_R so that
     // Control_L and Control_R could be a combination?
@@ -24,6 +88,11 @@ xkb_symbols "local" {
 
     // key <AD02> {    [     w,    W       ]   };
 
+    //
+    // Experiment to try to map Super to Level5 so to not collide with levels
+    // 1-4.
+    //
+
     // key <LSUP> {
     //     type[Group1] = "ONE_LEVEL",
     //     symbols[Group1] = [ ISO_Level5_Shift ]
@@ -34,606 +103,637 @@ xkb_symbols "local" {
     //     symbols[Group1] = [ Overlay1_Enable ]
     // };
 
-    // 1
-    key <AE01> {
-        type = "FOUR_LEVEL_SUPER",
-        symbols[Group1] = [
-            NoSymbol, NoSymbol, NoSymbol, NoSymbol
-        ],
-        actions[Group1] = [
-            NoAction(),
-            NoAction(),
-            RedirectKey(key=<AE01>,clearmods=Super,mods=Control),
-            RedirectKey(key=<AE01>,clearmods=Super,mods=Control)
-        ]
-    };
+    //
+    // When using the left Alt key as Super, these mappings below are necessary
+    // to map most/all `Super+<key>` combinations back to `Ctrl+<key>`.
+    //
+    // These use a custom type I've defined in `types/local`.
+    //
+    // h,j,k,l are commented out because they conflicted with key commands I
+    // have gotten used to with `tmux`.
+    //
+    // I should note that in a practical sense, this does not really cover all
+    // bases.
+    //
+    // Using `xbindkeys -mk` I still see these mappings sending the `NoSymbol`
+    // symbol for some reason. It was my understanding using that would not
+    // actually send any symbol, but here we are.
+    //
+    // TODO: Look deeper into the options for RedirectKey. There may be more
+    // available options that could avoid `NoSymbol` being sent.
 
-    // 2
-    key <AE02> {
-        type = "FOUR_LEVEL_SUPER",
-        symbols[Group1] = [
-            NoSymbol, NoSymbol, NoSymbol, NoSymbol
-        ],
-        actions[Group1] = [
-            NoAction(),
-            NoAction(),
-            RedirectKey(key=<AE02>,clearmods=Super,mods=Control),
-            RedirectKey(key=<AE02>,clearmods=Super,mods=Control)
-        ]
-    };
+    //
+    // TODO: Look into using SetMods with actions. There might be a way to use
+    // mods and clearmods to accomplish the same thing that RedirectKey is
+    // doing below.
+    //
 
-    // 3
-    key <AE03> {
-        type = "FOUR_LEVEL_SUPER",
-        symbols[Group1] = [
-            NoSymbol, NoSymbol, NoSymbol, NoSymbol
-        ],
-        actions[Group1] = [
-            NoAction(),
-            NoAction(),
-            RedirectKey(key=<AE03>,clearmods=Super,mods=Control),
-            RedirectKey(key=<AE03>,clearmods=Super,mods=Control)
-        ]
-    };
+    //
+    // TODO: Look into using "overlays" to accomplish swapping out Super and
+    // Ctrl. It might have better trade-offs. See `compat/local` for example
+    // with `Overlay1_Enable`.
+    //
 
-    // 4
-    key <AE04> {
-        type = "FOUR_LEVEL_SUPER",
-        symbols[Group1] = [
-            NoSymbol, NoSymbol, NoSymbol, NoSymbol
-        ],
-        actions[Group1] = [
-            NoAction(),
-            NoAction(),
-            RedirectKey(key=<AE04>,clearmods=Super,mods=Control),
-            RedirectKey(key=<AE04>,clearmods=Super,mods=Control)
-        ]
-    };
+    //// 1
+    //key <AE01> {
+    //    type = "FOUR_LEVEL_SUPER",
+    //    symbols[Group1] = [
+    //        NoSymbol, NoSymbol, NoSymbol, NoSymbol
+    //    ],
+    //    actions[Group1] = [
+    //        NoAction(),
+    //        NoAction(),
+    //        RedirectKey(key=<AE01>,clearmods=Super,mods=Control),
+    //        RedirectKey(key=<AE01>,clearmods=Super,mods=Control)
+    //    ]
+    //};
 
-    // 5
-    key <AE05> {
-        type = "FOUR_LEVEL_SUPER",
-        symbols[Group1] = [
-            NoSymbol, NoSymbol, NoSymbol, NoSymbol
-        ],
-        actions[Group1] = [
-            NoAction(),
-            NoAction(),
-            RedirectKey(key=<AE05>,clearmods=Super,mods=Control),
-            RedirectKey(key=<AE05>,clearmods=Super,mods=Control)
-        ]
-    };
+    //// 2
+    //key <AE02> {
+    //    type = "FOUR_LEVEL_SUPER",
+    //    symbols[Group1] = [
+    //        NoSymbol, NoSymbol, NoSymbol, NoSymbol
+    //    ],
+    //    actions[Group1] = [
+    //        NoAction(),
+    //        NoAction(),
+    //        RedirectKey(key=<AE02>,clearmods=Super,mods=Control),
+    //        RedirectKey(key=<AE02>,clearmods=Super,mods=Control)
+    //    ]
+    //};
 
-    // 6
-    key <AE06> {
-        type = "FOUR_LEVEL_SUPER",
-        symbols[Group1] = [
-            NoSymbol, NoSymbol, NoSymbol, NoSymbol
-        ],
-        actions[Group1] = [
-            NoAction(),
-            NoAction(),
-            RedirectKey(key=<AE06>,clearmods=Super,mods=Control),
-            RedirectKey(key=<AE06>,clearmods=Super,mods=Control)
-        ]
-    };
+    //// 3
+    //key <AE03> {
+    //    type = "FOUR_LEVEL_SUPER",
+    //    symbols[Group1] = [
+    //        NoSymbol, NoSymbol, NoSymbol, NoSymbol
+    //    ],
+    //    actions[Group1] = [
+    //        NoAction(),
+    //        NoAction(),
+    //        RedirectKey(key=<AE03>,clearmods=Super,mods=Control),
+    //        RedirectKey(key=<AE03>,clearmods=Super,mods=Control)
+    //    ]
+    //};
 
-    // 7
-    key <AE07> {
-        type = "FOUR_LEVEL_SUPER",
-        symbols[Group1] = [
-            NoSymbol, NoSymbol, NoSymbol, NoSymbol
-        ],
-        actions[Group1] = [
-            NoAction(),
-            NoAction(),
-            RedirectKey(key=<AE07>,clearmods=Super,mods=Control),
-            RedirectKey(key=<AE07>,clearmods=Super,mods=Control)
-        ]
-    };
+    //// 4
+    //key <AE04> {
+    //    type = "FOUR_LEVEL_SUPER",
+    //    symbols[Group1] = [
+    //        NoSymbol, NoSymbol, NoSymbol, NoSymbol
+    //    ],
+    //    actions[Group1] = [
+    //        NoAction(),
+    //        NoAction(),
+    //        RedirectKey(key=<AE04>,clearmods=Super,mods=Control),
+    //        RedirectKey(key=<AE04>,clearmods=Super,mods=Control)
+    //    ]
+    //};
 
-    // 8
-    key <AE08> {
-        type = "FOUR_LEVEL_SUPER",
-        symbols[Group1] = [
-            NoSymbol, NoSymbol, NoSymbol, NoSymbol
-        ],
-        actions[Group1] = [
-            NoAction(),
-            NoAction(),
-            RedirectKey(key=<AE08>,clearmods=Super,mods=Control),
-            RedirectKey(key=<AE08>,clearmods=Super,mods=Control)
-        ]
-    };
+    //// 5
+    //key <AE05> {
+    //    type = "FOUR_LEVEL_SUPER",
+    //    symbols[Group1] = [
+    //        NoSymbol, NoSymbol, NoSymbol, NoSymbol
+    //    ],
+    //    actions[Group1] = [
+    //        NoAction(),
+    //        NoAction(),
+    //        RedirectKey(key=<AE05>,clearmods=Super,mods=Control),
+    //        RedirectKey(key=<AE05>,clearmods=Super,mods=Control)
+    //    ]
+    //};
 
-    // 9
-    key <AE09> {
-        type = "FOUR_LEVEL_SUPER",
-        symbols[Group1] = [
-            NoSymbol, NoSymbol, NoSymbol, NoSymbol
-        ],
-        actions[Group1] = [
-            NoAction(),
-            NoAction(),
-            RedirectKey(key=<AE09>,clearmods=Super,mods=Control),
-            RedirectKey(key=<AE09>,clearmods=Super,mods=Control)
-        ]
-    };
+    //// 6
+    //key <AE06> {
+    //    type = "FOUR_LEVEL_SUPER",
+    //    symbols[Group1] = [
+    //        NoSymbol, NoSymbol, NoSymbol, NoSymbol
+    //    ],
+    //    actions[Group1] = [
+    //        NoAction(),
+    //        NoAction(),
+    //        RedirectKey(key=<AE06>,clearmods=Super,mods=Control),
+    //        RedirectKey(key=<AE06>,clearmods=Super,mods=Control)
+    //    ]
+    //};
 
-    // 0
-    key <AE10> {
-        type = "FOUR_LEVEL_SUPER",
-        symbols[Group1] = [
-            NoSymbol, NoSymbol, NoSymbol, NoSymbol
-        ],
-        actions[Group1] = [
-            NoAction(),
-            NoAction(),
-            RedirectKey(key=<AE10>,clearmods=Super,mods=Control),
-            RedirectKey(key=<AE10>,clearmods=Super,mods=Control)
-        ]
-    };
+    //// 7
+    //key <AE07> {
+    //    type = "FOUR_LEVEL_SUPER",
+    //    symbols[Group1] = [
+    //        NoSymbol, NoSymbol, NoSymbol, NoSymbol
+    //    ],
+    //    actions[Group1] = [
+    //        NoAction(),
+    //        NoAction(),
+    //        RedirectKey(key=<AE07>,clearmods=Super,mods=Control),
+    //        RedirectKey(key=<AE07>,clearmods=Super,mods=Control)
+    //    ]
+    //};
 
-    // q
-    key <AD01> {
-        // overlay1 = 
-        type = "FOUR_LEVEL_SUPER",
-        symbols[Group1] = [
-            NoSymbol, NoSymbol, NoSymbol, NoSymbol
-        ],
-        actions[Group1] = [
-            NoAction(),
-            NoAction(),
-            RedirectKey(key=<AD01>,clearmods=Super,mods=Control), // quit
-            RedirectKey(key=<AD01>,clearmods=Super,mods=Control)
-        ]
-    };
+    //// 8
+    //key <AE08> {
+    //    type = "FOUR_LEVEL_SUPER",
+    //    symbols[Group1] = [
+    //        NoSymbol, NoSymbol, NoSymbol, NoSymbol
+    //    ],
+    //    actions[Group1] = [
+    //        NoAction(),
+    //        NoAction(),
+    //        RedirectKey(key=<AE08>,clearmods=Super,mods=Control),
+    //        RedirectKey(key=<AE08>,clearmods=Super,mods=Control)
+    //    ]
+    //};
 
-    // w
-    key <AD02> {
-        type = "FOUR_LEVEL_SUPER",
-        symbols[Group1] = [
-            NoSymbol, NoSymbol, NoSymbol, NoSymbol
-        ],
-        actions[Group1] = [
-            NoAction(),
-            NoAction(),
-            RedirectKey(key=<AD02>,clearmods=Super,mods=Control), // close window
-            RedirectKey(key=<AD02>,clearmods=Super,mods=Control)
-        ]
-    };
+    //// 9
+    //key <AE09> {
+    //    type = "FOUR_LEVEL_SUPER",
+    //    symbols[Group1] = [
+    //        NoSymbol, NoSymbol, NoSymbol, NoSymbol
+    //    ],
+    //    actions[Group1] = [
+    //        NoAction(),
+    //        NoAction(),
+    //        RedirectKey(key=<AE09>,clearmods=Super,mods=Control),
+    //        RedirectKey(key=<AE09>,clearmods=Super,mods=Control)
+    //    ]
+    //};
 
-    // e
-    key <AD03> {
-        type = "FOUR_LEVEL_SUPER",
-        symbols[Group1] = [
-            NoSymbol, NoSymbol, NoSymbol, NoSymbol
-        ],
-        actions[Group1] = [
-            NoAction(),
-            NoAction(),
-            RedirectKey(key=<AD03>,clearmods=Super,mods=Control),
-            RedirectKey(key=<AD03>,clearmods=Super,mods=Control)
-        ]
-    };
+    //// 0
+    //key <AE10> {
+    //    type = "FOUR_LEVEL_SUPER",
+    //    symbols[Group1] = [
+    //        NoSymbol, NoSymbol, NoSymbol, NoSymbol
+    //    ],
+    //    actions[Group1] = [
+    //        NoAction(),
+    //        NoAction(),
+    //        RedirectKey(key=<AE10>,clearmods=Super,mods=Control),
+    //        RedirectKey(key=<AE10>,clearmods=Super,mods=Control)
+    //    ]
+    //};
 
-    // r
-    key <AD04> {
-        type = "FOUR_LEVEL_SUPER",
-        symbols[Group1] = [
-            NoSymbol, NoSymbol, NoSymbol, NoSymbol
-        ],
-        actions[Group1] = [
-            NoAction(),
-            NoAction(),
-            RedirectKey(key=<AD04>,clearmods=Super,mods=Control),
-            RedirectKey(key=<AD04>,clearmods=Super,mods=Control)
-        ]
-    };
+    //// q
+    //key <AD01> {
+    //    // overlay1 =
+    //    type = "FOUR_LEVEL_SUPER",
+    //    symbols[Group1] = [
+    //        NoSymbol, NoSymbol, NoSymbol, NoSymbol
+    //    ],
+    //    actions[Group1] = [
+    //        NoAction(),
+    //        NoAction(),
+    //        RedirectKey(key=<AD01>,clearmods=Super,mods=Control), // quit
+    //        RedirectKey(key=<AD01>,clearmods=Super,mods=Control)
+    //    ]
+    //};
 
-    // t
-    key <AD05> {
-        type = "FOUR_LEVEL_SUPER",
-        symbols[Group1] = [
-            NoSymbol, NoSymbol, NoSymbol, NoSymbol
-        ],
-        actions[Group1] = [
-            NoAction(),
-            NoAction(),
-            RedirectKey(key=<AD05>,clearmods=Super,mods=Control), // new tab
-            RedirectKey(key=<AD05>,clearmods=Super,mods=Control) // open last tab
-        ]
-    };
+    //// w
+    //key <AD02> {
+    //    type = "FOUR_LEVEL_SUPER",
+    //    symbols[Group1] = [
+    //        NoSymbol, NoSymbol, NoSymbol, NoSymbol
+    //    ],
+    //    actions[Group1] = [
+    //        NoAction(),
+    //        NoAction(),
+    //        RedirectKey(key=<AD02>,clearmods=Super,mods=Control), // close window
+    //        RedirectKey(key=<AD02>,clearmods=Super,mods=Control)
+    //    ]
+    //};
 
-    // y
-    key <AD06> {
-        type = "FOUR_LEVEL_SUPER",
-        symbols[Group1] = [
-            NoSymbol, NoSymbol, NoSymbol, NoSymbol
-        ],
-        actions[Group1] = [
-            NoAction(),
-            NoAction(),
-            RedirectKey(key=<AD06>,clearmods=Super,mods=Control),
-            RedirectKey(key=<AD06>,clearmods=Super,mods=Control)
-        ]
-    };
+    //// e
+    //key <AD03> {
+    //    type = "FOUR_LEVEL_SUPER",
+    //    symbols[Group1] = [
+    //        NoSymbol, NoSymbol, NoSymbol, NoSymbol
+    //    ],
+    //    actions[Group1] = [
+    //        NoAction(),
+    //        NoAction(),
+    //        RedirectKey(key=<AD03>,clearmods=Super,mods=Control),
+    //        RedirectKey(key=<AD03>,clearmods=Super,mods=Control)
+    //    ]
+    //};
 
-    // u
-    key <AD07> {
-        type = "FOUR_LEVEL_SUPER",
-        symbols[Group1] = [
-            NoSymbol, NoSymbol, NoSymbol, NoSymbol
-        ],
-        actions[Group1] = [
-            NoAction(),
-            NoAction(),
-            RedirectKey(key=<AD07>,clearmods=Super,mods=Control),
-            RedirectKey(key=<AD07>,clearmods=Super,mods=Control)
-        ]
-    };
+    //// r
+    //key <AD04> {
+    //    type = "FOUR_LEVEL_SUPER",
+    //    symbols[Group1] = [
+    //        NoSymbol, NoSymbol, NoSymbol, NoSymbol
+    //    ],
+    //    actions[Group1] = [
+    //        NoAction(),
+    //        NoAction(),
+    //        RedirectKey(key=<AD04>,clearmods=Super,mods=Control),
+    //        RedirectKey(key=<AD04>,clearmods=Super,mods=Control)
+    //    ]
+    //};
 
-    // i
-    key <AD08> {
-        type = "FOUR_LEVEL_SUPER",
-        symbols[Group1] = [
-            NoSymbol, NoSymbol, NoSymbol, NoSymbol
-        ],
-        actions[Group1] = [
-            NoAction(),
-            NoAction(),
-            RedirectKey(key=<AD08>,clearmods=Super,mods=Control),
-            RedirectKey(key=<AD08>,clearmods=Super,mods=Control) // open dev tools
-        ]
-    };
+    //// t
+    //key <AD05> {
+    //    type = "FOUR_LEVEL_SUPER",
+    //    symbols[Group1] = [
+    //        NoSymbol, NoSymbol, NoSymbol, NoSymbol
+    //    ],
+    //    actions[Group1] = [
+    //        NoAction(),
+    //        NoAction(),
+    //        RedirectKey(key=<AD05>,clearmods=Super,mods=Control), // new tab
+    //        RedirectKey(key=<AD05>,clearmods=Super,mods=Control) // open last tab
+    //    ]
+    //};
 
-    // o
-    key <AD09> {
-        type = "FOUR_LEVEL_SUPER",
-        symbols[Group1] = [
-            NoSymbol, NoSymbol, NoSymbol, NoSymbol
-        ],
-        actions[Group1] = [
-            NoAction(),
-            NoAction(),
-            RedirectKey(key=<AD09>,clearmods=Super,mods=Control),
-            RedirectKey(key=<AD09>,clearmods=Super,mods=Control)
-        ]
-    };
+    //// y
+    //key <AD06> {
+    //    type = "FOUR_LEVEL_SUPER",
+    //    symbols[Group1] = [
+    //        NoSymbol, NoSymbol, NoSymbol, NoSymbol
+    //    ],
+    //    actions[Group1] = [
+    //        NoAction(),
+    //        NoAction(),
+    //        RedirectKey(key=<AD06>,clearmods=Super,mods=Control),
+    //        RedirectKey(key=<AD06>,clearmods=Super,mods=Control)
+    //    ]
+    //};
 
-    // p
-    key <AD10> {
-        type = "FOUR_LEVEL_SUPER",
-        symbols[Group1] = [
-            NoSymbol, NoSymbol, NoSymbol, NoSymbol
-        ],
-        actions[Group1] = [
-            NoAction(),
-            NoAction(),
-            RedirectKey(key=<AD10>,clearmods=Super,mods=Control),
-            RedirectKey(key=<AD10>,clearmods=Super,mods=Control)
-        ]
-    };
+    //// u
+    //key <AD07> {
+    //    type = "FOUR_LEVEL_SUPER",
+    //    symbols[Group1] = [
+    //        NoSymbol, NoSymbol, NoSymbol, NoSymbol
+    //    ],
+    //    actions[Group1] = [
+    //        NoAction(),
+    //        NoAction(),
+    //        RedirectKey(key=<AD07>,clearmods=Super,mods=Control),
+    //        RedirectKey(key=<AD07>,clearmods=Super,mods=Control)
+    //    ]
+    //};
 
-    // [ and {
-    key <AD11> {
-        type = "FOUR_LEVEL_SUPER",
-        symbols[Group1] = [
-            NoSymbol, NoSymbol, NoSymbol, NoSymbol
-        ],
-        actions[Group1] = [
-            NoAction(),
-            NoAction(),
-            RedirectKey(key=<AD11>,clearmods=Super,mods=Control),
-            RedirectKey(key=<AD11>,clearmods=Super,mods=Control)
-        ]
-    };
+    //// i
+    //key <AD08> {
+    //    type = "FOUR_LEVEL_SUPER",
+    //    symbols[Group1] = [
+    //        NoSymbol, NoSymbol, NoSymbol, NoSymbol
+    //    ],
+    //    actions[Group1] = [
+    //        NoAction(),
+    //        NoAction(),
+    //        RedirectKey(key=<AD08>,clearmods=Super,mods=Control),
+    //        RedirectKey(key=<AD08>,clearmods=Super,mods=Control) // open dev tools
+    //    ]
+    //};
 
-    // ] and }
-    key <AD12> {
-        type = "FOUR_LEVEL_SUPER",
-        symbols[Group1] = [
-            NoSymbol, NoSymbol, NoSymbol, NoSymbol
-        ],
-        actions[Group1] = [
-            NoAction(),
-            NoAction(),
-            RedirectKey(key=<AD12>,clearmods=Super,mods=Control),
-            RedirectKey(key=<AD12>,clearmods=Super,mods=Control)
-        ]
-    };
+    //// o
+    //key <AD09> {
+    //    type = "FOUR_LEVEL_SUPER",
+    //    symbols[Group1] = [
+    //        NoSymbol, NoSymbol, NoSymbol, NoSymbol
+    //    ],
+    //    actions[Group1] = [
+    //        NoAction(),
+    //        NoAction(),
+    //        RedirectKey(key=<AD09>,clearmods=Super,mods=Control),
+    //        RedirectKey(key=<AD09>,clearmods=Super,mods=Control)
+    //    ]
+    //};
 
-    // a
-    key <AC01> {
-        type = "FOUR_LEVEL_SUPER",
-        symbols[Group1] = [
-            NoSymbol, NoSymbol, NoSymbol, NoSymbol
-        ],
-        actions[Group1] = [
-            NoAction(),
-            NoAction(),
-            RedirectKey(key=<AC01>,clearmods=Super,mods=Control), // select all
-            RedirectKey(key=<AC01>,clearmods=Super,mods=Control)
-        ]
-    };
+    //// p
+    //key <AD10> {
+    //    type = "FOUR_LEVEL_SUPER",
+    //    symbols[Group1] = [
+    //        NoSymbol, NoSymbol, NoSymbol, NoSymbol
+    //    ],
+    //    actions[Group1] = [
+    //        NoAction(),
+    //        NoAction(),
+    //        RedirectKey(key=<AD10>,clearmods=Super,mods=Control),
+    //        RedirectKey(key=<AD10>,clearmods=Super,mods=Control)
+    //    ]
+    //};
 
-    // s
-    key <AC02> {
-        type = "FOUR_LEVEL_SUPER",
-        symbols[Group1] = [
-            NoSymbol, NoSymbol, NoSymbol, NoSymbol
-        ],
-        actions[Group1] = [
-            NoAction(),
-            NoAction(),
-            RedirectKey(key=<AC02>,clearmods=Super,mods=Control), // save
-            RedirectKey(key=<AC02>,clearmods=Super,mods=Control) // save as
-        ]
-    };
+    //// [ and {
+    //key <AD11> {
+    //    type = "FOUR_LEVEL_SUPER",
+    //    symbols[Group1] = [
+    //        NoSymbol, NoSymbol, NoSymbol, NoSymbol
+    //    ],
+    //    actions[Group1] = [
+    //        NoAction(),
+    //        NoAction(),
+    //        RedirectKey(key=<AD11>,clearmods=Super,mods=Control),
+    //        RedirectKey(key=<AD11>,clearmods=Super,mods=Control)
+    //    ]
+    //};
 
-    // d
-    key <AC03> {
-        type = "FOUR_LEVEL_SUPER",
-        symbols[Group1] = [
-            NoSymbol, NoSymbol, NoSymbol, NoSymbol
-        ],
-        actions[Group1] = [
-            NoAction(),
-            NoAction(),
-            RedirectKey(key=<AC03>,clearmods=Super,mods=Control),
-            RedirectKey(key=<AC03>,clearmods=Super,mods=Control)
-        ]
-    };
+    //// ] and }
+    //key <AD12> {
+    //    type = "FOUR_LEVEL_SUPER",
+    //    symbols[Group1] = [
+    //        NoSymbol, NoSymbol, NoSymbol, NoSymbol
+    //    ],
+    //    actions[Group1] = [
+    //        NoAction(),
+    //        NoAction(),
+    //        RedirectKey(key=<AD12>,clearmods=Super,mods=Control),
+    //        RedirectKey(key=<AD12>,clearmods=Super,mods=Control)
+    //    ]
+    //};
 
-    // f
-    key <AC04> {
-        type = "FOUR_LEVEL_SUPER",
-        symbols[Group1] = [
-            NoSymbol, NoSymbol, NoSymbol, NoSymbol
-        ],
-        actions[Group1] = [
-            NoAction(),
-            NoAction(),
-            RedirectKey(key=<AC04>,clearmods=Super,mods=Control),
-            RedirectKey(key=<AC04>,clearmods=Super,mods=Control)
-        ]
-    };
+    //// a
+    //key <AC01> {
+    //    type = "FOUR_LEVEL_SUPER",
+    //    symbols[Group1] = [
+    //        NoSymbol, NoSymbol, NoSymbol, NoSymbol
+    //    ],
+    //    actions[Group1] = [
+    //        NoAction(),
+    //        NoAction(),
+    //        RedirectKey(key=<AC01>,clearmods=Super,mods=Control), // select all
+    //        RedirectKey(key=<AC01>,clearmods=Super,mods=Control)
+    //    ]
+    //};
 
-    // g
-    key <AC05> {
-        type = "FOUR_LEVEL_SUPER",
-        symbols[Group1] = [
-            NoSymbol, NoSymbol, NoSymbol, NoSymbol
-        ],
-        actions[Group1] = [
-            NoAction(),
-            NoAction(),
-            RedirectKey(key=<AC05>,clearmods=Super,mods=Control),
-            RedirectKey(key=<AC05>,clearmods=Super,mods=Control)
-        ]
-    };
+    //// s
+    //key <AC02> {
+    //    type = "FOUR_LEVEL_SUPER",
+    //    symbols[Group1] = [
+    //        NoSymbol, NoSymbol, NoSymbol, NoSymbol
+    //    ],
+    //    actions[Group1] = [
+    //        NoAction(),
+    //        NoAction(),
+    //        RedirectKey(key=<AC02>,clearmods=Super,mods=Control), // save
+    //        RedirectKey(key=<AC02>,clearmods=Super,mods=Control) // save as
+    //    ]
+    //};
 
-    // h
-    // key <AC06> {
-    //     type = "FOUR_LEVEL_SUPER",
-    //     symbols[Group1] = [
-    //         NoSymbol, NoSymbol, NoSymbol, NoSymbol
-    //     ],
-    //     actions[Group1] = [
-    //         NoAction(),
-    //         NoAction(),
-    //         RedirectKey(key=<AC06>,clearmods=Super,mods=Control),
-    //         RedirectKey(key=<AC06>,clearmods=Super,mods=Control)
-    //     ]
-    // };
+    //// d
+    //key <AC03> {
+    //    type = "FOUR_LEVEL_SUPER",
+    //    symbols[Group1] = [
+    //        NoSymbol, NoSymbol, NoSymbol, NoSymbol
+    //    ],
+    //    actions[Group1] = [
+    //        NoAction(),
+    //        NoAction(),
+    //        RedirectKey(key=<AC03>,clearmods=Super,mods=Control),
+    //        RedirectKey(key=<AC03>,clearmods=Super,mods=Control)
+    //    ]
+    //};
 
-    // j
-    // key <AC07> {
-    //     type = "FOUR_LEVEL_SUPER",
-    //     symbols[Group1] = [
-    //         NoSymbol, NoSymbol, NoSymbol, NoSymbol
-    //     ],
-    //     actions[Group1] = [
-    //         NoAction(),
-    //         NoAction(),
-    //         RedirectKey(key=<AC07>,clearmods=Super,mods=Control),
-    //         RedirectKey(key=<AC07>,clearmods=Super,mods=Control)
-    //     ]
-    // };
+    //// f
+    //key <AC04> {
+    //    type = "FOUR_LEVEL_SUPER",
+    //    symbols[Group1] = [
+    //        NoSymbol, NoSymbol, NoSymbol, NoSymbol
+    //    ],
+    //    actions[Group1] = [
+    //        NoAction(),
+    //        NoAction(),
+    //        RedirectKey(key=<AC04>,clearmods=Super,mods=Control),
+    //        RedirectKey(key=<AC04>,clearmods=Super,mods=Control)
+    //    ]
+    //};
 
-    // k
-    // key <AC08> {
-    //     type = "FOUR_LEVEL_SUPER",
-    //     symbols[Group1] = [
-    //         NoSymbol, NoSymbol, NoSymbol, NoSymbol
-    //     ],
-    //     actions[Group1] = [
-    //         NoAction(),
-    //         NoAction(),
-    //         RedirectKey(key=<AC08>,clearmods=Super,mods=Control),
-    //         RedirectKey(key=<AC08>,clearmods=Super,mods=Control)
-    //     ]
-    // };
+    //// g
+    //key <AC05> {
+    //    type = "FOUR_LEVEL_SUPER",
+    //    symbols[Group1] = [
+    //        NoSymbol, NoSymbol, NoSymbol, NoSymbol
+    //    ],
+    //    actions[Group1] = [
+    //        NoAction(),
+    //        NoAction(),
+    //        RedirectKey(key=<AC05>,clearmods=Super,mods=Control),
+    //        RedirectKey(key=<AC05>,clearmods=Super,mods=Control)
+    //    ]
+    //};
 
-    // l
-    // key <AC09> {
-    //     type = "FOUR_LEVEL_SUPER",
-    //     symbols[Group1] = [
-    //         NoSymbol, NoSymbol, NoSymbol, NoSymbol
-    //     ],
-    //     actions[Group1] = [
-    //         NoAction(),
-    //         NoAction(),
-    //         RedirectKey(key=<AC09>,clearmods=Super,mods=Control),
-    //         RedirectKey(key=<AC09>,clearmods=Super,mods=Control)
-    //     ]
-    // };
+    //// h
+    //// key <AC06> {
+    ////     type = "FOUR_LEVEL_SUPER",
+    ////     symbols[Group1] = [
+    ////         NoSymbol, NoSymbol, NoSymbol, NoSymbol
+    ////     ],
+    ////     actions[Group1] = [
+    ////         NoAction(),
+    ////         NoAction(),
+    ////         RedirectKey(key=<AC06>,clearmods=Super,mods=Control),
+    ////         RedirectKey(key=<AC06>,clearmods=Super,mods=Control)
+    ////     ]
+    //// };
 
-    // ; and :
-    key <AC10> {
-        type = "FOUR_LEVEL_SUPER",
-        symbols[Group1] = [
-            NoSymbol, NoSymbol, NoSymbol, NoSymbol
-        ],
-        actions[Group1] = [
-            NoAction(),
-            NoAction(),
-            RedirectKey(key=<AC10>,clearmods=Super,mods=Control),
-            RedirectKey(key=<AC10>,clearmods=Super,mods=Control)
-        ]
-    };
+    //// j
+    //// key <AC07> {
+    ////     type = "FOUR_LEVEL_SUPER",
+    ////     symbols[Group1] = [
+    ////         NoSymbol, NoSymbol, NoSymbol, NoSymbol
+    ////     ],
+    ////     actions[Group1] = [
+    ////         NoAction(),
+    ////         NoAction(),
+    ////         RedirectKey(key=<AC07>,clearmods=Super,mods=Control),
+    ////         RedirectKey(key=<AC07>,clearmods=Super,mods=Control)
+    ////     ]
+    //// };
 
-    // ' and "
-    key <AC11> {
-        type = "FOUR_LEVEL_SUPER",
-        symbols[Group1] = [
-            NoSymbol, NoSymbol, NoSymbol, NoSymbol
-        ],
-        actions[Group1] = [
-            NoAction(),
-            NoAction(),
-            RedirectKey(key=<AC11>,clearmods=Super,mods=Control),
-            RedirectKey(key=<AC11>,clearmods=Super,mods=Control)
-        ]
-    };
+    //// k
+    //// key <AC08> {
+    ////     type = "FOUR_LEVEL_SUPER",
+    ////     symbols[Group1] = [
+    ////         NoSymbol, NoSymbol, NoSymbol, NoSymbol
+    ////     ],
+    ////     actions[Group1] = [
+    ////         NoAction(),
+    ////         NoAction(),
+    ////         RedirectKey(key=<AC08>,clearmods=Super,mods=Control),
+    ////         RedirectKey(key=<AC08>,clearmods=Super,mods=Control)
+    ////     ]
+    //// };
 
-    // z
-    key <AB01> {
-        type = "FOUR_LEVEL_SUPER",
-        symbols[Group1] = [
-            NoSymbol, NoSymbol, NoSymbol, NoSymbol
-        ],
-        actions[Group1] = [
-            NoAction(),
-            NoAction(),
-            RedirectKey(key=<AB01>,clearmods=Super,mods=Control), // undo
-            RedirectKey(key=<AB01>,clearmods=Super,mods=Control) // redo
-        ]
-    };
+    //// l
+    //// key <AC09> {
+    ////     type = "FOUR_LEVEL_SUPER",
+    ////     symbols[Group1] = [
+    ////         NoSymbol, NoSymbol, NoSymbol, NoSymbol
+    ////     ],
+    ////     actions[Group1] = [
+    ////         NoAction(),
+    ////         NoAction(),
+    ////         RedirectKey(key=<AC09>,clearmods=Super,mods=Control),
+    ////         RedirectKey(key=<AC09>,clearmods=Super,mods=Control)
+    ////     ]
+    //// };
 
-    // x
-    key <AB02> {
-        type = "FOUR_LEVEL_SUPER",
-        symbols[Group1] = [
-            NoSymbol, NoSymbol, NoSymbol, NoSymbol
-        ],
-        actions[Group1] = [
-            NoAction(),
-            NoAction(),
-            RedirectKey(key=<AB02>,clearmods=Super,mods=Control), // cut
-            RedirectKey(key=<AB02>,clearmods=Super,mods=Control)
-        ]
-    };
+    //// ; and :
+    //key <AC10> {
+    //    type = "FOUR_LEVEL_SUPER",
+    //    symbols[Group1] = [
+    //        NoSymbol, NoSymbol, NoSymbol, NoSymbol
+    //    ],
+    //    actions[Group1] = [
+    //        NoAction(),
+    //        NoAction(),
+    //        RedirectKey(key=<AC10>,clearmods=Super,mods=Control),
+    //        RedirectKey(key=<AC10>,clearmods=Super,mods=Control)
+    //    ]
+    //};
 
-    // c
-    key <AB03> {
-        type = "FOUR_LEVEL_SUPER",
-        symbols[Group1] = [
-            NoSymbol, NoSymbol, NoSymbol, NoSymbol
-        ],
-        actions[Group1] = [
-            NoAction(),
-            NoAction(),
-            RedirectKey(key=<AB03>,clearmods=Super,mods=Control), // copy
-            RedirectKey(key=<AB03>,clearmods=Super,mods=Control) // inspect element
-        ]
-    };
+    //// ' and "
+    //key <AC11> {
+    //    type = "FOUR_LEVEL_SUPER",
+    //    symbols[Group1] = [
+    //        NoSymbol, NoSymbol, NoSymbol, NoSymbol
+    //    ],
+    //    actions[Group1] = [
+    //        NoAction(),
+    //        NoAction(),
+    //        RedirectKey(key=<AC11>,clearmods=Super,mods=Control),
+    //        RedirectKey(key=<AC11>,clearmods=Super,mods=Control)
+    //    ]
+    //};
 
-    // v
-    key <AB04> {
-        type = "FOUR_LEVEL_SUPER",
-        symbols[Group1] = [
-            NoSymbol, NoSymbol, NoSymbol, NoSymbol
-        ],
-        actions[Group1] = [
-            NoAction(),
-            NoAction(),
-            RedirectKey(key=<AB04>,clearmods=Super,mods=Control), // paste
-            RedirectKey(key=<AB04>,clearmods=Super,mods=Control)
-        ]
-    };
+    //// z
+    //key <AB01> {
+    //    type = "FOUR_LEVEL_SUPER",
+    //    symbols[Group1] = [
+    //        NoSymbol, NoSymbol, NoSymbol, NoSymbol
+    //    ],
+    //    actions[Group1] = [
+    //        NoAction(),
+    //        NoAction(),
+    //        RedirectKey(key=<AB01>,clearmods=Super,mods=Control), // undo
+    //        RedirectKey(key=<AB01>,clearmods=Super,mods=Control) // redo
+    //    ]
+    //};
 
-    // b
-    key <AB05> {
-        type = "FOUR_LEVEL_SUPER",
-        symbols[Group1] = [
-            NoSymbol, NoSymbol, NoSymbol, NoSymbol
-        ],
-        actions[Group1] = [
-            NoAction(),
-            NoAction(),
-            RedirectKey(key=<AB05>,clearmods=Super,mods=Control),
-            RedirectKey(key=<AB05>,clearmods=Super,mods=Control)
-        ]
-    };
+    //// x
+    //key <AB02> {
+    //    type = "FOUR_LEVEL_SUPER",
+    //    symbols[Group1] = [
+    //        NoSymbol, NoSymbol, NoSymbol, NoSymbol
+    //    ],
+    //    actions[Group1] = [
+    //        NoAction(),
+    //        NoAction(),
+    //        RedirectKey(key=<AB02>,clearmods=Super,mods=Control), // cut
+    //        RedirectKey(key=<AB02>,clearmods=Super,mods=Control)
+    //    ]
+    //};
 
-    // n
-    key <AB06> {
-        type = "FOUR_LEVEL_SUPER",
-        symbols[Group1] = [
-            NoSymbol, NoSymbol, NoSymbol, NoSymbol
-        ],
-        actions[Group1] = [
-            NoAction(),
-            NoAction(),
-            RedirectKey(key=<AB06>,clearmods=Super,mods=Control),
-            RedirectKey(key=<AB06>,clearmods=Super,mods=Control)
-        ]
-    };
+    //// c
+    //key <AB03> {
+    //    type = "FOUR_LEVEL_SUPER",
+    //    symbols[Group1] = [
+    //        NoSymbol, NoSymbol, NoSymbol, NoSymbol
+    //    ],
+    //    actions[Group1] = [
+    //        NoAction(),
+    //        NoAction(),
+    //        RedirectKey(key=<AB03>,clearmods=Super,mods=Control), // copy
+    //        RedirectKey(key=<AB03>,clearmods=Super,mods=Control) // inspect element
+    //    ]
+    //};
 
-    // m
-    key <AB07> {
-        type = "FOUR_LEVEL_SUPER",
-        symbols[Group1] = [
-            NoSymbol, NoSymbol, NoSymbol, NoSymbol
-        ],
-        actions[Group1] = [
-            NoAction(),
-            NoAction(),
-            RedirectKey(key=<AB07>,clearmods=Super,mods=Control),
-            RedirectKey(key=<AB07>,clearmods=Super,mods=Control)
-        ]
-    };
+    //// v
+    //key <AB04> {
+    //    type = "FOUR_LEVEL_SUPER",
+    //    symbols[Group1] = [
+    //        NoSymbol, NoSymbol, NoSymbol, NoSymbol
+    //    ],
+    //    actions[Group1] = [
+    //        NoAction(),
+    //        NoAction(),
+    //        RedirectKey(key=<AB04>,clearmods=Super,mods=Control), // paste
+    //        RedirectKey(key=<AB04>,clearmods=Super,mods=Control)
+    //    ]
+    //};
 
-    // , and <
-    key <AB08> {
-        type = "FOUR_LEVEL_SUPER",
-        symbols[Group1] = [
-            NoSymbol, NoSymbol, NoSymbol, NoSymbol
-        ],
-        actions[Group1] = [
-            NoAction(),
-            NoAction(),
-            RedirectKey(key=<AB08>,clearmods=Super,mods=Control),
-            RedirectKey(key=<AB08>,clearmods=Super,mods=Control)
-        ]
-    };
+    //// b
+    //key <AB05> {
+    //    type = "FOUR_LEVEL_SUPER",
+    //    symbols[Group1] = [
+    //        NoSymbol, NoSymbol, NoSymbol, NoSymbol
+    //    ],
+    //    actions[Group1] = [
+    //        NoAction(),
+    //        NoAction(),
+    //        RedirectKey(key=<AB05>,clearmods=Super,mods=Control),
+    //        RedirectKey(key=<AB05>,clearmods=Super,mods=Control)
+    //    ]
+    //};
 
-    // . and >
-    key <AB09> {
-        type = "FOUR_LEVEL_SUPER",
-        symbols[Group1] = [
-            NoSymbol, NoSymbol, NoSymbol, NoSymbol
-        ],
-        actions[Group1] = [
-            NoAction(),
-            NoAction(),
-            RedirectKey(key=<AB09>,clearmods=Super,mods=Control),
-            RedirectKey(key=<AB09>,clearmods=Super,mods=Control)
-        ]
-    };
+    //// n
+    //key <AB06> {
+    //    type = "FOUR_LEVEL_SUPER",
+    //    symbols[Group1] = [
+    //        NoSymbol, NoSymbol, NoSymbol, NoSymbol
+    //    ],
+    //    actions[Group1] = [
+    //        NoAction(),
+    //        NoAction(),
+    //        RedirectKey(key=<AB06>,clearmods=Super,mods=Control),
+    //        RedirectKey(key=<AB06>,clearmods=Super,mods=Control)
+    //    ]
+    //};
 
-    // / and ?
-    key <AB10> {
-        type = "FOUR_LEVEL_SUPER",
-        symbols[Group1] = [
-            NoSymbol, NoSymbol, NoSymbol, NoSymbol
-        ],
-        actions[Group1] = [
-            NoAction(),
-            NoAction(),
-            RedirectKey(key=<AB10>,clearmods=Super,mods=Control),
-            RedirectKey(key=<AB10>,clearmods=Super,mods=Control)
-        ]
-    };
+    //// m
+    //key <AB07> {
+    //    type = "FOUR_LEVEL_SUPER",
+    //    symbols[Group1] = [
+    //        NoSymbol, NoSymbol, NoSymbol, NoSymbol
+    //    ],
+    //    actions[Group1] = [
+    //        NoAction(),
+    //        NoAction(),
+    //        RedirectKey(key=<AB07>,clearmods=Super,mods=Control),
+    //        RedirectKey(key=<AB07>,clearmods=Super,mods=Control)
+    //    ]
+    //};
+
+    //// , and <
+    //key <AB08> {
+    //    type = "FOUR_LEVEL_SUPER",
+    //    symbols[Group1] = [
+    //        NoSymbol, NoSymbol, NoSymbol, NoSymbol
+    //    ],
+    //    actions[Group1] = [
+    //        NoAction(),
+    //        NoAction(),
+    //        RedirectKey(key=<AB08>,clearmods=Super,mods=Control),
+    //        RedirectKey(key=<AB08>,clearmods=Super,mods=Control)
+    //    ]
+    //};
+
+    //// . and >
+    //key <AB09> {
+    //    type = "FOUR_LEVEL_SUPER",
+    //    symbols[Group1] = [
+    //        NoSymbol, NoSymbol, NoSymbol, NoSymbol
+    //    ],
+    //    actions[Group1] = [
+    //        NoAction(),
+    //        NoAction(),
+    //        RedirectKey(key=<AB09>,clearmods=Super,mods=Control),
+    //        RedirectKey(key=<AB09>,clearmods=Super,mods=Control)
+    //    ]
+    //};
+
+    //// / and ?
+    //key <AB10> {
+    //    type = "FOUR_LEVEL_SUPER",
+    //    symbols[Group1] = [
+    //        NoSymbol, NoSymbol, NoSymbol, NoSymbol
+    //    ],
+    //    actions[Group1] = [
+    //        NoAction(),
+    //        NoAction(),
+    //        RedirectKey(key=<AB10>,clearmods=Super,mods=Control),
+    //        RedirectKey(key=<AB10>,clearmods=Super,mods=Control)
+    //    ]
+    //};
 };
