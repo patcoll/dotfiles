@@ -8,20 +8,20 @@ xkb_symbols "local" {
     // and Super. For this reason, I decided to pick/choose only certain parts
     // of those two configs so I could get that key to map only to Super.
     //
-    // include "altwin(ctrl_alt_win)"
+    include "altwin(ctrl_alt_win)"
 
     //
     // Customized version of `altwin(ctrl_alt_win)`:
-    key <LALT> { [ Control_L, Control_L  ] };
-    // key <RALT> { type[Group1] = "TWO_LEVEL",
-    //              symbols[Group1] = [ Control_R, Control_R ] };
-    key <LWIN> { [ Alt_L, Meta_L ] };
-    key <RWIN> { [ Alt_R, Meta_R ] };
-    key <LCTL> { [ Super_L ] };
-    key <RCTL> { [ Super_R ] };
-    modifier_map Control { <LALT> };
-    modifier_map Mod1 { <LWIN>, <RWIN> };
-    modifier_map Mod4 { <LCTL>, <RCTL> };
+    // key <LALT> { [ Control_L, Control_L  ] };
+    // // key <RALT> { type[Group1] = "TWO_LEVEL",
+    // //              symbols[Group1] = [ Control_R, Control_R ] };
+    // key <LWIN> { [ Alt_L, Meta_L ] };
+    // key <RWIN> { [ Alt_R, Meta_R ] };
+    // key <LCTL> { [ Super_L ] };
+    // key <RCTL> { [ Super_R ] };
+    // modifier_map Control { <LALT> };
+    // modifier_map Mod1 { <LWIN>, <RWIN> };
+    // modifier_map Mod4 { <LCTL>, <RCTL> };
 
     //
     // CAPS LOCK REPLACEMENT OPTIONS. See note above regarding
@@ -30,11 +30,11 @@ xkb_symbols "local" {
     //
     // include "ctrl(nocaps)"
 
-    replace key <CAPS> { [ Control_R, Control_R ] };
-    replace modifier_map Control { <CAPS>, <LALT> };
+    // replace key <CAPS> { [ Control_R, Control_R ] };
+    // replace modifier_map Control { <CAPS>, <LALT>, <RALT> };
 
     // 1
-    // include "capslock(ctrl_modifier)"
+    include "capslock(ctrl_modifier)"
     // replace key <CAPS> { [ Control_L, Control_L ] };
 
     // 2
@@ -56,7 +56,7 @@ xkb_symbols "local" {
     // Map the right Alt key to AltGr. This key has historically been mapped to
     // enable special characters.  For my purposes, I'll probably map it to an
     // emoji picker.
-    include "level3(ralt_switch)"
+    // include "level3(ralt_switch)"
 
     //
     // BELOW BE DRAGONS.
