@@ -9,9 +9,9 @@ last-folder='/home/pat/Downloads'
 viewed=['welcome', 'location', 'night-light', 'housekeeping', 'appcenter', 'finish']
 
 [io/elementary/switchboard/saved-state]
-window-position=(1247, 521)
+window-position=(1524, 73)
 window-maximized=false
-window-size=(1108, 873)
+window-size=(1108, 875)
 
 [io/elementary/photos/preferences/window]
 direct-maximize=false
@@ -25,7 +25,7 @@ library-width=1000
 library-height=680
 
 [io/elementary/calendar/saved-state]
-month-page='2020-06'
+month-page='2020-07'
 
 [io/elementary/desktop/wingpanel/bluetooth]
 bluetooth-enabled=true
@@ -42,18 +42,22 @@ use-category=false
 last-title-info=['io.elementary.music.desktop', '', '']
 
 [io/elementary/files/preferences]
-sidebar-width=145
-window-position=(208, 393)
+sidebar-width=170
+window-position=(38, 290)
 default-viewmode='list'
-window-size=(1490, 885)
+window-size=(1236, 873)
 window-state='normal'
-active-tab-position=0
-tab-info-list=[(uint32 1, 'file:///home/pat/Downloads', '')]
+active-tab-position=2
+tab-info-list=[(uint32 1, 'recent:///', ''), (1, 'file:///', ''), (1, 'file:///home/pat/Downloads', '')]
 
 sidebar-cat-personal-expander=true
 
+single-click=false
+
+sidebar-cat-devices-expander=true
+
 [io/elementary/files/file-chooser]
-last-folder-uri='file:///home/pat/Downloads'
+last-folder-uri='file:///home/pat/Pictures/Screenshots'
 
 [io/elementary/files/icon-view]
 zoom-level='large'
@@ -69,30 +73,30 @@ background='rgba(46, 46, 46, 0.95)'
 [io/elementary/terminal/saved-state]
 zoom=1.0
 tabs=['/home/pat']
-window-position=(94, 103)
+window-position=(214, 182)
 focused-tab=0
-window-state='Maximized'
-window-size=(2289, 1247)
+window-state='Normal'
+window-size=(941, 568)
 
 [io/elementary/appcenter/settings]
-last-refresh-time=int64 1591283704
-window-position=(162, 74)
+last-refresh-time=int64 1593969890
+window-position=(155, 63)
 non-curated-warning=false
 cached-drivers=['backport-iwlwifi-dkms']
 window-maximized=false
-window-size=(838, 482)
+window-size=(848, 1257)
 
-paid-apps=['com.github.cassidyjames.ideogram', 'com.github.chasinglogic.tardis']
+paid-apps=['com.github.cassidyjames.ideogram', 'com.github.chasinglogic.tardis', 'com.github.dr-styki.screenrec']
 
 [io/elementary/code/settings]
 focused-document-view2='file:///home/pat/.local/share/io.elementary.code/unsaved/Text%20file%20from%202020-05-04%2009:39:50:949837'
-opened-files-view1=['file:///home/pat/.local/share/io.elementary.code/unsaved/Text%20file%20from%202020-05-04%2011:10:06:635563', 'file:///home/pat/.local/share/io.elementary.code/unsaved/Text%20file%20from%202020-05-04%2011:48:54:949509', 'file:///home/pat/Downloads/result-dueling-statuses.json']
+opened-files-view1=['file:///home/pat/.local/share/io.elementary.code/unsaved/Text%20file%20from%202020-05-04%2011:10:06:635563', 'file:///home/pat/.local/share/io.elementary.code/unsaved/Text%20file%20from%202020-05-04%2011:48:54:949509', 'file:///home/pat/Downloads/dist/index.html', 'file:///home/pat/Downloads/dist/assets/pleroma-pwa-9ec1ce924b715b627a6415fa7f4f6bdf.css', 'file:///home/pat/Downloads/us-east-ips.txt']
 opened-files-view2=@as []
 plugins-enabled=['brackets-completion', 'detect-indent', 'editorconfig', 'outline']
-focused-document-view1='file:///home/pat/Downloads/result-dueling-statuses.json'
+focused-document-view1='file:///home/pat/Downloads/us-east-ips.txt'
 
 [io/elementary/code/folder-manager]
-opened-folders=@as []
+opened-folders=['/home/pat/Downloads/dist']
 
 [io/elementary/code/saved-state]
 window-x=693
@@ -105,7 +109,7 @@ window-y=55
 icon-size=64
 show-dock-item=false
 position='bottom'
-dock-items=['io.elementary.files.dockitem', 'chromium-browser.dockitem', 'io.elementary.appcenter.dockitem', 'org.gnome.Software.dockitem', 'io.elementary.switchboard.dockitem', 'org.gnome.tweaks.dockitem', 'ca.desrt.dconf-editor.dockitem', 'autokey-gtk.dockitem', 'chrome-kjbdgfilnfhdoflbpgamdcdgpehopbep-Profile_1.dockitem', 'chrome-abodobnggleknjoeklhafimineibjadg-Default.dockitem', 'kitty.dockitem', 'spotify_spotify.dockitem', 'chrome-palopljeaklbpkonmpmfaghknkhjajjn-Default.dockitem', 'slack.dockitem', 'gnome-system-monitor.dockitem', 'sublime_merge.dockitem', 'sublime_text.dockitem', 'io.elementary.code.dockitem', 'chrome-lhmfhdnfcochlihjdblnbkpihdockkjo-Default.dockitem', 'chrome-jgmhnadkeifhincmchdalimcghpocjkn-Default.dockitem', 'chrome-pnpnebpkafjbaejjhkkaiandjbnbbbak-Default.dockitem', 'vlc.dockitem', 'chrome-hedhafefnifgolggglochkohcfieohdb-Default.dockitem', 'com.uploadedlobster.peek.dockitem', 'virtualbox.dockitem']
+dock-items=['io.elementary.files.dockitem', 'chromium-browser.dockitem', 'io.elementary.appcenter.dockitem', 'org.gnome.Software.dockitem', 'io.elementary.switchboard.dockitem', 'org.gnome.tweaks.dockitem', 'ca.desrt.dconf-editor.dockitem', 'autokey-gtk.dockitem', 'chrome-kjbdgfilnfhdoflbpgamdcdgpehopbep-Profile_1.dockitem', 'chrome-abodobnggleknjoeklhafimineibjadg-Default.dockitem', 'kitty.dockitem', 'spotify_spotify.dockitem', 'chrome-palopljeaklbpkonmpmfaghknkhjajjn-Default.dockitem', 'slack.dockitem', 'gnome-system-monitor.dockitem', 'sublime_merge.dockitem', 'sublime_text.dockitem', 'io.elementary.code.dockitem', 'chrome-pnpnebpkafjbaejjhkkaiandjbnbbbak-Default.dockitem', 'chrome-jgmhnadkeifhincmchdalimcghpocjkn-Default.dockitem', 'vlc.dockitem', 'chrome-hedhafefnifgolggglochkohcfieohdb-Default.dockitem', 'com.uploadedlobster.peek.dockitem', 'chrome-hbhdmahdpbnjilbejcofaomlljjjjpcn-Default.dockitem', 'dbeaver-ce_dbeaver-ce.dockitem', 'com.github.dr-styki.screenrec.dockitem', 'appimagekit_2a209210a7a023ee8b8890ece72eacf4-Mark_Text.dockitem']
 unhide-delay=0
 items-alignment='center'
 theme='Gtk+'
@@ -269,7 +273,7 @@ switch-monitor=['']
 show-dependencies=false
 current-tab='processes'
 maximized=false
-window-state=(1007, 500, 103, 746)
+window-state=(1007, 500, 51, 760)
 show-whose-processes='user'
 
 [org/gnome/gnome-system-monitor/disktreenew]
@@ -286,11 +290,11 @@ sort-col=15
 [org/gtk/settings/file-chooser]
 sort-column='name'
 sidebar-width=148
-window-position=(785, 242)
+window-position=(785, 241)
 show-size-column=true
 show-hidden=false
-window-size=(990, 742)
-sort-directories-first=true
+window-size=(1018, 742)
+sort-directories-first=false
 date-format='regular'
 sort-order='ascending'
 location-mode='path-bar'
@@ -303,7 +307,7 @@ messages-pane-position=400
 [org/pantheon/desktop/gala/keybindings]
 cycle-workspaces-next=['']
 cycle-workspaces-previous=['']
-pip=['']
+pip=['<Super>p']
 switch-to-workspace-last=['']
 switch-to-workspace-first=['']
 
@@ -351,7 +355,7 @@ idle-hint=false
 lock-on-lid=false
 
 [ca/desrt/dconf-editor]
-saved-view='/org/gnome/desktop/input-sources/xkb-options'
+saved-view='/io/elementary/files/preferences/'
 bookmarks=['/io/elementary/terminal/settings/', '/org/gnome/desktop/input-sources/']
 window-height=1041
 window-width=1268
@@ -378,7 +382,7 @@ binding=''
 
 
 
-binding='ISO_Level3_Shift'
+binding='<Super>e'
 
 command='com.github.cassidyjames.ideogram'
 
@@ -393,7 +397,7 @@ name='python /home/pat/bin/windows.py group -f'
 binding='<Primary>grave'
 
 [org/gnome/evince/default]
-window-ratio=(0.29225396367862805, 0.22994664239715076)
+window-ratio=(0.83333333333333337, 0.86994949494949492)
 
 [org/gnome/settings-daemon/plugins/power]
 power-button-action='interactive'
@@ -425,7 +429,7 @@ zoom-level='small'
 locate-pointer=false
 
 [org/gtk/settings/emoji-chooser]
-recent-emoji=[(([uint32 129315], 'rolling on the floor laughing', ''), uint32 0), (([128075, 0], 'waving hand', ':wave:'), 0), (([128512], 'grinning face', ':grinning:'), 0), (([127928], 'guitar', ':guitar:'), 0), (([10004], 'heavy check mark', ':heavy_check_mark:'), 0), (([128556], 'grimacing face', ':grimacing:'), 0), (([128378, 0], 'man dancing', ''), 0), (([128588, 0], 'raising hands', ':raised_hands:'), 0), (([128031], 'fish', ':fish:'), 0), (([128640], 'rocket', ':rocket:'), 0), (([128131, 0], 'woman dancing', ':dancer:'), 0), (([128521], 'winking face', ':wink:'), 0), (([128518], 'grinning squinting face', ':laughing:'), 0)]
+recent-emoji=[(([uint32 128579], 'upside-down face', ':upside_down:'), uint32 0), (([128165], 'collision', ':boom:'), 0), (([129315], 'rolling on the floor laughing', ''), 0), (([128075, 0], 'waving hand', ':wave:'), 0), (([128512], 'grinning face', ':grinning:'), 0), (([127928], 'guitar', ':guitar:'), 0), (([10004], 'heavy check mark', ':heavy_check_mark:'), 0), (([128556], 'grimacing face', ':grimacing:'), 0), (([128378, 0], 'man dancing', ''), 0), (([128588, 0], 'raising hands', ':raised_hands:'), 0), (([128031], 'fish', ':fish:'), 0), (([128640], 'rocket', ':rocket:'), 0), (([128131, 0], 'woman dancing', ':dancer:'), 0), (([128521], 'winking face', ':wink:'), 0), (([128518], 'grinning squinting face', ':laughing:'), 0)]
 
 [com/github/chasinglogic/tardis]
 window-width=700
@@ -456,7 +460,7 @@ categories=['X-SuSE-YaST']
 
 [org/gnome/software]
 first-run=false
-check-timestamp=int64 1591293976
+check-timestamp=int64 1592837069
 
 [io/elementary/photos/crop-settings]
 last-crop-menu-choice=0
@@ -477,3 +481,10 @@ interface-show-notification=true
 
 [org/pantheon/desktop/gala/notifications]
 do-not-disturb=false
+
+[org/gnome/nm-applet/eap/8724a646-5652-48f1-8913-a36a924be431]
+ignore-ca-cert=false
+ignore-phase2-ca-cert=false
+
+[io/elementary/appcenter/caches]
+api-caches={'/newest/project': ['com.github.rickybas.date-countdown', 'com.github.dr-styki.screenrec', 'com.github.torikulhabib.niki', 'com.github.ryonakano.konbucase', 'com.github.skarva.lockbox', 'com.github.linuxhubit.catfacts', 'com.github.cleac.olifant', 'com.github.rajkumaar23.badgie', 'com.github.ma1onso.quotes', 'com.github.matfantinel.moneta'], '/newest/release': ['com.github.phase1geo.outliner', 'com.github.subhadeepjasu.pebbles', 'com.github.chasinglogic.tardis', 'com.github.cassidyjames.principles', 'com.github.cassidyjames.palette', 'com.github.cassidyjames.dippi', 'com.github.cassidyjames.clairvoyant', 'com.github.padjis.ghistory', 'com.github.lainsce.khronos', 'com.github.zelikos.rannum'], '/newest/downloads': ['com.github.lainsce.quilter', 'com.github.artemanufrij.playmymusic', 'com.github.lainsce.notejot', 'com.github.philip-scott.spice-up', 'com.github.artemanufrij.playmyvideos', 'com.github.artemanufrij.webpin', 'com.github.alecaddd.sequeler', 'com.github.bartzaalberg.bookmark-manager', 'com.github.artemanufrij.showmypictures', 'com.github.bartzaalberg.php-tester']}
