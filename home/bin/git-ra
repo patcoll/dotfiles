@@ -1,15 +1,23 @@
 #!/bin/bash
-{ set -x; } 2>/dev/null
+# { set -x; } 2>/dev/null
+{ set -u; } 2>/dev/null
 CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
-{ set +x; } 2>/dev/null
-for branch in master develop; do
-  if [[ $(git ls-remote --heads origin $branch | wc -l) -ne 0 ]]; then
+# { set +x; } 2>/dev/null
+for branch in staging production master stable develop; do
+  if [[ $(git branch -r --list "*/$branch" | wc -l) -ne 0 ]]; then
     { set -x; } 2>/dev/null
-    git checkout $branch && git rebase origin/$branch $branch
+    # { set -e; } 2>/dev/null
+    git checkout $branch
+    { set +x; } 2>/dev/null
+    BRANCH_UPSTREAM=$(git status -b --porcelain=v2 | grep -m 1 "^# branch.upstream " | cut -d " " -f 3-)
+    { set -x; } 2>/dev/null
+    git rebase "$BRANCH_UPSTREAM" "$branch"
+    # { set +e; } 2>/dev/null
   fi
   { set +x; } 2>/dev/null
 done
 
 { set -x; } 2>/dev/null
-git checkout $CURRENT_BRANCH
+git checkout "$CURRENT_BRANCH"
 { set +x; } 2>/dev/null
+{ set +u; } 2>/dev/null
