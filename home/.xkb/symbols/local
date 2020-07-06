@@ -58,6 +58,35 @@ xkb_symbols "local" {
     // emoji picker.
     // include "level3(ralt_switch)"
 
+    // key <LEFT> {
+    //     type= "PC_ALT_LEVEL2",
+    //     symbols[Group1]= [ Print, Sys_Req ]
+    // };
+
+    // Map Alt-Left to Ctrl-Left to feel more Mac-like.
+    // key <LEFT> {
+    //     type= "PC_ALT_LEVEL2",
+    //     symbols[Group1] = [
+    //         NoSymbol, NoSymbol
+    //     ],
+    //     actions[Group1] = [
+    //         NoAction(),
+    //         SetMods(mods=Control)
+    //     ]
+    // };
+
+    // Map Alt-Right to Ctrl-Right to feel more Mac-like.
+    // key <RGHT> {
+    //     type= "PC_ALT_LEVEL2",
+    //     symbols[Group1] = [
+    //         NoSymbol, NoSymbol
+    //     ],
+    //     actions[Group1] = [
+    //         NoAction(),
+    //         SetMods(mods=Control)
+    //     ]
+    // };
+
     //
     // BELOW BE DRAGONS.
     //
