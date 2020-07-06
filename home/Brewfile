@@ -1,6 +1,8 @@
 tap "homebrew/cask"
 cask_args appdir: "/Applications"
 
+# basics
+
 brew "gnu-tar"
 brew "curl-openssl"
 brew "wget"
@@ -11,6 +13,7 @@ brew "asdf"
 brew "the_silver_searcher"
 brew "ripgrep"
 brew "bat"
+brew "dust"
 brew "fd"
 brew "jq"
 
@@ -21,6 +24,8 @@ brew "nvim"
 
 brew "watchman"
 brew "redis"
+
+# casks
 
 cask "textmate"
 
