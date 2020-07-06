@@ -1,4 +1,3 @@
-# turning this on makes kitty sad :(
 # note: I should get better at Linux-specific UI controls :(
 
 import re
