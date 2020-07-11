@@ -477,8 +477,8 @@ if [[ "$NODE_DEFAULT_VERSION" != "" ]]; then
 fi
 
 # source /usr/local/opt/autoenv/activate.sh
-[[ "$(which direnv)" != "" ]] && eval "$(direnv hook bash)"
-[[ "$(which npm)" != "" ]] && eval "$(npm completion)"
+[[ "$(which direnv 2> /dev/null)" != "" ]] && eval "$(direnv hook bash)"
+[[ "$(which npm 2> /dev/null)" != "" ]] && eval "$(npm completion)"
 
 # [[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
 
