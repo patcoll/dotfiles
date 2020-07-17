@@ -1,12 +1,8 @@
-import re
+app = window.get_active_class()
 
-store.set_global_value('hotkey', '<ctrl>+[')
-
-if re.match('.*(Chromium|Firefox)', window.get_active_class()):
-    engine.set_return_value('<alt>+<left>')
-elif re.match('.*(Slack).*', window.get_active_class()):
-    engine.set_return_value('<alt>+<left>')
+if 'Chromium' in app or 'Firefox' in app:
+    keyboard.send_keys('<alt>+<left>')
+elif 'Slack' in app:
+    keyboard.send_keys('<alt>+<left>')
 else:
-    engine.set_return_value('<ctrl>+[')
-
-engine.run_script('combo')
+    keyboard.send_keys('<ctrl>+[')

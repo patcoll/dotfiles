@@ -1,30 +1,30 @@
 {
-    "usageCount": 11, 
-    "omitTrigger": false, 
-    "prompt": false, 
-    "description": "browse-prev", 
-    "abbreviation": {
-        "wordChars": "[\\w]", 
-        "abbreviations": [], 
-        "immediate": false, 
-        "ignoreCase": false, 
-        "backspace": true, 
-        "triggerInside": false
-    }, 
-    "hotkey": {
-        "hotKey": "[", 
-        "modifiers": [
-            "<ctrl>"
-        ]
-    }, 
+    "type": "script",
+    "description": "browse-prev",
+    "store": {},
     "modes": [
         3
-    ], 
-    "showInTrayMenu": false, 
+    ],
+    "usageCount": 17,
+    "prompt": false,
+    "omitTrigger": false,
+    "showInTrayMenu": false,
+    "abbreviation": {
+        "abbreviations": [],
+        "backspace": true,
+        "ignoreCase": false,
+        "immediate": false,
+        "triggerInside": false,
+        "wordChars": "[\\w]"
+    },
+    "hotkey": {
+        "modifiers": [
+            "<ctrl>"
+        ],
+        "hotKey": "["
+    },
     "filter": {
-        "regex": null, 
+        "regex": null,
         "isRecursive": false
-    }, 
-    "type": "script", 
-    "store": {}
+    }
 }

@@ -1,13 +1,8 @@
-import re
+app = window.get_active_class()
 
-store.set_global_value('hotkey', '<ctrl>+<super>+[')
-
-if re.match('.*(Chromium|Firefox|Sublime Text|Sublime Merge)', window.get_active_class()):
-#    engine.set_return_value('<shift>+<ctrl>+<tab>')
-    engine.set_return_value('<ctrl>+<page_up>')
-elif re.match('.*(Slack).*', window.get_active_class()):
-    engine.set_return_value('<alt>+<left>')
+if 'Chromium' in app or 'Firefox' in app:
+    keyboard.send_keys('<ctrl>+<page_up>')
+elif 'Slack' in app:
+    keyboard.send_keys('<alt>+<left>')
 else:
-    engine.set_return_value('<ctrl>+<super>+[')
-
-engine.run_script('combo')
+    keyboard.send_keys('<ctrl>+<super>+[')
