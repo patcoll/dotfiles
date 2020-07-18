@@ -135,7 +135,7 @@ custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybin
 
 screenreader=''
 
-screensaver='<Primary><Shift><Super>l'
+screensaver='<Primary><Shift><Alt><Super>l'
 
 terminal=''
 
@@ -200,9 +200,9 @@ move-to-workspace-9=['']
 move-to-monitor-down=['']
 lower=['']
 switch-windows-backward=['<Primary><Shift>Tab']
-minimize=['<Primary><Alt>Down']
+minimize=['<Primary><Alt><Super>Down']
 move-to-workspace-right=['']
-toggle-maximized=['<Primary><Alt>Up']
+toggle-maximized=['<Primary><Alt><Super>Up']
 move-to-monitor-up=['']
 close=['<Alt>F4']
 switch-windows=['<Primary>Tab']
@@ -382,7 +382,7 @@ binding=''
 
 
 
-binding='<Super>e'
+binding='<Primary><Alt><Super>e'
 
 command='com.github.cassidyjames.ideogram'
 
