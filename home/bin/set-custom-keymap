@@ -1,0 +1,3 @@
+#!/bin/sh
+
+custom-keymap | xkbcomp -I$HOME/.xkb -w3 - $DISPLAY
