@@ -2,10 +2,8 @@
     "type": "script",
     "description": "alt-right",
     "store": {},
-    "modes": [
-        3
-    ],
-    "usageCount": 532,
+    "modes": [],
+    "usageCount": 556,
     "prompt": false,
     "omitTrigger": false,
     "showInTrayMenu": false,

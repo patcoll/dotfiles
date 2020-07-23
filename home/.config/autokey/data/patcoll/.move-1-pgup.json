@@ -2,9 +2,7 @@
     "type": "script",
     "description": "move-1-pgup",
     "store": {},
-    "modes": [
-        3
-    ],
+    "modes": [],
     "usageCount": 19,
     "prompt": false,
     "omitTrigger": false,

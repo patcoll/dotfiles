@@ -2,9 +2,7 @@
     "type": "script",
     "description": "move-2-pgdown",
     "store": {},
-    "modes": [
-        3
-    ],
+    "modes": [],
     "usageCount": 272,
     "prompt": false,
     "omitTrigger": false,

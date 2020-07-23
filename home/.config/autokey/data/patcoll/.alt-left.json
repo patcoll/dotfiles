@@ -2,10 +2,8 @@
     "type": "script",
     "description": "alt-left",
     "store": {},
-    "modes": [
-        3
-    ],
-    "usageCount": 837,
+    "modes": [],
+    "usageCount": 870,
     "prompt": false,
     "omitTrigger": false,
     "showInTrayMenu": false,

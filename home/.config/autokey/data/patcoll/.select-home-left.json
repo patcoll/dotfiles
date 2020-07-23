@@ -2,10 +2,8 @@
     "type": "script",
     "description": "select-home-left",
     "store": {},
-    "modes": [
-        3
-    ],
-    "usageCount": 22,
+    "modes": [],
+    "usageCount": 47,
     "prompt": false,
     "omitTrigger": false,
     "showInTrayMenu": false,

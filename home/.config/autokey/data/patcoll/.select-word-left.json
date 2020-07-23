@@ -2,10 +2,8 @@
     "type": "script",
     "description": "select-word-left",
     "store": {},
-    "modes": [
-        3
-    ],
-    "usageCount": 35,
+    "modes": [],
+    "usageCount": 130,
     "prompt": false,
     "omitTrigger": false,
     "showInTrayMenu": false,

@@ -2,9 +2,7 @@
     "type": "script",
     "description": "move-4-end",
     "store": {},
-    "modes": [
-        3
-    ],
+    "modes": [],
     "usageCount": 93,
     "prompt": false,
     "omitTrigger": false,
