@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -eu
+
+. "$(dirname "$0")/dconf-common"
+
+for d in ${dconf_dirs}; do
+  setting_backup_file="${dconf_backup_folder}${d}${file}"
+  mkdir -p "${dconf_backup_folder}${d}"
+  dconf dump ${d} > ${setting_backup_file}
+done

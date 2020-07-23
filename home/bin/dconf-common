@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -eu
+dconf_backup_folder="$HOME/.dconf-backup"
+mkdir -p "${dconf_backup_folder}"
+
+backup_file="${dconf_backup_folder}/dconf-backup.txt"
+
+if [[ ! -f ${backup_file} ]]; then
+  echo "could not find: ${backup_file}"
+  exit 1
+fi
+
+file="settings"
+
+default_dconf_dirs=$(cat ${backup_file} | sed 's=^\[=/=' | sed 's=\]$=/=')
+dconf_dirs="${default_dconf_dirs:-/dev/stdin}"

@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -eu
+
+. "$(dirname "$0")/dconf-common"
+
+for d in ${dconf_dirs}; do
+  setting_backup_file="${dconf_backup_folder}${d}${file}"
+  if [[ ! -f "${setting_backup_file}" ]]; then
+    continue
+  fi
+  dconf load "${d}" < "${setting_backup_file}"
+done
