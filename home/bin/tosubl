@@ -1,0 +1,9 @@
+#!/bin/bash
+
+TMPDIR=${TMPDIR:-/tmp}  # default to /tmp if TMPDIR isn't set
+F=$(mktemp $TMPDIR/tosubl-XXXXXXXX)
+cat >| $F  # use >| instead of > if you set noclobber in bash
+subl $F
+subl --command ansi
+# sleep 1  # give subl a little time to open the file
+# rm -f $F  # file will be deleted as soon as subl closes it
