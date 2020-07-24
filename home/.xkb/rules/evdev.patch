@@ -1,10 +1,8 @@
---- /usr/share/X11/xkb/rules/evdev	2020-05-07 11:47:25.891615456 -0400
-+++ /home/pat/.xkb/rules/evdev	2020-05-07 11:46:38.908491169 -0400
-@@ -1136,6 +1136,7 @@
-   lv5:lwin_switch_lock_cancel     =       +level5(lwin_switch_lock_cancel)
-   lv5:rwin_switch_lock_cancel     =       +level5(rwin_switch_lock_cancel)
-   parens:swap_brackets   =   +parens(swap_brackets)
-+  supermods:w   =   +supermods(w)
- 
- 
- ! option	=	compat
+*** evdev.orig	2020-07-23 20:44:37.013737390 -0400
+--- evdev.mod	2020-07-23 20:44:44.005874851 -0400
+***************
+*** 963,964 ****
+--- 963,965 ----
+  ! option	=	symbols
++   local  =  +local
+    grp:shift_toggle	=	+group(shifts_toggle)

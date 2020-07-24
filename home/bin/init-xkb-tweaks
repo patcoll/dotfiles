@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+set -eux
+
+{ set -x; } 2>/dev/null
+sudo ln -nfs "$HOME/.xkb/compat/local" "/usr/share/X11/xkb/compat/local"
+sudo ln -nfs "$HOME/.xkb/keycodes/local" "/usr/share/X11/xkb/keycodes/local"
+sudo ln -nfs "$HOME/.xkb/symbols/local" "/usr/share/X11/xkb/symbols/local"
+sudo ln -nfs "$HOME/.xkb/types/local" "/usr/share/X11/xkb/types/local"
+{ set +x; } 2>/dev/null
+
+patch_location="$HOME/.xkb/rules/evdev.patch"
+sudo patch -t --dry-run /usr/share/X11/xkb/rules/evdev "${patch_location}" | grep 'previously applied' >/dev/null 2>&1
+previously_applied=$?
+
+if [[ "$previously_applied" != "0" ]]; then
+  { set -x; } 2>/dev/null
+  sudo patch /usr/share/X11/xkb/rules/evdev "${patch_location}"
+  { set +x; } 2>/dev/null
+else
+  echo "rules/evdev already patched"
+fi
