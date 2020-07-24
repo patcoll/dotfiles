@@ -494,14 +494,26 @@ punshift "/usr/local/opt/curl-openssl/bin"
 # For ChooseNim
 punshift "$HOME/.nimble/bin"
 
-# Load asdf
-if [[ -f "$HOME/.asdf/asdf.sh" ]]; then
-  . "$HOME/.asdf/asdf.sh"
+ASDF_HOME=""
+
+if [[ -d "$HOME/.asdf" ]]; then
+  ASDF_HOME="$HOME/.asdf"
 fi
 
-# Load asdf bash completion
-if [[ -f "$HOME/.asdf/completions/asdf.bash" ]]; then
-  . "$HOME/.asdf/completions/asdf.bash"
+if [[ -d "/opt/asdf-vm" ]]; then
+  ASDF_HOME="/opt/asdf-vm"
+fi
+
+if [[ "${ASDF_HOME}" != "" ]]; then
+  # Load asdf
+  if [[ -f "${ASDF_HOME}/asdf.sh" ]]; then
+    . "${ASDF_HOME}/asdf.sh"
+  fi
+
+  # Load asdf bash completion
+  if [[ -f "${ASDF_HOME}/completions/asdf.bash" ]]; then
+    . "${ASDF_HOME}/completions/asdf.bash"
+  fi
 fi
 
 # tmux bash completion
