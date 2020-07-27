@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -eux
+set -u
 
 { set -x; } 2>/dev/null
 sudo ln -nfs "$HOME/.xkb/compat/local" "/usr/share/X11/xkb/compat/local"
