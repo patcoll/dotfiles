@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -u
+
+vconsole="/etc/vconsole.conf"
+personal_keymap="$HOME/.kbd/keymaps/personal.map"
+
+grep KEYMAP "${vconsole}" >/dev/null 2>&1
+previously_applied=$?
+
+if [[ "$previously_applied" != "0" ]]; then
+  { set -x; } 2>/dev/null
+  echo "KEYMAP=${personal_keymap}" | sudo tee -a "${vconsole}"
+  { set +x; } 2>/dev/null
+else
+  echo "personal keymap already applied"
+fi
