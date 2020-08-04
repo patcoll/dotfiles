@@ -53,18 +53,18 @@ xkb_symbols "local" {
     // modifier_map Mod4 { <LCTL>, <RCTL> };
 
     // Map Super+Control+Alt to Left Control key.
-    replace key <LCTL> {
-        type[Group1] = "ONE_LEVEL",
-        symbols[Group1] = [ Super_L ],
-        actions[Group1] = [ SetMods(modifiers=Super+Control+Alt) ]
-    };
+    // replace key <LCTL> {
+    //     type[Group1] = "ONE_LEVEL",
+    //     symbols[Group1] = [ Super_L ],
+    //     actions[Group1] = [ SetMods(modifiers=Super+Control+Alt) ]
+    // };
 
     // Map Shift+Super+Control+Alt to Right Control key.
-    replace key <RCTL> {
-        type[Group1] = "ONE_LEVEL",
-        symbols[Group1] = [ Super_R ],
-        actions[Group1] = [ SetMods(modifiers=Shift+Super+Control+Alt) ]
-    };
+    // replace key <RCTL> {
+    //     type[Group1] = "ONE_LEVEL",
+    //     symbols[Group1] = [ Super_R ],
+    //     actions[Group1] = [ SetMods(modifiers=Shift+Super+Control+Alt) ]
+    // };
 
     //
     // Map the right Alt key to AltGr. This key has historically been mapped to

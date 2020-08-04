@@ -7,7 +7,8 @@
 ### Variables
 #
 # Logo key. Use Mod1 for Alt.
-set $mod Ctrl+Alt+Mod4
+# set $mod Ctrl+Alt+Mod4
+set $mod Mod4
 # Home row direction keys, like vim
 set $left h
 set $down j
@@ -18,7 +19,9 @@ set $term kitty
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-set $menu dmenu_path | dmenu | xargs swaymsg exec --
+set $menu dmenu_path | wofi -S dmenu | xargs swaymsg exec --
+
+set $lock swaylock -c 000000
 
 ### Output configuration
 #
@@ -46,14 +49,17 @@ bindswitch --reload --locked lid:off output $laptop enable
 #
 # Example configuration:
 #
-exec swayidle -w \
-       timeout 300 'swaylock -f -c 000000' \
-       timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-       before-sleep 'swaylock -f -c 000000'
+# exec swayidle -w \
+#        timeout 300 'swaylock -f -c 000000' \
+#        timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+#        before-sleep 'swaylock -f -c 000000'
 #
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
 # resumed. It will also lock your screen before your computer goes to sleep.
+
+# wob
+exec mkfifo $SWAYSOCK.wob && ( tail -f $SWAYSOCK.wob | wob )
 
 ### Input configuration
 #
@@ -94,6 +100,10 @@ input "type:touchpad" {
 
     # Start your launcher
     bindsym $mod+d exec $menu
+
+    # lock
+    bindsym $mod+Ctrl+Alt+Shift+l exec $lock
+
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -192,9 +202,10 @@ bindsym Ctrl+tab workspace back_and_forth
 
 # MEDIA
 
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
-bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioRaiseVolume exec pamixer -ui 5 && pamixer --get-volume > $SWAYSOCK.wob
+bindsym XF86AudioLowerVolume exec pamixer -ud 5 && pamixer --get-volume > $SWAYSOCK.wob
+# bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioMute exec pamixer --toggle-mute && ( pamixer --get-mute && echo 0 > $SWAYSOCK.wob ) || pamixer --get-volume > $SWAYSOCK.wob
 bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
 bindsym XF86MonBrightnessUp exec brightnessctl set +5%
@@ -248,6 +259,8 @@ bar {
     # swaybar_command waybar
 
     position top
+
+    # tray_output none
 
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.

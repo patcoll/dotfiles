@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+export SWAYSOCK=$(ls /run/user/1000/sway-ipc.* | head -n 1)

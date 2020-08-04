@@ -1,0 +1,11 @@
+set $mod Mod4
+
+set $term kitty
+
+bindsym $mod+Return exec $term
+
+exec_always --no-startup-id /home/pat/bin/set-custom-keymap
+
+exec --no-startup-id autokey-gtk
+
+

@@ -303,8 +303,13 @@ punshift "/usr/local/bin"
 punshift "$HOME/bin"
 
 # condense PATH entries
-export PATH=$(puniq $PATH)
-export MANPATH=$(puniq $MANPATH)
+if [[ ${PATH+x} ]]; then
+  export PATH=$(puniq $PATH)
+fi
+
+if [[ ${MANPATH+x} ]]; then
+  export MANPATH=$(puniq $MANPATH)
+fi
 
 # Use the color prompt by default when interactive
 test -n "$PS1" &&
