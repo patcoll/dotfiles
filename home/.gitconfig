@@ -56,6 +56,9 @@
 [branch]
   autosetupmerge = true
 
+[commit]
+  gpgsign = true
+
 [diff]
   # tool = vimdiff
   renames = copies
@@ -63,6 +66,9 @@
 
 # [difftool]
 #   prompt = false
+
+[log]
+  showSignature = true
 
 [push]
   default = current
