@@ -1,6 +1,7 @@
 [user]
   name = Patrick Collins
   email = pat@burned.com
+  signingkey = DEDC0C0CA92BF20F
 
 [sendemail]
   smtpserver = smtp.gmail.com
