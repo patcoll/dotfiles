@@ -102,7 +102,7 @@ input "type:touchpad" {
     bindsym $mod+d exec $menu
 
     # lock
-    bindsym $mod+Ctrl+Alt+Shift+l exec $lock
+    bindsym Shift+$mod+Alt+l exec $lock
 
 
     # Drag floating windows by holding down $mod and left mouse button.
@@ -146,6 +146,11 @@ input "type:touchpad" {
 
 bindsym Ctrl+space exec $menu
 bindsym Ctrl+tab workspace back_and_forth
+
+# screenshots
+bindsym Print exec grim -t png
+bindsym Shift+Print exec grim -g "$(slurp)" -t png
+bindsym Ctrl+Shift+Print exec grim -g "$(slurp)" -t png - | wl-copy -t image/png
 
 #
 # Workspaces:
