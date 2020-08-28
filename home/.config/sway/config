@@ -76,7 +76,8 @@ exec mkfifo $SWAYSOCK.wob && ( tail -f $SWAYSOCK.wob | wob )
 # Read `man 5 sway-input` for more information about this section.
 
 input "type:keyboard" {
-    xkb_options local
+    # xkb_options terminate:ctrl_alt_bksp,caps:ctrl_modifier,altwin:ctrl_alt_win
+    xkb_options terminate:ctrl_alt_bksp,shift:both_capslock_cancel
 }
 
 input "type:pointer" {
