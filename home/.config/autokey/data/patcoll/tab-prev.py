@@ -5,4 +5,4 @@ if 'Chromium' in app or 'Firefox' in app:
 elif 'Slack' in app:
     keyboard.send_keys('<alt>+<left>')
 else:
-    keyboard.send_keys('<ctrl>+<super>+[')
+    keyboard.send_keys('<shift>+<ctrl>+[')
