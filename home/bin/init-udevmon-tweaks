@@ -6,8 +6,7 @@ set -u
 # interception-tools (AUR)
 # interception-dual-function-keys (AUR)
 # interception-space2meta (AUR)
-#
-# interception-caps2esc is not used, because it (inexplicably) maps the Esc key to Caps Lock.
+# interception-caps2esc-nocaps-git (AUR)
 
 { set -x; } 2>/dev/null
 sudo ln -nfs "$HOME/.kbd/udevmon/udevmon.yaml" "/etc/udevmon.yaml"
