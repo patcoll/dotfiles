@@ -30,6 +30,7 @@
 /Simplenote
 /Slack
 /spotify
+/systemd/user/*.wants
 /sublime-merge
 /sublime-text-3
 /VirtualBox
