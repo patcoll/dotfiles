@@ -1,9 +1,12 @@
+/*-nativefier-*
+/1Password
 /autokey/autokey.json~
 /autokey/autokey.log
 /autokey/autokey.pid
 /configstore
 /Cypress
 /direnv/allow
+/discord
 /Duplicati
 /chromium
 /enchant
@@ -13,6 +16,7 @@
 /gtk-3.0
 /gtk-4.0
 /libaccounts-glib
+/LosslessCut
 /marktext
 /marlin
 /menus
@@ -22,6 +26,7 @@
 /pulse
 /QtProject.conf
 /rclone/rclone.conf
+/rofi
 /Simplenote
 /Slack
 /spotify
