@@ -337,6 +337,9 @@ alias gaa='git add -A'
 alias gp='git push'
 alias gco='git checkout'
 
+# sway
+alias sway='XDG_CURRENT_DESKTOP=sway sway'
+
 # tmux aliases
 alias tmux="TERM=screen-256color-bce tmux -2 -u"
 alias t="tmux"

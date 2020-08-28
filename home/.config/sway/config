@@ -19,8 +19,14 @@ set $term kitty
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-set $menu dmenu_path | wofi -S dmenu | xargs swaymsg exec --
+# set $menu dmenu_path | wofi -S dmenu | xargs swaymsg exec --
+# set $menu wofi -i -b -W 600 -H 250 -S "drun,run"
+# set $menu rofi -show combi
+set $menu kitty --class=launcher bash -c 'TERMINAL_COMMAND=kitty sway-launcher-desktop'
+# menu style
+for_window [app_id="^launcher$"] floating enable, sticky enable, border pixel 10, move position center
 
+# Lock command
 set $lock swaylock -c 000000
 
 ### Output configuration
@@ -38,6 +44,15 @@ set $laptop "Unknown 0x02E2 0x00000000"
 set $monoprice "Unknown 27inch DP YSP12310001"
 
 # monoprice monitor on top, laptop opened beneath it, in the middle
+# TODO: these are the same I think
+# output $monoprice {
+#     pos 0 0 res 2560x1440
+# }
+#
+# output $laptop {
+#     pos 480 1440 res 1600x900
+# }
+
 output $monoprice pos 0 0 res 2560x1440
 output $laptop pos 480 1440 res 1600x900
 
@@ -61,6 +76,9 @@ bindswitch --reload --locked lid:off output $laptop enable
 # wob
 exec mkfifo $SWAYSOCK.wob && ( tail -f $SWAYSOCK.wob | wob )
 
+# float pinboard windows
+for_window [title="^Pinboard - Save a Bookmark"] floating enable
+
 ### Input configuration
 #
 # Example configuration:
@@ -75,10 +93,19 @@ exec mkfifo $SWAYSOCK.wob && ( tail -f $SWAYSOCK.wob | wob )
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
 
+# NOTE: With these options, the `symbols/local` setup in `init-xkb-tweaks` is
+# not necessary.
 input "type:keyboard" {
     # xkb_options terminate:ctrl_alt_bksp,caps:ctrl_modifier,altwin:ctrl_alt_win
     xkb_options terminate:ctrl_alt_bksp,shift:both_capslock_cancel
 }
+
+# fix-apple-keyboard
+# exec fix-apple-keyboard /dev/input/by-id/usb-Apple_Inc._Apple_Keyboard-event-kbd
+#
+# input "1452:591:Apple_Inc._Apple_Keyboard" {
+#     xkb_options terminate:ctrl_alt_bksp,caps:ctrl_modifier,altwin:swap_alt_win
+# }
 
 input "type:pointer" {
     pointer_accel 0.4
@@ -101,8 +128,10 @@ input "type:touchpad" {
 
     # Start your launcher
     bindsym $mod+d exec $menu
+    bindsym Ctrl+space exec $menu
 
     # lock
+    bindsym Shift+$mod+Ctrl+Alt+l exec $lock
     bindsym Shift+$mod+Alt+l exec $lock
 
 
@@ -145,13 +174,32 @@ input "type:touchpad" {
 
 #CUSTOM
 
-bindsym Ctrl+space exec $menu
+exec /usr/lib/xdg-desktop-portal -r
+exec /usr/lib/xdg-desktop-portal-wlr
+
+# Custom Alt-tab implementation
+# exec sway-alttab -c 'Ctrl+tab'
+
 bindsym Ctrl+tab workspace back_and_forth
 
-# screenshots
-bindsym Print exec grim -t png
+# SCREENSHOTS
+set $copy_image_selection grim -g "$(slurp)" -t png - | wl-copy -t image/png
+
+# Capture whole scren as image in home folder. Or probably `~/Pictures` if that's setup correctly.
+# bindsym Print exec grim -t png
+bindsym Print exec $copy_image_selection
+# Capture selection as image in home folder.
 bindsym Shift+Print exec grim -g "$(slurp)" -t png
-bindsym Ctrl+Shift+Print exec grim -g "$(slurp)" -t png - | wl-copy -t image/png
+# Copy selection as image to clipboard
+bindsym Ctrl+Shift+Print exec $copy_image_selection
+
+# Copy selection as image to clipboard (Keychron K2 dedicated key)
+bindsym Ctrl+Shift+4 exec $copy_image_selection
+
+# VIDEO SCREEN CAPTURE
+
+bindsym Ctrl+Alt+Shift+Print exec kitty --class=videocapture bash -c 'wf-recorder -g "$(slurp)" -f "video-$(date +%Y-%m-%d_%I-%M-%S).mp4"'
+for_window [app_id="^videocapture$"] floating enable, sticky enable, border pixel 10, resize set width 400, resize set height 150, move absolute position 0 0
 
 #
 # Workspaces:
@@ -240,16 +288,16 @@ mode "resize" {
     # right will grow the containers width
     # up will shrink the containers height
     # down will grow the containers height
-    bindsym $left resize shrink width 10px
-    bindsym $down resize grow height 10px
-    bindsym $up resize shrink height 10px
-    bindsym $right resize grow width 10px
+    bindsym $left resize shrink width 40px
+    bindsym $down resize grow height 40px
+    bindsym $up resize shrink height 40px
+    bindsym $right resize grow width 40px
 
     # Ditto, with arrow keys
-    bindsym Left resize shrink width 10px
-    bindsym Down resize grow height 10px
-    bindsym Up resize shrink height 10px
-    bindsym Right resize grow width 10px
+    bindsym Left resize shrink width 40px
+    bindsym Down resize grow height 40px
+    bindsym Up resize shrink height 40px
+    bindsym Right resize grow width 40px
 
     # Return to default mode
     bindsym Return mode "default"
@@ -266,7 +314,7 @@ bar {
 
     position top
 
-    # tray_output none
+    tray_output none
 
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
