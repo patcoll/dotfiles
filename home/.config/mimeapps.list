@@ -26,11 +26,16 @@ text/plain;inode/directory;=nvim.desktop
 text/english;text/plain;text/x-makefile;text/x-c++hdr;text/x-c++src;text/x-chdr;text/x-csrc;text/x-java;text/x-moc;text/x-pascal;text/x-tcl;text/x-tex;application/x-shellscript;text/x-c;text/x-c++;=io.elementary.code.desktop
 x-scheme-handler/about=chromium-browser.desktop
 x-scheme-handler/unknown=chromium-browser.desktop
-x-scheme-handler/webcal=chromium-browser.desktop
+x-scheme-handler/webcal=chromium.desktop
 x-scheme-handler/irc=chromium-browser.desktop
 x-scheme-handler/ircs=chromium-browser.desktop
 image/gif=chromium-browser.desktop
 video/quicktime=vlc.desktop
+image/png=io.elementary.photos-viewer.desktop
+inode/directory=org.gnome.Evince.desktop
+application/pdf=org.gnome.Evince.desktop
+image/jpeg=io.elementary.photos-viewer.desktop
+application/zip=org.gnome.FileRoller.desktop
 
 [Added Associations]
 x-scheme-handler/http=firefox.desktop;
@@ -60,3 +65,8 @@ text/plain;inode/directory;=nvim.desktop;
 text/english;text/plain;text/x-makefile;text/x-c++hdr;text/x-c++src;text/x-chdr;text/x-csrc;text/x-java;text/x-moc;text/x-pascal;text/x-tcl;text/x-tex;application/x-shellscript;text/x-c;text/x-c++;=io.elementary.code.desktop;
 image/gif=chromium-browser.desktop;firefox.desktop;
 video/quicktime=vlc.desktop;
+image/png=io.elementary.photos-viewer.desktop;
+inode/directory=org.gnome.Evince.desktop;
+application/pdf=org.gnome.Evince.desktop;
+image/jpeg=io.elementary.photos-viewer.desktop;
+application/zip=org.gnome.FileRoller.desktop;
