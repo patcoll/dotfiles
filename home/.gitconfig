@@ -101,6 +101,9 @@
   # tool = opendiff
   tool = smerge
 
+[rebase]
+  autoStash = true
+
 [mergetool]
   keepBackup = false
 
