@@ -8,9 +8,9 @@ MAPPINGS:
     TAP: KEY_ESC
     HOLD: KEY_LEFTCTRL
   # Map holding down grave key (`) to Alt.
-  - KEY: KEY_GRAVE
-    TAP: KEY_GRAVE
-    HOLD: KEY_LEFTALT
+  # - KEY: KEY_GRAVE
+  #   TAP: KEY_GRAVE
+  #   HOLD: KEY_LEFTALT
   # Map holding down Tab (`) to Super.
   - KEY: KEY_TAB
     TAP: KEY_TAB

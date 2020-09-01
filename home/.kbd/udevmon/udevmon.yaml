@@ -3,11 +3,5 @@
     # NOTE: Leaving off the name applies config to all keyboards
     # NAME: "Massdrop Inc. CTRL Keyboard"
     EVENTS:
-      EV_KEY: [KEY_ESC, KEY_GRAVE, KEY_SPACE, KEY_TAB, KEY_CAPSLOCK, KEY_LEFTMETA, KEY_LEFTSHIFT, KEY_RIGHTSHIFT, KEY_LEFTCTRL, KEY_RIGHTCTRL, KEY_LEFTALT, KEY_RIGHTALT]
-# NOTE: Leaving this here because of weirdness of something not working in tty.
-# - JOB: "intercept -g $DEVNODE | caps2esc | dual-function-keys -c /etc/dual-function-keys.yaml | space2meta | uinput -d $DEVNODE"
-#   DEVICE:
-#     # NOTE: Leaving off the name applies config to all keyboards
-#     NAME: "Telink Wireless Receiver"
-#     EVENTS:
-#       EV_KEY: [KEY_SPACE, KEY_TAB, KEY_CAPSLOCK, KEY_LEFTMETA, KEY_LEFTSHIFT, KEY_RIGHTSHIFT, KEY_LEFTCTRL, KEY_RIGHTCTRL]
+      EV_KEY: [KEY_ESC, KEY_SPACE, KEY_TAB, KEY_CAPSLOCK, KEY_LEFTMETA, KEY_LEFTSHIFT, KEY_RIGHTSHIFT, KEY_LEFTCTRL, KEY_RIGHTCTRL, KEY_LEFTALT, KEY_RIGHTALT]
+# NOTE: Might need a new stanza for other keyboards? At some point, these changes were not working in tty. That might be the reason. (After reboot, those issues went away.)
