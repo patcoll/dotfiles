@@ -4,6 +4,8 @@
 #
 # Read `man 5 sway` for a complete reference.
 
+# gaps inner 10
+
 ### Variables
 #
 # Logo key. Use Mod1 for Alt.
@@ -15,19 +17,20 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term kitty
+set $term alacritty
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
 # set $menu dmenu_path | wofi -S dmenu | xargs swaymsg exec --
 # set $menu wofi -i -b -W 600 -H 250 -S "drun,run"
 # set $menu rofi -show combi
-set $menu kitty --class=launcher bash -c 'TERMINAL_COMMAND=kitty sway-launcher-desktop'
+set $menu alacritty --class launcher --command env TERMINAL_COMMAND='alacritty --command' sway-launcher-desktop
 # menu style
 for_window [app_id="^launcher$"] floating enable, sticky enable, border pixel 10, move position center
 
 # Lock command
 set $lock swaylock -c 000000
+
 
 ### Output configuration
 #
@@ -133,6 +136,7 @@ input "type:touchpad" {
     # lock
     bindsym Shift+$mod+Ctrl+Alt+l exec $lock
     bindsym Shift+$mod+Alt+l exec $lock
+    # bindsym $mod+F24 exec $lock
 
 
     # Drag floating windows by holding down $mod and left mouse button.
@@ -198,7 +202,7 @@ bindsym Ctrl+Shift+4 exec $copy_image_selection
 
 # VIDEO SCREEN CAPTURE
 
-bindsym Ctrl+Alt+Shift+Print exec kitty --class=videocapture bash -c 'wf-recorder -g "$(slurp)" -f "video-$(date +%Y-%m-%d_%I-%M-%S).mp4"'
+bindsym Ctrl+Alt+Shift+Print exec alacritty --class videocapture --command wf-recorder -g "$(slurp)" -f "video-$(date +%Y-%m-%d_%I-%M-%S).mp4"
 for_window [app_id="^videocapture$"] floating enable, sticky enable, border pixel 10, resize set width 400, resize set height 150, move absolute position 0 0
 
 #
