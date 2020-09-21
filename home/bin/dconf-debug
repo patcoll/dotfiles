@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -eu
+
+. "$(dirname "$0")/dconf-common"
+echo "${dconf_dirs}"
