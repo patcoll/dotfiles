@@ -99,12 +99,12 @@ font:
     #   - (macOS) Menlo
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
-    family: Cozette
+    # family: Cozette
     # family: DinaR
     # family: monospace
 
     # The `style` can be specified to pick a specific face.
-    #style: Regular
+    style: Regular
 
   # Bold font face
   #bold:
@@ -596,8 +596,30 @@ key_bindings:
   - { key: Key7, mods: Control, chars: "7gt" }
   - { key: Key8, mods: Control, chars: "8gt" }
   - { key: Key9, mods: Control, chars: "9gt" }
+  - { key: Key1, mods: Alt, chars: "1gt" }
+  - { key: Key2, mods: Alt, chars: "2gt" }
+  - { key: Key3, mods: Alt, chars: "3gt" }
+  - { key: Key4, mods: Alt, chars: "4gt" }
+  - { key: Key5, mods: Alt, chars: "5gt" }
+  - { key: Key6, mods: Alt, chars: "6gt" }
+  - { key: Key7, mods: Alt, chars: "7gt" }
+  - { key: Key8, mods: Alt, chars: "8gt" }
+  - { key: Key9, mods: Alt, chars: "9gt" }
+  - { key: Key1, mods: Command, chars: "1gt" }
+  - { key: Key2, mods: Command, chars: "2gt" }
+  - { key: Key3, mods: Command, chars: "3gt" }
+  - { key: Key4, mods: Command, chars: "4gt" }
+  - { key: Key5, mods: Command, chars: "5gt" }
+  - { key: Key6, mods: Command, chars: "6gt" }
+  - { key: Key7, mods: Command, chars: "7gt" }
+  - { key: Key8, mods: Command, chars: "8gt" }
+  - { key: Key9, mods: Command, chars: "9gt" }
   - { key: 26, mods: Control, chars: "gT" }
   - { key: 27, mods: Control, chars: "gt" }
+  - { key: 26, mods: Alt, chars: "gT" }
+  - { key: 27, mods: Alt, chars: "gt" }
+  - { key: 26, mods: Command, chars: "gT" }
+  - { key: 27, mods: Command, chars: "gt" }
 
 #: resize panes
 
