@@ -3,14 +3,14 @@
 # Any items in the `env` entry below will be added as
 # environment variables. Some entries may override variables
 # set by alacritty itself.
-#env:
+env:
   # TERM variable
   #
   # This value is used to set the `$TERM` environment variable for
   # each instance of Alacritty. If it is not present, alacritty will
   # check the local terminfo database and use `alacritty` if it is
   # available, otherwise `xterm-256color` is used.
-  #TERM: alacritty
+  TERM: xterm-256color
 
 window:
   # Window dimensions (changes require restart)
@@ -99,7 +99,7 @@ font:
     #   - (macOS) Menlo
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
-    # family: Cozette
+    family: Cozette
     # family: DinaR
     # family: monospace
 
@@ -224,26 +224,26 @@ colors:
     #  foreground: '#1d1f21'
 
   # Normal colors
-  normal:
-   black:   '#2e2e2e'
-   red:     '#ff260d'
-   green:   '#9ae204'
-   yellow:  '#ffc400'
-   blue:    '#00a1f9'
-   magenta: '#805bb5'
-   cyan:    '#00ddef'
-   white:   '#dddddd'
+  # normal:
+  #  black:   '#2e2e2e'
+  #  red:     '#ff260d'
+  #  green:   '#9ae204'
+  #  yellow:  '#ffc400'
+  #  blue:    '#00a1f9'
+  #  magenta: '#805bb5'
+  #  cyan:    '#00ddef'
+  #  white:   '#dddddd'
 
   # Bright colors
-  bright:
-   black:   '#555555'
-   red:     '#ff4250'
-   green:   '#b8e36d'
-   yellow:  '#ffd852'
-   blue:    '#00a5ff'
-   magenta: '#ab7aef'
-   cyan:    '#74fcf3'
-   white:   '#ffffff'
+  # bright:
+  #  black:   '#555555'
+  #  red:     '#ff4250'
+  #  green:   '#b8e36d'
+  #  yellow:  '#ffd852'
+  #  blue:    '#00a5ff'
+  #  magenta: '#ab7aef'
+  #  cyan:    '#74fcf3'
+  #  white:   '#ffffff'
 
   # Dim colors
   #

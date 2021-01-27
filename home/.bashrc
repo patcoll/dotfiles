@@ -341,7 +341,7 @@ alias gco='git checkout'
 alias sway='XDG_CURRENT_DESKTOP=sway sway'
 
 # tmux aliases
-alias tmux="TERM=screen-256color-bce tmux -2 -u"
+alias tmux="tmux -2 -u"
 alias t="tmux"
 # alias tn='tmux new -s "$(basename `pwd`)" || tmux at -t "$(basename `pwd`)"'
 alias ta='tmux attach'
