@@ -45,7 +45,9 @@ load-module module-switch-on-port-available
 ### Automatically load driver modules depending on the hardware available
 .ifexists module-udev-detect.so
 # Turn off timer scheduling because it was causing scratchy audio.
-load-module module-udev-detect tsched=0
+# load-module module-udev-detect tsched=0
+# load-module module-udev-detect tsched=1
+load-module module-udev-detect
 .else
 ### Use the static hardware detection module (for systems that lack udev support)
 load-module module-detect
@@ -114,7 +116,7 @@ load-module module-always-sink
 load-module module-intended-roles
 
 ### Automatically suspend sinks/sources that become idle for too long
-load-module module-suspend-on-idle
+# load-module module-suspend-on-idle
 
 ### If autoexit on idle is enabled we want to make sure we only quit
 ### when no local session needs us anymore.
