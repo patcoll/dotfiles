@@ -99,7 +99,7 @@ font:
     #   - (macOS) Menlo
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
-    family: Cozette
+    # family: Cozette
     # family: DinaR
     # family: monospace
 
@@ -140,7 +140,7 @@ font:
     #style: Bold Italic
 
   # Point size
-  # size: 8.0
+  size: 8.0
 
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
@@ -165,11 +165,11 @@ font:
 #draw_bold_text_with_bright_colors: false
 
 # Colors (Tomorrow Night)
-colors:
+# colors:
   # Default colors
-  primary:
-   background: '#101321'
-   foreground: '#fffaf5'
+  # primary:
+   # background: '#101321'
+   # foreground: '#fffaf5'
 
     # Bright and dim foreground colors
     #
@@ -757,3 +757,6 @@ key_bindings:
 
   # Print all received window events.
   #print_events: false
+
+import:
+  - ~/.config/alacritty/dracula.yml
