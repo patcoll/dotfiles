@@ -36,6 +36,8 @@ inode/directory=org.gnome.Evince.desktop
 application/pdf=org.gnome.Evince.desktop
 image/jpeg=io.elementary.photos-viewer.desktop
 application/zip=org.gnome.FileRoller.desktop
+x-scheme-handler/tg=userapp-Telegram Desktop-OCU0Y0.desktop
+x-scheme-handler/slack=slack.desktop
 
 [Added Associations]
 x-scheme-handler/http=firefox.desktop;
@@ -70,3 +72,4 @@ inode/directory=org.gnome.Evince.desktop;
 application/pdf=org.gnome.Evince.desktop;
 image/jpeg=io.elementary.photos-viewer.desktop;
 application/zip=org.gnome.FileRoller.desktop;
+x-scheme-handler/tg=userapp-Telegram Desktop-OCU0Y0.desktop;
