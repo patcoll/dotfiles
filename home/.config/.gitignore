@@ -1,5 +1,6 @@
 /*-nativefier-*
 /1Password
+/autokey/autokey.json
 /autokey/autokey.json~
 /autokey/autokey.log
 /autokey/autokey.pid
@@ -35,6 +36,7 @@
 /marktext
 /marlin
 /menus
+/mimeapps.list
 /monitors.xml*
 /ncspot
 /neofetch
