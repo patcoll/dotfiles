@@ -9,9 +9,10 @@ set -u
 # interception-caps2esc-nocaps-git (AUR)
 
 { set -x; } 2>/dev/null
-sudo ln -nfs "$HOME/.kbd/udevmon/udevmon.yaml" "/etc/udevmon.yaml"
+sudo ln -nfs "$HOME/.kbd/udevmon/udevmon.yaml" "/etc/interception/udevmon.yaml"
 sudo ln -nfs "$HOME/.kbd/udevmon/dual-function-keys.yaml" "/etc/dual-function-keys.yaml"
+sudo ln -nfs "$HOME/.kbd/udevmon/dual-function-keys-preonic.yaml" "/etc/dual-function-keys-preonic.yaml"
 sudo ln -nfs "$HOME/.kbd/udevmon/udevmon.service" "/etc/systemd/system/udevmon.service"
-sudo systemctl start udevmon
+sudo systemctl restart udevmon
 sudo systemctl enable udevmon
 { set +x; } 2>/dev/null
