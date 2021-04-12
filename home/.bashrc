@@ -69,6 +69,8 @@ export LANG LANGUAGE LC_CTYPE LC_ALL
 : ${FTP_PASSIVE:=1}
 export FTP_PASSIVE
 
+export BASH_SILENCE_DEPRECATION_WARNING=1
+
 # ignore backups, CVS directories, python bytecode, vim swap files
 FIGNORE="~:CVS:#:.pyc:.swp:.swa:apache-solr-*"
 
@@ -190,7 +192,14 @@ _expand() {
 # ----------------------------------------------------------------------
 
 # we always pass these to ls(1)
-LS_COMMON="-hB --color=auto"
+
+export CLICOLOR=1
+LS_COMMON="-hB"
+
+# if [[ "$UNAME" = Darwin ]]; then
+# else
+#   LS_COMMON="-hB --color=auto"
+# fi
 
 # if the dircolors utility is available, set that up to
 dircolors="$(type -P gdircolors dircolors | head -1)"
