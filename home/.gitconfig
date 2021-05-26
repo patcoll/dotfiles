@@ -12,6 +12,9 @@
 [alias]
   aa = add -A
   aliases = !git config --get-regexp alias | sed -e 's/^alias\\.\\(.*\\)$/\\1/' -e 's/^\\([^ ]\\{1,\\}\\) \\(.*\\)$/\\1 = \\2/'
+  assume   = update-index --assume-unchanged
+  assumed  = "!git ls-files -v | grep ^h | cut -c 3-"
+  unassume = update-index --no-assume-unchanged
   br = branch
   cb = rev-parse --abbrev-ref HEAD
   cl = clone
@@ -47,7 +50,7 @@
   logallrefupdates = true
   whitespace = space-before-tab, trailing-space
   autocrlf = input
-  editor = vim
+  editor = nvim
   excludesfile = ~/.gitignore_global
 
 [help]
