@@ -76,8 +76,8 @@
 [gpg]
   program = gpg2
 
-[log]
-  showSignature = true
+# [log]
+  # showSignature = true
 
 [push]
   default = current
