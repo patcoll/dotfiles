@@ -40,6 +40,9 @@
   permission-reset = !git diff -p -R | grep -E \"^(diff|(old|new) mode)\" | git apply
   ll = log --pretty=oneline --abbrev-commit --max-count=15
   lg = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h %C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)'
+  assume   = update-index --assume-unchanged
+  assumed  = "!git ls-files -v | grep ^h | cut -c 3-"
+  unassume = update-index --no-assume-unchanged
 
 [apply]
   whitespace = fix

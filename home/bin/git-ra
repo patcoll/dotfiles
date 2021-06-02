@@ -2,16 +2,25 @@
 # { set -x; } 2>/dev/null
 { set -u; } 2>/dev/null
 CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+echo CURRENT_BRANCH: $CURRENT_BRANCH
 # { set +x; } 2>/dev/null
-for branch in staging production master stable develop; do
+for branch in staging production master main stable develop; do
   if [[ $(git branch -r --list "*/$branch" | wc -l) -ne 0 ]]; then
     { set -x; } 2>/dev/null
     # { set -e; } 2>/dev/null
     git checkout $branch
+    if [[ "$?" != "0" ]]; then
+      echo Could not change branches.
+      exit
+    fi
     { set +x; } 2>/dev/null
     BRANCH_UPSTREAM=$(git status -b --porcelain=v2 | grep -m 1 "^# branch.upstream " | cut -d " " -f 3-)
     { set -x; } 2>/dev/null
     git rebase "$BRANCH_UPSTREAM" "$branch"
+    if [[ "$?" != "0" ]]; then
+      echo Could not rebase.
+      exit
+    fi
     # { set +e; } 2>/dev/null
   fi
   { set +x; } 2>/dev/null
