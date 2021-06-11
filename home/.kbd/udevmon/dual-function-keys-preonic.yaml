@@ -1,0 +1,60 @@
+# TIMING:
+  # TAP_MILLISEC: 150
+  # DOUBLE_TAP_MILLISEC: 75
+
+MAPPINGS:
+  # Map holding down Esc to Ctrl.
+  # - KEY: KEY_ESC
+  #   TAP: KEY_ESC
+  #   HOLD: KEY_LEFTCTRL
+  # Map holding down grave key (`) to Alt.
+  # - KEY: KEY_GRAVE
+  #   TAP: KEY_GRAVE
+  #   HOLD: KEY_LEFTALT
+  # Map holding down Tab (`) to Super.
+  # - KEY: KEY_TAB
+  #   TAP: KEY_TAB
+  #   HOLD: KEY_LEFTMETA
+  # Map CapsLock key to Ctrl. On tap, make it an Esc key.
+  # NOTE: Moved this to use `interception-caps2esc-nocaps-git`
+  # - KEY: KEY_CAPSLOCK
+  #   TAP: KEY_ESC
+  #   HOLD: KEY_LEFTCTRL
+  # NOTE: superceded by space2meta which is more responsive
+  # - KEY: KEY_SPACE
+  #   TAP: KEY_SPACE
+  #   HOLD: KEY_LEFTMETA
+  # NOTE: a bit risky to take over enter. deferring this experiment.
+  # - KEY: KEY_ENTER
+  #   TAP: KEY_ENTER
+  #   HOLD: KEY_RIGHTCTRL
+  # Map Super keys to Alt.
+  - KEY: KEY_LEFTMETA
+    TAP: KEY_LEFTCTRL
+    HOLD: KEY_LEFTCTRL
+  # - KEY: KEY_RIGHTMETA
+    # TAP: KEY_RIGHTALT
+    # HOLD: KEY_RIGHTALT
+  #  For shift keys, on tap, inject ( and ) respectively.
+  # - KEY: KEY_LEFTSHIFT
+  #   TAP: [ KEY_LEFTSHIFT, KEY_9, ]
+  #   HOLD: KEY_LEFTSHIFT
+  # - KEY: KEY_RIGHTSHIFT
+  #   TAP: [ KEY_RIGHTSHIFT, KEY_0, ]
+  #   HOLD: KEY_RIGHTSHIFT
+  # Map Ctrl keys to Super.
+  # - KEY: KEY_LEFTCTRL
+  #   TAP: KEY_LEFTMETA
+  #   HOLD: KEY_LEFTMETA
+  # - KEY: KEY_RIGHTCTRL
+  #   TAP: KEY_RIGHTMETA
+  #   HOLD: KEY_RIGHTMETA
+  # Map Alt keys to Ctrl. On tap, inject { and } respectively.
+  # - KEY: KEY_LEFTALT
+  #   # TAP: [ KEY_LEFTSHIFT, KEY_LEFTBRACE, ]
+  #   TAP: KEY_LEFTCTRL
+  #   HOLD: KEY_LEFTCTRL
+  # - KEY: KEY_RIGHTALT
+  #   # TAP: [ KEY_LEFTSHIFT, KEY_RIGHTBRACE, ]
+  #   TAP: KEY_RIGHTCTRL
+  #   HOLD: KEY_RIGHTCTRL
