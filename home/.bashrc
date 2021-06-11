@@ -565,3 +565,5 @@ fi
 
 # added by travis gem
 [ ! -s /home/pat/.travis/travis.sh ] || source /home/pat/.travis/travis.sh
+
+export FZF_DEFAULT_COMMAND='rg --files --hidden --follow'
