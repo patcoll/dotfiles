@@ -3,5 +3,5 @@ ruby 2.5.1
 rust 1.45.0
 elixir 1.11.4-otp-23
 erlang 23.2.4
-python 3.8.5
+python system
 go 1.14.6
