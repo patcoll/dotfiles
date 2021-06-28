@@ -82,6 +82,10 @@
 [push]
   default = current
 
+[pull]
+  rebase = true
+  ff = only
+
 [color]
   ui = auto
   ;branch = auto
