@@ -2,7 +2,8 @@
 AssertUser=pat
 Description=RClone mount of users remote %i using filesystem permissions
 Documentation=http://rclone.org/docs/
-After=network-online.target
+Wants=network-wait-online.service
+After=network-wait-online.service
 
 
 [Service]
