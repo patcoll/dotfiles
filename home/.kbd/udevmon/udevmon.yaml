@@ -1,14 +1,14 @@
 # - JOB: "intercept -g $DEVNODE | dual-function-keys -c /etc/dual-function-keys.yaml | caps2esc | space2meta | uinput -d $DEVNODE"
 # - JOB: "intercept -g $DEVNODE | space2meta | uinput -d $DEVNODE"
 # - JOB: "intercept -g $DEVNODE | dual-function-keys -c /etc/dual-function-keys.yaml | caps2esc | uinput -d $DEVNODE"
-- JOB: "intercept -g $DEVNODE | caps2esc | uinput -d $DEVNODE"
+- JOB: "intercept -g $DEVNODE | caps2esc | /usr/local/bin/btn_middle_none | uinput -d $DEVNODE"
   DEVICE:
     # NOTE: Leaving off the name applies config to all keyboards
     # NAME: "Massdrop Inc. CTRL Keyboard"
     EVENTS:
       # EV_KEY: [KEY_ESC, KEY_SPACE, KEY_TAB, KEY_CAPSLOCK, KEY_LEFTMETA, KEY_LEFTSHIFT, KEY_RIGHTSHIFT, KEY_LEFTCTRL, KEY_RIGHTCTRL, KEY_LEFTALT, KEY_RIGHTALT]
       # EV_KEY: [KEY_ESC, KEY_TAB, KEY_CAPSLOCK, KEY_LEFTMETA, KEY_LEFTSHIFT, KEY_RIGHTSHIFT, KEY_LEFTCTRL, KEY_RIGHTCTRL, KEY_LEFTALT, KEY_RIGHTALT]
-      EV_KEY: [KEY_CAPSLOCK]
+      EV_KEY: [KEY_CAPSLOCK, BTN_MIDDLE]
       # EV_KEY: [KEY_SPACE]
 # - JOB: "intercept -g $DEVNODE | dual-function-keys -c /etc/dual-function-keys-preonic.yaml | uinput -d $DEVNODE"
 #   DEVICE:
